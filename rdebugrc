@@ -1,0 +1,4 @@
+set autolist
+set forcestep
+set listsize 25
+set autoeval on
