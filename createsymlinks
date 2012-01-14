@@ -1,4 +1,3 @@
 ln -s ~/dotfiles/gitconfig ~/.gitconfig
-ln -s ~/dotfiles/irbrc ~/.irbc
+ln -s ~/dotfiles/irbrc ~/.irbrc
 ln -s ~/dotfiles/rdebugrc ~/.rdebugrc
-
