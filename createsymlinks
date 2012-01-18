@@ -1,4 +1,4 @@
 ln -s ~/dotfiles/gitconfig ~/.gitconfig
-ln -s ~/dotfiles/irbrc ~/.irbc
+ln -s ~/dotfiles/irbrc ~/.irbrc
 ln -s ~/dotfiles/rdebugrc ~/.rdebugrc
-ln -s ~/dotfiles/sublime_keybindings.json /home/docallaghan/.config/sublime-text-2/Packages/User/Default (Linux).sublime-keymap
+ln -s ~/dotfiles/sublime_keybindings.json ~/.config/sublime-text-2/Packages/User/Default (Linux).sublime-keymap
