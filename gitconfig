@@ -30,3 +30,5 @@
 [apply]
   whitespace = nowarn
 
+[push]
+	default = current
