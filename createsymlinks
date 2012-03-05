@@ -2,3 +2,5 @@ ln -s ~/dotfiles/gitconfig ~/.gitconfig
 ln -s ~/dotfiles/irbrc ~/.irbrc
 ln -s ~/dotfiles/rdebugrc ~/.rdebugrc
 ln -s ~/dotfiles/sublime_keybindings.json ~/.config/sublime-text-2/Packages/User/Default (Linux).sublime-keymap
+ln -s ~/dotfiles/Preferences.sublime-settings ~/.config/sublime-text-2/Packages/User/Preferences.sublime-settings
+ln -s ~/dotfiles/vimrc ~/.vimrc
