@@ -26,9 +26,13 @@
   untracked = cyan  
 [user]
   name = Daniel O'Callaghan
-  email = DO'Callaghan@au.westfield.com
+  email = DOCallaghan@au.westfield.com
 [apply]
   whitespace = nowarn
 
 [push]
 	default = current
+[hub]
+	host = github.dbg.westfield.com
+[mergetool]
+	keepBackup = false
