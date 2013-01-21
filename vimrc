@@ -11,3 +11,7 @@ set autoindent
 set expandtab
 
 colorscheme molokai
+autocmd vimenter * NERDTree
+
+inoremap jk <esc>
+inoremap kj <esc>
