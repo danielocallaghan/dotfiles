@@ -34,7 +34,8 @@ map <leader>k              :wincmd k<cr>
 map <leader>l              :wincmd l<cr>
 
 colorscheme molokai
-autocmd vimenter * NERDTree
+
+"  autocmd vimenter * if !argc() | NERDTree | endif
 
 inoremap jk <esc>
 inoremap kj <esc>
