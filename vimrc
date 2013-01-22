@@ -3,6 +3,12 @@ set expandtab
 set softtabstop=2
 set shiftwidth=2
 set pastetoggle=<F2>
+set tabstop=2
+set smarttab
+set shiftwidth=2
+set autoindent
+set expandtab
+
 noremap <F6> :bnext!<CR>
 noremap <F5> :bprev!<CR>
 inoremap <F6> :bnext!<CR>
@@ -14,7 +20,8 @@ inoremap <F7> :tabprev!<CR>
 
 call pathogen#infect()
 syntax on
-filetype on
+filetype off
+filetype plugin indent on
 au BufNewFile,BufRead,BufWrite *.dump set filetype=sql
 au BufNewFile,BufRead,BufWrite Gemfile,Gemfile.lock,config.ru,*.rabl set filetype=ruby
 au BufNewFile,BufRead,BufWrite *.yml set filetype=yaml
