@@ -1,1 +1,5 @@
 Various vim related configuration files that can be symlinked to the current users profile/home dir
+
+vim plugins installed as submodules eg:
+git submodule add https://github.com/git-mirror/vim-l9.git vim/bundle/l9
+
