@@ -3,3 +3,5 @@ Various vim related configuration files that can be symlinked to the current use
 vim plugins installed as submodules eg:
 git submodule add https://github.com/git-mirror/vim-l9.git vim/bundle/l9
 
+Consider installing Vundle instead:
+https://github.com/gmarik/vundle
