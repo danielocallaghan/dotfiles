@@ -36,3 +36,5 @@
 	host = github.dbg.westfield.com
 [mergetool]
 	keepBackup = false
+[core]
+	editor = vim

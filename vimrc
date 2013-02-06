@@ -1,6 +1,28 @@
 set nocompatible
 
-call pathogen#infect()
+" call pathogen#infect()
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'gmarik/vundle'
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-cucumber'
+Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-unimpaired'
+Bundle 'tpope/vim-abolish'
+Bundle 'tpope/vim-repeat'
+Bundle 'git-mirror/vim-l9'
+Bundle 'tpope/vim-fugitive'
+Bundle 'kien/ctrlp.vim'
+Bundle 'airblade/vim-rooter'
+Bundle 'Lokaltog/vim-easymotion'
+"Bundle 'Valloric/YouCompleteMe'
+"Bundle 'vim-scripts/AutoComplPop'
+Bundle 'ervandew/supertab'
+Bundle 'scrooloose/snipmate-snippets'
+Bundle 'msanders/snipmate.vim'
+Bundle 'rubycomplete.vim'
 
 " == general config ==
 set number
@@ -62,6 +84,9 @@ set scrolloff=8         "Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
 
+set guioptions-=m  "menu bar
+set guioptions-=T  "toolbar
+
 syntax on
 filetype off
 filetype plugin indent on
@@ -71,14 +96,24 @@ au BufNewFile,BufRead,BufWrite *.dump set filetype=sql
 au BufNewFile,BufRead,BufWrite Gemfile,Gemfile.lock,config.ru,*.rabl set filetype=ruby
 au BufNewFile,BufRead,BufWrite *.yml set filetype=yaml
 au BufNewFile,BufRead,BufWrite *.json set filetype=javascript
-autocmd FileType sh,spec,c,cpp,python,ruby,java,yaml,javascript,html,css autocmd BufWritePre <buffer> :%s/\s\+$//e
+"au BufAdd,BufNewFile,BufRead * nested tab sball
+map <C-W> :confirm bdelete<CR>
+" autocmd FileType sh,spec,c,cpp,python,ruby,java,yaml,javascript,html,css autocmd BufWritePre <buffer> :%s/\s\+$//e
+
+"ruby
+autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+""improve autocomplete menu color
+highlight Pmenu ctermbg=238 gui=bold
 
 map <leader>h              :wincmd h<cr>
 map <leader>j              :wincmd j<cr>
 map <leader>k              :wincmd k<cr>
 map <leader>l              :wincmd l<cr>
 
-"colorscheme molokai
+colorscheme molokai
 
 noremap <F5> :bprev!<CR>
 noremap <F6> :bnext!<CR>
@@ -88,6 +123,8 @@ inoremap <F5> :bprev!<CR>
 inoremap <F6> :bnext!<CR>
 inoremap <F7> :tabprev!<CR>
 inoremap <F8> :tabnext!<CR>
+nmap <C-Tab> :tabn<CR>
+nmap <C-S-Tab> :tabp<CR>
 inoremap jk <esc>
 inoremap kj <esc>
 " ========================================
@@ -108,6 +145,12 @@ inoremap kj <esc>
 imap <c-l> <space>=><space>
 
 let mapleader=','
+
+"let g:netrw_liststyle=3 " Use tree-mode as default view
+"let g:netrw_browse_split=4 " Open file in previous buffer
+let g:netrw_preview=1 " preview window shown in a vertically split
+let g:netrw_winsize=20
+
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
@@ -116,6 +159,11 @@ let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links',
+  \ }
+
+let g:ctrlp_prompt_mappings = {
+  \ 'AcceptSelection("e")': [],
+  \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
   \ }
 
 " via: http://rails-bestpractices.com/posts/60-remove-trailing-whitespace
