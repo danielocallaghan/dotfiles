@@ -106,14 +106,14 @@ autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 ""improve autocomplete menu color
-highlight Pmenu ctermbg=238 gui=bold
+highlight Pmenu ctermbg=lightgrey guifg=white gui=bold
 
 map <leader>h              :wincmd h<cr>
 map <leader>j              :wincmd j<cr>
 map <leader>k              :wincmd k<cr>
 map <leader>l              :wincmd l<cr>
 
-colorscheme molokai
+"colorscheme molokai
 
 noremap <F5> :bprev!<CR>
 noremap <F6> :bnext!<CR>
@@ -123,6 +123,9 @@ inoremap <F5> :bprev!<CR>
 inoremap <F6> :bnext!<CR>
 inoremap <F7> :tabprev!<CR>
 inoremap <F8> :tabnext!<CR>
+nmap <silent> tn :tabnext<CR>
+nmap <silent> tp :tabprev<CR>
+nmap <silent> to :tabnew<CR>
 nmap <C-Tab> :tabn<CR>
 nmap <C-S-Tab> :tabp<CR>
 inoremap jk <esc>
@@ -138,10 +141,8 @@ inoremap kj <esc>
 " Now using the middle finger of either hand you can type
 " underscores with apple-k or apple-d, and add Shift
 " to type dashes
-"imap <silent> <c-k> _
-"imap <silent> <c-d> _
-"imap <silent> <c-K> -
-"imap <silent> <c-D> -
+imap <silent> <C-k> _
+imap <silent> <C-d> -
 imap <c-l> <space>=><space>
 
 let mapleader=','
@@ -154,6 +155,7 @@ let g:netrw_winsize=20
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_regexp = 1
 
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
