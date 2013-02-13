@@ -1,38 +1,43 @@
-export EC2_HOME="/Users/danieloc/Documents/AWS/ec2-api-tools-1.3-24159"
-export EC2_PRIVATE_KEY="~/.ec2/pk-PON566DBRY3RZB352UK4ZSPN56DYFYNA.pem"
-export AWS_SECRET_KEY="5MK6nbFCRtBqALFqUItZNtl3JXRqwfa6lfiEPMJF"
-export EC2_CERT="~/.ec2/cert-PON566DBRY3RZB352UK4ZSPN56DYFYNA.pem"
-export JAVA_HOME="/System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home"
+# .bashrc
 
-#export PATH=~/.gem/ruby/1.8/bin:/usr/local/git/bin:/usr/local/mysql/bin:$PATH
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+  . /etc/bashrc
+fi
+
+# User specific aliases and functions
+export QMAKE=/usr/bin/qmake-qt4
 export PATH=/usr/local/bin:$PATH
-
-export ARCHFLAGS="-arch i386 -arch x86_64"
 export EVENT_NOKQUEUE=1
 export MANPATH=/usr/local/git/man:$MANPATH
 
 alias l='ls -al'
-alias sites='cd /Users/danieloc/Sites/rails_apps/heroku/'
-alias show_processlist='while true; do x=`echo "show processlist;"| mysql -ualtnet -p3wumexEgeP -h127.0.0.1 altnet|grep -v Sleep `; echo $x; echo $x|wc -l; echo " unslept processes"; sleep 5; done'
+alias vim="stty stop '' -ixoff ; vim"
 alias gitcycle='git stash && git pull --rebase && git stash pop'
-alias getherokubackup='curl -o ~/Downloads/database_backups/backup-`date +%d-%m-%Y`.dump `heroku pgbackups:url`'
-alias herokuimport='pg_restore --verbose --clean --no-acl --no-owner -h localhost -p 5434 -U rails_app -d dms_dev2 backup-01-04-2012.dump'
+alias gs='git status .'
 alias be='bundle exec'
 alias ber='bundle exec rake'
-alias rails='bundle exec rails'
-alias sshec2='ssh -v -i ~/.ssh/s3-proxy-keypair.pem ubuntu@ec2-23-22-201-235.compute-1.amazonaws.com'
+alias bes='bundle exec spec'
 
-# alias mysql=/usr/local/mysql/bin/mysql
-# alias mysqladmin=/usr/local/mysql/bin/mysqladmin
+alias sshsyt2='ssh docallaghan@aubdc-appsyt02.dbg.westfield.com'
+alias sshsyt3='ssh docallaghan@aubdc-appsyt03.dbg.westfield.com'
+alias sshci03='ssh docallaghan@aubdc-appci03.dbg.westfield.com'
+alias sshavarice='ssh ec2-user@174.129.247.117'
 
-if [[ -s /Users/danieloc/.rvm/scripts/rvm ]] ; then source /Users/danieloc/.rvm/scripts/rvm ; fi
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
 complete -C $rvm_scripts_path/rvm-completion.rb -o default rvm
-# source ~/bin/git-completion.bash
 
 # GIT modifications
+
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
+
 export CLICOLOR=1
 export TERM=xterm-color
 export LSCOLORS=GxFxCxDxBxegedabagaced
+export VISUAL=vim
+export EDITOR=vim
 
 # Setting GIT prompt
 c_cyan=`tput setaf 6`
@@ -65,12 +70,10 @@ parse_git_branch ()
     else
         return 0
     fi
-echo -e $gitver
+    echo -e $gitver
 }
 
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[$(branch_color)\]$(parse_git_branch)\[${c_sgr0}\]\$ '
 
-alias gs='git status .'
-
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+PATH=$PATH:/usr/pgsql-9.1/bin:$HOME/.rvm/bin # Add RVM to PATH for scripting

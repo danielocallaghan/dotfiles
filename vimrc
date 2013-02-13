@@ -17,10 +17,10 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'kien/ctrlp.vim'
 Bundle 'airblade/vim-rooter'
 Bundle 'Lokaltog/vim-easymotion'
-"Bundle 'Valloric/YouCompleteMe'
 "Bundle 'vim-scripts/AutoComplPop'
 Bundle 'ervandew/supertab'
 Bundle 'scrooloose/snipmate-snippets'
+Bundle 'vim-scripts/greplace.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'rubycomplete.vim'
 
@@ -57,8 +57,9 @@ set autoindent
 " Display tabs and trailing spaces visually
 " set list listchars=tab:\ \ ,trail:·
 "
-" set nowrap       "Don't wrap lines
+set nowrap       "Don't wrap lines
 " set linebreak    "Wrap lines at convenient points
+set wrap linebreak textwidth=0 
 
 " ================ Folds ============================
 set foldmethod=indent   "fold based on indent
@@ -66,7 +67,8 @@ set foldnestmax=3       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
 
 " ================ Completion =======================
-set wildmode=list:longest
+"set wildmode=list:longest
+set wildmode=""
 set wildmenu                "enable ctrl-n and ctrl-p to scroll thru matches
 set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing
 set wildignore+=*vim/backups*
@@ -105,14 +107,22 @@ autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
 autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+
 ""improve autocomplete menu color
-highlight Pmenu ctermbg=lightgrey guifg=white gui=bold
+hi Pmenu ctermbg=LightGrey guifg=white gui=bold
+hi PmenuSel ctermbg=NONE ctermfg=Yellow ctermbg=NONE cterm=bold
+hi TabLineSel ctermfg=white cterm=bold
+hi TabLine ctermfg=LightGrey ctermbg=NONE gui=NONE guifg=DarkGrey cterm=NONE
 
 map <leader>h              :wincmd h<cr>
 map <leader>j              :wincmd j<cr>
 map <leader>k              :wincmd k<cr>
 map <leader>l              :wincmd l<cr>
 
+"let g:solarized_contrast="low"
+"let g:solarized_visibility="low"
+set background=dark
+"colorscheme solarized
 "colorscheme molokai
 
 noremap <F5> :bprev!<CR>
@@ -128,6 +138,12 @@ nmap <silent> tp :tabprev<CR>
 nmap <silent> to :tabnew<CR>
 nmap <C-Tab> :tabn<CR>
 nmap <C-S-Tab> :tabp<CR>
+" Use CTRL-S for saving, also in Insert mode
+noremap <C-s> :w<CR>
+vnoremap <C-s> <C-C>:w<CR>
+inoremap <C-s> <C-O>:w<CR>
+
+
 inoremap jk <esc>
 inoremap kj <esc>
 " ========================================
@@ -147,22 +163,17 @@ imap <c-l> <space>=><space>
 
 let mapleader=','
 
-"let g:netrw_liststyle=3 " Use tree-mode as default view
-"let g:netrw_browse_split=4 " Open file in previous buffer
 let g:netrw_preview=1 " preview window shown in a vertically split
 let g:netrw_winsize=20
 
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = ''
-let g:ctrlp_regexp = 1
-
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
-
 let g:ctrlp_prompt_mappings = {
   \ 'AcceptSelection("e")': [],
   \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
