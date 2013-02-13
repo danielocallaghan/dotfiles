@@ -23,6 +23,7 @@ Bundle 'scrooloose/snipmate-snippets'
 Bundle 'vim-scripts/greplace.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'rubycomplete.vim'
+Bundle 'altercation/vim-colors-solarized'
 
 " == general config ==
 set number
@@ -88,6 +89,7 @@ set sidescroll=1
 
 set guioptions-=m  "menu bar
 set guioptions-=T  "toolbar
+set guifont=Menlo\ Regular:h13
 
 syntax on
 filetype off
@@ -119,10 +121,8 @@ map <leader>j              :wincmd j<cr>
 map <leader>k              :wincmd k<cr>
 map <leader>l              :wincmd l<cr>
 
-"let g:solarized_contrast="low"
-"let g:solarized_visibility="low"
 set background=dark
-"colorscheme solarized
+colorscheme solarized
 "colorscheme molokai
 
 noremap <F5> :bprev!<CR>
@@ -166,6 +166,11 @@ let mapleader=','
 let g:netrw_preview=1 " preview window shown in a vertically split
 let g:netrw_winsize=20
 
+if has('gui_running')
+  
+else
+ 
+endif
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = ''
