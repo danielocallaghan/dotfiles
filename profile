@@ -5,10 +5,14 @@ if [ -f /etc/bashrc ]; then
   . /etc/bashrc
 fi
 
+# Source private vars 
+if [ -f ~/.private-env.bash ]; then
+  . ~/.private-env.bash
+fi
+
 # User specific aliases and functions
 export QMAKE=/usr/bin/qmake-qt4
 export PATH=/usr/local/bin:$PATH
-export EVENT_NOKQUEUE=1
 export MANPATH=/usr/local/git/man:$MANPATH
 
 alias l='ls -al'
@@ -18,6 +22,9 @@ alias gs='git status .'
 alias be='bundle exec'
 alias ber='bundle exec rake'
 alias bes='bundle exec spec'
+alias bers='bundle exec rspec'
+alias rails='bundle exec rails'
+alias sshec2='ssh -v -i ~/.ssh/s3-proxy-keypair.pem ubuntu@ec2-23-22-201-235.compute-1.amazonaws.com'
 
 alias sshsyt2='ssh docallaghan@aubdc-appsyt02.dbg.westfield.com'
 alias sshsyt3='ssh docallaghan@aubdc-appsyt03.dbg.westfield.com'
@@ -31,6 +38,10 @@ complete -C $rvm_scripts_path/rvm-completion.rb -o default rvm
 
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
+fi
+
+if [ -f /usr/share/git-core/git-completion.bash ]; then
+  . /usr/share/git-core/git-completion.bash 
 fi
 
 export CLICOLOR=1
