@@ -122,7 +122,7 @@ map <leader>k              :wincmd k<cr>
 map <leader>l              :wincmd l<cr>
 
 set background=dark
-colorscheme solarized
+"colorscheme solarized
 "colorscheme molokai
 
 noremap <F5> :bprev!<CR>
@@ -142,7 +142,7 @@ nmap <C-S-Tab> :tabp<CR>
 noremap <C-s> :w<CR>
 vnoremap <C-s> <C-C>:w<CR>
 inoremap <C-s> <C-O>:w<CR>
-
+nmap <silent> cp :CtrlP<CR>
 
 inoremap jk <esc>
 inoremap kj <esc>
@@ -166,11 +166,6 @@ let mapleader=','
 let g:netrw_preview=1 " preview window shown in a vertically split
 let g:netrw_winsize=20
 
-if has('gui_running')
-  
-else
- 
-endif
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = ''
@@ -183,6 +178,8 @@ let g:ctrlp_prompt_mappings = {
   \ 'AcceptSelection("e")': [],
   \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
   \ }
+if has('gui_running')
+endif
 
 " via: http://rails-bestpractices.com/posts/60-remove-trailing-whitespace
 " Strip trailing whitespace
