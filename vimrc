@@ -12,6 +12,7 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-repeat'
+Bundle 'skwp/YankRing.vim'
 Bundle 'git-mirror/vim-l9'
 Bundle 'tpope/vim-fugitive'
 Bundle 'kien/ctrlp.vim'
@@ -20,6 +21,7 @@ Bundle 'Lokaltog/vim-easymotion'
 "Bundle 'vim-scripts/AutoComplPop'
 Bundle 'ervandew/supertab'
 Bundle 'scrooloose/snipmate-snippets'
+Bundle 'scrooloose/nerdtree'
 Bundle 'vim-scripts/greplace.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'rubycomplete.vim'
@@ -60,7 +62,7 @@ set autoindent
 "
 set nowrap       "Don't wrap lines
 " set linebreak    "Wrap lines at convenient points
-set wrap linebreak textwidth=0 
+"set wrap linebreak textwidth=0
 
 " ================ Folds ============================
 set foldmethod=indent   "fold based on indent
@@ -142,10 +144,15 @@ nmap <C-S-Tab> :tabp<CR>
 noremap <C-s> :w<CR>
 vnoremap <C-s> <C-C>:w<CR>
 inoremap <C-s> <C-O>:w<CR>
-nmap <silent> cp :CtrlP<CR>
+"nmap <silent> cp :CtrlP<CR>
 
 inoremap jk <esc>
 inoremap kj <esc>
+
+" Keep search hit centered
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
+
 " ========================================
 " RSI Prevention - keyboard remaps
 " ========================================
@@ -157,32 +164,40 @@ inoremap kj <esc>
 " Now using the middle finger of either hand you can type
 " underscores with apple-k or apple-d, and add Shift
 " to type dashes
-imap <silent> <C-k> _
-imap <silent> <C-d> -
-imap <c-l> <space>=><space>
+if has('gui_running')
+  imap <silent> <D-k> _
+  imap <silent> <D-d> -
+  imap <D-l> <space>=><space>
+else
+  imap <silent> <C-k> _
+  imap <silent> <C-d> -
+  imap <C-l> <space>=><space>
+endif
 
 let mapleader=','
 
 let g:netrw_preview=1 " preview window shown in a vertically split
 let g:netrw_winsize=20
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+let g:NERDTreeWinSize = 30
+map <silent> ,ntt :NERDTreeToggle<CR>
+map <silent> ,ntf :NERDTree<CR>:wincmd l<cr>p:NERDTreeFind<CR> " Show current file in NERDTree
 
-let g:ctrlp_map = '<c-p>'
+let g:ctrlp_map = 'cp'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = ''
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'file': '\v\.(exe|so|dll|.DS_Store)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
 let g:ctrlp_prompt_mappings = {
   \ 'AcceptSelection("e")': [],
   \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
   \ }
-if has('gui_running')
-endif
 
-" via: http://rails-bestpractices.com/posts/60-remove-trailing-whitespace
-" Strip trailing whitespace
+" http://rails-bestpractices.com/posts/60-remove-trailing-whitespace
 function! <SID>StripTrailingWhitespaces()
     " Preparation: save last search, and cursor position.
     let _s=@/
@@ -194,5 +209,6 @@ function! <SID>StripTrailingWhitespaces()
     let @/=_s
     call cursor(l, c)
 endfunction
-command! StripTrailingWhitespaces call <SID>StripTrailingWhitespaces()
-nmap ,w :StripTrailingWhitespaces<CR>
+"command! StripTrailingWhitespaces call <SID>StripTrailingWhitespaces()
+nmap ,w :StripTrailingWhitespaces<CR>:w<CR>
+autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
