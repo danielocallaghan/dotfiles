@@ -18,10 +18,10 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'kien/ctrlp.vim'
 Bundle 'airblade/vim-rooter'
 Bundle 'Lokaltog/vim-easymotion'
-"Bundle 'vim-scripts/AutoComplPop'
 Bundle 'ervandew/supertab'
 Bundle 'scrooloose/snipmate-snippets'
 Bundle 'scrooloose/nerdtree'
+Bundle 'scrooloose/nerdcommenter'
 Bundle 'vim-scripts/greplace.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'rubycomplete.vim'
@@ -88,6 +88,8 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 set scrolloff=8         "Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
 
 set guioptions-=m  "menu bar
 set guioptions-=T  "toolbar
