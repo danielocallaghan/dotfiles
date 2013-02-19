@@ -1,4 +1,5 @@
 set nocompatible
+" Bundle 'scrooloose/nerdcommenter'
 
 " call pathogen#infect()
 set rtp+=~/.vim/bundle/vundle/
@@ -12,6 +13,8 @@ Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-unimpaired'
 Bundle 'tpope/vim-abolish'
 Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-ragtag'
 Bundle 'skwp/YankRing.vim'
 Bundle 'git-mirror/vim-l9'
 Bundle 'tpope/vim-fugitive'
@@ -21,7 +24,6 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'ervandew/supertab'
 Bundle 'scrooloose/snipmate-snippets'
 Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
 Bundle 'vim-scripts/greplace.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'rubycomplete.vim'
