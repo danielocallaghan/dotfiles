@@ -28,6 +28,7 @@ Bundle 'vim-scripts/greplace.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'rubycomplete.vim'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'vim-scripts/molokai'
 
 " == general config ==
 set number
@@ -121,8 +122,8 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 
 ""improve autocomplete menu color
-hi Pmenu ctermbg=LightGrey guifg=white gui=bold
-hi PmenuSel ctermbg=NONE ctermfg=Yellow ctermbg=NONE cterm=bold
+"hi Pmenu ctermbg=LightGrey guifg=white gui=bold
+"hi PmenuSel ctermbg=NONE ctermfg=Yellow ctermbg=NONE cterm=bold
 hi TabLineSel ctermfg=white cterm=bold
 hi TabLine ctermfg=LightGrey ctermbg=NONE gui=NONE guifg=DarkGrey cterm=NONE
 
@@ -134,6 +135,10 @@ map <leader>l              :wincmd l<cr>
 set background=dark
 "colorscheme solarized
 "colorscheme molokai
+if has('gui_running')
+  "colorscheme solarized
+  colorscheme molokai
+endif
 
 noremap <F5> :bprev!<CR>
 noremap <F6> :bnext!<CR>
@@ -180,6 +185,9 @@ else
   imap <silent> <C-k> _
   imap <silent> <C-d> -
   imap <C-l> <space>=><space>
+  imap <silent> <D-k> _
+  imap <silent> <D-d> -
+  imap <D-l> <space>=><space>
 endif
 
 let mapleader=','

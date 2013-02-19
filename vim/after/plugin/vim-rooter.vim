@@ -18,8 +18,8 @@ autocmd rooter BufEnter Procfile :Rooter
 
 let g:rooter_patterns = [ '.root', 'Gemfile', 'config.ru', 'Rakefile', '.git/']
 
-highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
-
+highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=#9C9C9C guibg=NONE
+"hi LineNr guifg=#9C9C9C guibg=NONE
 ""improve autocomplete menu color
 "hi Pmenu ctermbg=LightGrey guifg=white gui=bold
 "hi PmenuSel ctermbg=NONE ctermfg=Yellow ctermbg=NONE cterm=bold
