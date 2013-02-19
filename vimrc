@@ -95,7 +95,11 @@ nnoremap <C-y> 3<C-y>
 
 set guioptions-=m  "menu bar
 set guioptions-=T  "toolbar
-set guifont=Menlo\ Regular:h13
+set guifont=Menlo\ Regular:h13 " solarized bg: 002933
+if has('gui_running')
+  highlight normal guibg=#002933
+  " guifg=grey
+endif
 
 syntax on
 filetype off
