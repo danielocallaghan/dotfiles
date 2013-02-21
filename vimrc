@@ -62,9 +62,9 @@ set autoindent
 
 " Display tabs and trailing spaces visually
 " set list listchars=tab:\ \ ,trail:·
-"
+
 set nowrap       "Don't wrap lines
-" set linebreak    "Wrap lines at convenient points
+"set linebreak    "Wrap lines at convenient points
 "set wrap linebreak textwidth=0
 
 " ================ Folds ============================
@@ -94,14 +94,6 @@ set sidescroll=1
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
-set guioptions-=m  "menu bar
-set guioptions-=T  "toolbar
-set guifont=Menlo\ Regular:h13 " solarized bg: 002933
-if has('gui_running')
-  highlight normal guibg=#002933
-  " guifg=grey
-endif
-
 syntax on
 filetype off
 filetype plugin indent on
@@ -113,7 +105,6 @@ au BufNewFile,BufRead,BufWrite *.yml set filetype=yaml
 au BufNewFile,BufRead,BufWrite *.json set filetype=javascript
 "au BufAdd,BufNewFile,BufRead * nested tab sball
 map <C-W> :confirm bdelete<CR>
-" autocmd FileType sh,spec,c,cpp,python,ruby,java,yaml,javascript,html,css autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 "ruby
 autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
@@ -122,8 +113,6 @@ autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 
 ""improve autocomplete menu color
-"hi Pmenu ctermbg=LightGrey guifg=white gui=bold
-"hi PmenuSel ctermbg=NONE ctermfg=Yellow ctermbg=NONE cterm=bold
 hi TabLineSel ctermfg=white cterm=bold
 hi TabLine ctermfg=LightGrey ctermbg=NONE gui=NONE guifg=DarkGrey cterm=NONE
 
@@ -134,11 +123,14 @@ map <leader>l              :wincmd l<cr>
 
 set background=dark
 "colorscheme solarized
-"colorscheme molokai
 if has('gui_running')
-  "colorscheme solarized
   colorscheme molokai
 endif
+set guioptions-=m  "menu bar
+set guioptions-=T  "toolbar
+set guifont=Menlo\ Regular:h13 " solarized bg: 002933
+hi normal guibg=#002933
+hi LineNr guifg=#9C9C9C guibg=NONE
 
 noremap <F5> :bprev!<CR>
 noremap <F6> :bnext!<CR>
@@ -153,11 +145,9 @@ nmap <silent> tp :tabprev<CR>
 nmap <silent> to :tabnew<CR>
 nmap <C-Tab> :tabn<CR>
 nmap <C-S-Tab> :tabp<CR>
-" Use CTRL-S for saving, also in Insert mode
 noremap <C-s> :w<CR>
 vnoremap <C-s> <C-C>:w<CR>
 inoremap <C-s> <C-O>:w<CR>
-"nmap <silent> cp :CtrlP<CR>
 
 inoremap jk <esc>
 inoremap kj <esc>
@@ -177,14 +167,10 @@ nnoremap <silent> N Nzz
 " Now using the middle finger of either hand you can type
 " underscores with apple-k or apple-d, and add Shift
 " to type dashes
+imap <silent> <C-k> _
+imap <silent> <C-d> -
+imap <C-l> <space>=><space>
 if has('gui_running')
-  imap <silent> <D-k> _
-  imap <silent> <D-d> -
-  imap <D-l> <space>=><space>
-else
-  imap <silent> <C-k> _
-  imap <silent> <C-d> -
-  imap <C-l> <space>=><space>
   imap <silent> <D-k> _
   imap <silent> <D-d> -
   imap <D-l> <space>=><space>
