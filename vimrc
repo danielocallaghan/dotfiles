@@ -29,6 +29,9 @@ Bundle 'msanders/snipmate.vim'
 Bundle 'rubycomplete.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/molokai'
+Bundle 'groenewege/vim-less'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'spf13/vim-colors'
 
 " == general config ==
 set number
