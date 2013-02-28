@@ -1,19 +1,14 @@
-# .bashrc
-
 # Source global definitions
 if [ -f /etc/bashrc ]; then
   . /etc/bashrc
 fi
-
-# Source private vars 
+# Source private vars
 if [ -f ~/.private-env.bash ]; then
   . ~/.private-env.bash
 fi
 
 # User specific aliases and functions
-export QMAKE=/usr/bin/qmake-qt4
 export PATH=/usr/local/bin:$PATH
-export MANPATH=/usr/local/git/man:$MANPATH
 
 alias l='ls -al'
 alias vim="stty stop '' -ixoff ; vim"
@@ -26,24 +21,16 @@ alias bers='bundle exec rspec'
 alias rails='bundle exec rails'
 alias sshec2='ssh -v -i ~/.ssh/s3-proxy-keypair.pem ubuntu@ec2-23-22-201-235.compute-1.amazonaws.com'
 
-alias sshsyt2='ssh docallaghan@aubdc-appsyt02.dbg.westfield.com'
-alias sshsyt3='ssh docallaghan@aubdc-appsyt03.dbg.westfield.com'
-alias sshci03='ssh docallaghan@aubdc-appci03.dbg.westfield.com'
-alias sshavarice='ssh ec2-user@174.129.247.117'
-
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
-complete -C $rvm_scripts_path/rvm-completion.rb -o default rvm
+[[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
 
 # GIT modifications
-
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
-
 if [ -f /usr/share/git-core/git-completion.bash ]; then
-  . /usr/share/git-core/git-completion.bash 
+  . /usr/share/git-core/git-completion.bash
 fi
-
 export CLICOLOR=1
 export TERM=xterm-color
 export LSCOLORS=GxFxCxDxBxegedabagaced
