@@ -25,6 +25,7 @@ Bundle 'ervandew/supertab'
 Bundle 'scrooloose/snipmate-snippets'
 Bundle 'scrooloose/nerdtree'
 Bundle 'vim-scripts/greplace.vim'
+Bundle 'tjennings/git-grep-vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'rubycomplete.vim'
 Bundle 'altercation/vim-colors-solarized'
@@ -45,10 +46,11 @@ set autoread                    "Reload files changed outside vim
 
 " == search settings ==
 set incsearch        "Find the next match as we type the search
-"set hlsearch         "Hilight searches by default
+set hlsearch         "Hilight searches by default
 set viminfo='100,f1  "Save up to 100 marks, enable capital marks
 set ignorecase
 set smartcase
+nmap <silent> ,/ :nohlsearch<CR>
 
 " ================ Turn Off Swap Files ==============
 set noswapfile
@@ -153,6 +155,7 @@ nmap <C-S-Tab> :tabp<CR>
 noremap <C-s> :w<CR>
 vnoremap <C-s> <C-C>:w<CR>
 inoremap <C-s> <C-O>:w<CR>
+cmap w!! w !sudo tee % >/dev/null
 
 inoremap jk <esc>
 inoremap kj <esc>
