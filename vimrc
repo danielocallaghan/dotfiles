@@ -1,7 +1,5 @@
 set nocompatible
-" Bundle 'scrooloose/nerdcommenter'
 
-" call pathogen#infect()
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
