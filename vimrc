@@ -31,6 +31,7 @@ Bundle 'vim-scripts/molokai'
 Bundle 'groenewege/vim-less'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'spf13/vim-colors'
+Bundle 'vim-scripts/bufexplorer.zip'
 
 " == general config ==
 set number

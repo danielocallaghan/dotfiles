@@ -10,8 +10,9 @@ fi
 # User specific aliases and functions
 export PATH=/usr/local/bin:$PATH
 
-alias l='ls -al'
-alias vim="stty stop '' -ixoff ; vim"
+alias l='ls -alh'
+alias vim="stty stop '' -ixoff ; rvm ruby-1.9.3 do vim"
+alias mvim="rvm ruby-1.9.3 do mvim"
 alias gitcycle='git stash && git pull --rebase && git stash pop'
 alias gs='git status .'
 alias be='bundle exec'
@@ -19,7 +20,6 @@ alias ber='bundle exec rake'
 alias bes='bundle exec spec'
 alias bers='bundle exec rspec'
 alias rails='bundle exec rails'
-alias sshec2='ssh -v -i ~/.ssh/s3-proxy-keypair.pem ubuntu@ec2-23-22-201-235.compute-1.amazonaws.com'
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
 [[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
