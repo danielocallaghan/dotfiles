@@ -110,7 +110,6 @@ au BufNewFile,BufRead,BufWrite Gemfile,Gemfile.lock,config.ru,*.rabl set filetyp
 au BufNewFile,BufRead,BufWrite *.yml set filetype=yaml
 au BufNewFile,BufRead,BufWrite *.json set filetype=javascript
 "au BufAdd,BufNewFile,BufRead * nested tab sball
-map <C-W> :confirm bdelete<CR>
 
 "ruby
 autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
@@ -190,8 +189,8 @@ let g:netrw_winsize=20
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let g:NERDTreeWinSize = 30
-map <silent> ,ntt :NERDTreeToggle<CR>
-map <silent> ,ntf :NERDTree<CR>:wincmd l<cr>p:NERDTreeFind<CR> " Show current file in NERDTree
+map <silent> <leader>ntt :NERDTreeToggle<CR>
+map <silent> <leader>ntf :NERDTree<CR>:wincmd l<cr>p:NERDTreeFind<CR> " Show current file in NERDTree
 
 let g:ctrlp_map = 'cp'
 let g:ctrlp_cmd = 'CtrlP'
@@ -206,7 +205,6 @@ let g:ctrlp_prompt_mappings = {
   \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
   \ }
 
-" http://rails-bestpractices.com/posts/60-remove-trailing-whitespace
 function! <SID>StripTrailingWhitespaces()
     " Preparation: save last search, and cursor position.
     let _s=@/
@@ -218,6 +216,5 @@ function! <SID>StripTrailingWhitespaces()
     let @/=_s
     call cursor(l, c)
 endfunction
-"command! StripTrailingWhitespaces call <SID>StripTrailingWhitespaces()
 nmap ,w :StripTrailingWhitespaces<CR>:w<CR>
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
