@@ -42,6 +42,7 @@ set showmode                    "Show current mode down the bottom
 set gcr=a:blinkon0              "Disable cursor blink
 set visualbell                  "No sounds
 set autoread                    "Reload files changed outside vim
+let macvim_skip_cmd_opt_movement = 1
 
 " == search settings ==
 set incsearch        "Find the next match as we type the search
@@ -159,17 +160,16 @@ inoremap kj <esc>
 nnoremap <silent> n nzz
 nnoremap <silent> N Nzz
 
-" ========================================
-" RSI Prevention - keyboard remaps
-" ========================================
-" Certain things we do every day as programmers stress
-" out our hands. For example, typing underscores and
-" dashes are very common, and in position that require
-" a lot of hand movement. Vim to the rescue
-"
-" Now using the middle finger of either hand you can type
-" underscores with apple-k or apple-d, and add Shift
-" to type dashes
+" Line Bubbling
+nmap <D-Up> [e
+nmap <D-Down> ]e
+nmap <D-k> [e
+nmap <D-j> ]e
+vmap <D-Up> [egv
+vmap <D-Down> ]egv
+vmap <D-k> [egv
+vmap <D-j> ]egv
+
 imap <silent> <C-k> _
 imap <silent> <C-d> -
 imap <C-l> <space>=><space>
