@@ -39,7 +39,8 @@ set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
 set showcmd                     "Show incomplete cmds down the bottom
 set showmode                    "Show current mode down the bottom
-set gcr=a:blinkon0              "Disable cursor blink
+" set gcr=a:blinkon0              "Disable cursor blink
+set guicursor=a:blinkon1000
 set visualbell                  "No sounds
 set autoread                    "Reload files changed outside vim
 let macvim_skip_cmd_opt_movement = 1
@@ -51,7 +52,7 @@ set hlsearch         "Hilight searches by default
 set viminfo='100,f1  "Save up to 100 marks, enable capital marks
 set ignorecase
 set smartcase
-nmap <silent> ,/ :nohlsearch<CR>
+nmap <silent> <leader>/ :nohlsearch<CR>
 
 " ================ Turn Off Swap Files ==============
 set noswapfile
