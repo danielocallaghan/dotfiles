@@ -145,9 +145,6 @@ inoremap <F5> :bprev!<CR>
 inoremap <F6> :bnext!<CR>
 inoremap <F7> :tabprev!<CR>
 inoremap <F8> :tabnext!<CR>
-nmap <silent> tn :tabnext<CR>
-nmap <silent> tp :tabprev<CR>
-nmap <silent> to :tabnew<CR>
 nmap <C-Tab> :tabn<CR>
 nmap <C-S-Tab> :tabp<CR>
 noremap <C-s> :w<CR>
@@ -193,8 +190,10 @@ map <silent> <leader>ntt :NERDTreeToggle<CR>
 map <silent> <leader>ntf :NERDTree<CR>:wincmd l<cr>p:NERDTreeFind<CR> " Show current file in NERDTree
 
 let g:ctrlp_map = 'cp'
+map <silent> <leader>cpb :CtrlPBookmarkDir<CR>
 let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = ''
+let g:ctrlp_working_path_mode = 'r'
+let g:ctrlp_root_markers = [ '.root', 'Gemfile', 'config.ru', 'Rakefile', '.git/']
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(exe|so|dll|.DS_Store)$',
