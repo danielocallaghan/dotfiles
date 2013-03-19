@@ -43,6 +43,7 @@ set gcr=a:blinkon0              "Disable cursor blink
 set visualbell                  "No sounds
 set autoread                    "Reload files changed outside vim
 let macvim_skip_cmd_opt_movement = 1
+let mapleader=','
 
 " == search settings ==
 set incsearch        "Find the next match as we type the search
@@ -155,6 +156,8 @@ cmap w!! w !sudo tee % >/dev/null
 
 inoremap jk <esc>
 inoremap kj <esc>
+" toggle between most recently opened buffer
+nnoremap <leader><leader> <c-^>
 
 " Keep search hit centered
 nnoremap <silent> n nzz
@@ -169,17 +172,19 @@ vmap <D-Up> [egv
 vmap <D-Down> ]egv
 vmap <D-k> [egv
 vmap <D-j> ]egv
+" Visually select the text that was last edited/pasted
+nmap gV `[v`]
 
 imap <silent> <C-k> _
 imap <silent> <C-d> -
 imap <C-l> <space>=><space>
+
 if has('gui_running')
   imap <silent> <D-k> _
   imap <silent> <D-d> -
   imap <D-l> <space>=><space>
 endif
 
-let mapleader=','
 
 let g:netrw_preview=1 " preview window shown in a vertically split
 let g:netrw_winsize=20
