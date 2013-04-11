@@ -9,6 +9,7 @@
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   last = cat-file commit HEAD
   unstage = reset HEAD
+	ctags = !.git/hooks/ctags
 [color]
   ui = auto
 [color "branch"]
@@ -38,3 +39,5 @@
 	keepBackup = false
 [core]
 	editor = vim
+[init]
+	templatedir = ~/.git_template
