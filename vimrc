@@ -32,6 +32,7 @@ Bundle 'groenewege/vim-less'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'spf13/vim-colors'
 Bundle 'vim-scripts/bufexplorer.zip'
+Bundle 'delimitMate.vim'
 
 " == general config ==
 set number
