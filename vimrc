@@ -17,13 +17,15 @@ Bundle 'skwp/YankRing.vim'
 Bundle 'git-mirror/vim-l9'
 Bundle 'tpope/vim-fugitive'
 Bundle 'kien/ctrlp.vim'
+" Bundle 'Command-T'
 Bundle 'airblade/vim-rooter'
-Bundle 'Lokaltog/vim-easymotion'
+" Bundle 'Lokaltog/vim-easymotion'
 Bundle 'ervandew/supertab'
 Bundle 'scrooloose/snipmate-snippets'
 Bundle 'scrooloose/nerdtree'
 Bundle 'vim-scripts/greplace.vim'
 Bundle 'tjennings/git-grep-vim'
+Bundle 'mileszs/ack.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'rubycomplete.vim'
 Bundle 'altercation/vim-colors-solarized'
@@ -48,18 +50,24 @@ let macvim_skip_cmd_opt_movement = 1
 let mapleader=','
 
 " == search settings ==
-set incsearch        "Find the next match as we type the search
 set hlsearch         "Hilight searches by default
-set viminfo='100,f1  "Save up to 100 marks, enable capital marks
+set incsearch        "Find the next match as we type the search
 set ignorecase
 set smartcase
 nmap <silent> <leader>/ :nohlsearch<CR>
+nnoremap <CR> :nohlsearch<CR>
 
+set gdefault
+set viminfo='100,f1  "Save up to 100 marks, enable capital marks
 " ================ Turn Off Swap Files ==============
 set noswapfile
 set nobackup
 set nowb
-
+" Time out on key codes but not mappings.
+" Basically this makes terminal Vim work sanely.
+set notimeout
+set ttimeout
+set ttimeoutlen=100
 " ================ Indentation ======================
 set smartindent
 set expandtab
@@ -155,6 +163,8 @@ noremap <C-s> :w<CR>
 vnoremap <C-s> <C-C>:w<CR>
 inoremap <C-s> <C-O>:w<CR>
 cmap w!! w !sudo tee % >/dev/null
+" In command-line mode, C-a jumps to beginning (to match C-e)
+cnoremap <C-a> <Home>
 
 inoremap jk <esc>
 inoremap kj <esc>
@@ -187,7 +197,6 @@ if has('gui_running')
   imap <D-l> <space>=><space>
 endif
 
-
 let g:netrw_preview=1 " preview window shown in a vertically split
 let g:netrw_winsize=20
 let NERDTreeMinimalUI = 1
@@ -198,9 +207,11 @@ map <silent> <leader>ntf :NERDTree<CR>:wincmd l<cr>p:NERDTreeFind<CR> " Show cur
 
 let g:ctrlp_map = 'cp'
 map <silent> <leader>cpb :CtrlPBookmarkDir<CR>
+map <leader>F :CtrlP %%<CR>
+nmap <leader>b :CtrlPBuffer<CR>
 let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'r'
-let g:ctrlp_root_markers = [ '.root', 'Gemfile', 'config.ru', 'Rakefile', '.git/']
+let g:ctrlp_working_path_mode = '0'
+" let g:ctrlp_root_markers = [ '.root', 'Gemfile', 'config.ru', 'Rakefile', '.git/']
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\v\.(exe|so|dll|.DS_Store)$',
@@ -224,3 +235,11 @@ function! <SID>StripTrailingWhitespaces()
 endfunction
 nmap ,w :StripTrailingWhitespaces<CR>:w<CR>
 autocmd BufWritePre * :call <SID>StripTrailingWhitespaces()
+
+if has("statusline") && !&cp
+  set laststatus=2              " always show the status bar
+  set statusline=%f\ %m\ %r     " filename, modified, readonly
+  set statusline+=%{fugitive#statusline()}
+  set statusline+=\ %l/%L[%p%%] " current line/total lines
+  set statusline+=\ %v[0x%B]    " current column [hex char]
+endif
