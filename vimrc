@@ -17,7 +17,6 @@ Bundle 'skwp/YankRing.vim'
 Bundle 'git-mirror/vim-l9'
 Bundle 'tpope/vim-fugitive'
 Bundle 'kien/ctrlp.vim'
-" Bundle 'Command-T'
 Bundle 'airblade/vim-rooter'
 " Bundle 'Lokaltog/vim-easymotion'
 Bundle 'ervandew/supertab'
@@ -55,7 +54,7 @@ set incsearch        "Find the next match as we type the search
 set ignorecase
 set smartcase
 nmap <silent> <leader>/ :nohlsearch<CR>
-nnoremap <CR> :nohlsearch<CR>
+" nnoremap <CR> :nohlsearch<CR>
 
 set gdefault
 set viminfo='100,f1  "Save up to 100 marks, enable capital marks
@@ -149,8 +148,64 @@ set guifont=Menlo\ Regular:h13 " solarized bg: 002933
 hi normal guibg=#002933
 hi LineNr guifg=#9C9C9C guibg=NONE
 
-noremap <F5> :bprev!<CR>
-noremap <F6> :bnext!<CR>
+" alias yw to yank the entire word 'yank inner word'
+" even if the cursor is halfway inside the word
+nnoremap ,yw yiww
+" ,ow = 'overwrite word', replace a word with what's in the yank buffer
+nnoremap ,ow "_diwhp
+" ,# Surround a word with #{ruby interpolation}
+map ,# ysiw#
+vmap ,# c#{<C-R>"}<ESC>
+" ," Surround a word with "quotes"
+map ," ysiw"
+vmap ," c"<C-R>""<ESC>
+" ,' Surround a word with 'single quotes'
+map ,' ysiw'
+vmap ,' c'<C-R>"'<ESC>
+" ,) or ,( Surround a word with (parens)
+" The difference is in whether a space is put in
+map ,( ysiw(
+map ,) ysiw)
+vmap ,( c( <C-R>" )<ESC>
+vmap ,) c(<C-R>")<ESC>
+" ,[ Surround a word with [brackets]
+map ,] ysiw]
+map ,[ ysiw[
+vmap ,[ c[ <C-R>" ]<ESC>
+vmap ,] c[<C-R>"]<ESC>
+" ,{ Surround a word with {braces}
+map ,} ysiw}
+map ,{ ysiw{
+vmap ,} c{ <C-R>" }<ESC>
+vmap ,{ c{<C-R>"}<ESC>
+
+nnoremap <D-(> f(ci(
+nnoremap <D-)> f)ci)
+nnoremap <D-[> f[ci[
+nnoremap <D-]> f]ci]
+
+"When typing a string, your quotes auto complete. Move past the quote
+"while still in insert mode by hitting Ctrl-a. Example:
+"
+" type 'foo<c-a>
+"
+" the first quote will autoclose so you'll get 'foo' and hitting <c-a> will
+" put the cursor right after the quote
+imap <C-a> <esc>wa
+
+" GitGrep - open up a git grep line, with a quote started for the search
+nnoremap ,gg :GitGrep ""<left>
+
+" Reselect visual block after indent/outdent
+vnoremap < <gv
+vnoremap > >gv
+
+" create <%= foo %> erb tags using Ctrl-k in edit mode
+imap <silent> <C-K> <%=   %><Esc>3hi
+
+" create <%= foo %> erb tags using Ctrl-j in edit mode
+imap <silent> <C-J> <%  %><Esc>2hi
+
 noremap <F8> :tabnext<CR>
 noremap <F7> :tabprev!<CR>
 inoremap <F5> :bprev!<CR>
@@ -176,16 +231,16 @@ nnoremap <silent> n nzz
 nnoremap <silent> N Nzz
 
 " Line Bubbling
-nmap <D-Up> [e
-nmap <D-Down> ]e
 nmap <D-k> [e
 nmap <D-j> ]e
-vmap <D-Up> [egv
-vmap <D-Down> ]egv
 vmap <D-k> [egv
 vmap <D-j> ]egv
+
 " Visually select the text that was last edited/pasted
 nmap gV `[v`]
+" paste lines from unnamed register and fix indentation
+map <leader>p pV`]=
+nmap <leader>P PV`]=
 
 imap <silent> <C-k> _
 imap <silent> <C-d> -
