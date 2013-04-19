@@ -166,7 +166,7 @@ vmap ,' c'<C-R>"'<ESC>
 " The difference is in whether a space is put in
 map ,( ysiw(
 map ,) ysiw)
-vmap ,( c( <C-R>" )<ESC>
+vmap ,( c(<C-R>")<ESC>
 vmap ,) c(<C-R>")<ESC>
 " ,[ Surround a word with [brackets]
 map ,] ysiw]
@@ -175,14 +175,15 @@ vmap ,[ c[ <C-R>" ]<ESC>
 vmap ,] c[<C-R>"]<ESC>
 " ,{ Surround a word with {braces}
 map ,} ysiw}
-map ,{ ysiw{
-vmap ,} c{ <C-R>" }<ESC>
+map ,{ ysiw}
+vmap ,} c{<C-R>"}<ESC>
 vmap ,{ c{<C-R>"}<ESC>
 
 nnoremap <D-(> f(ci(
 nnoremap <D-)> f)ci)
 nnoremap <D-[> f[ci[
 nnoremap <D-]> f]ci]
+nnoremap <D-{> f{ci{
 
 "When typing a string, your quotes auto complete. Move past the quote
 "while still in insert mode by hitting Ctrl-a. Example:
@@ -242,15 +243,10 @@ nmap gV `[v`]
 map <leader>p pV`]=
 nmap <leader>P PV`]=
 
-imap <silent> <C-k> _
-imap <silent> <C-d> -
+" imap <silent> <C-k> _
+imap <silent> <C-d> _
 imap <C-l> <space>=><space>
-
-if has('gui_running')
-  imap <silent> <D-k> _
-  imap <silent> <D-d> -
-  imap <D-l> <space>=><space>
-endif
+imap <D-l> <space>=><space>
 
 let g:netrw_preview=1 " preview window shown in a vertically split
 let g:netrw_winsize=20
