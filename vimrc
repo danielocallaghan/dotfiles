@@ -255,18 +255,18 @@ vnoremap c "_c
 nnoremap C "_C
 vnoremap C "_C
 
-function! YRRunAfterMaps()
+" function! YRRunAfterMaps()
   " Make Y yank to end of line.
   " nnoremap Y :<C-U>YRYankCount 'y$'<CR>
   " Fix L and H in operator-pending mode, so yH and such works.
   " omap <expr> L YRMapsExpression("", "$")
   " omap <expr> H YRMapsExpression("", "^")
   " Don't clobber the yank register when pasting over text in visual mode.
-  vnoremap p :<c-u>YRPaste 'p', 'v'<cr>gv:YRYankRange 'v'<cr>
-endfunction
+  " vnoremap p :<c-u>YRPaste 'p', 'v'<cr>gv:YRYankRange 'v'<cr>
+" endfunction
 
 " imap <silent> <C-k> _
-imap <silent> <C-d> _
+imap <silent> <D-d> _
 imap <C-l> <space>=><space>
 imap <D-l> <space>=><space>
 
