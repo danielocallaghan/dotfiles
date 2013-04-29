@@ -242,30 +242,6 @@ nmap gV `[v`]
 " paste lines from unnamed register and fix indentation
 map <leader>p pV`]=
 nmap <leader>P PV`]=
-"These are to cancel the default behavior of d, D, c, C
-"to put the text they delete in the default register.
-"Note that this means e.g. "ad won't copy the text into
-"register a anymore.  You have to explicitly yank it.
-nnoremap d "_d
-vnoremap d "_d
-nnoremap D "_D
-vnoremap D "_D
-nnoremap c "_c
-vnoremap c "_c
-nnoremap C "_C
-vnoremap C "_C
-
-" function! YRRunAfterMaps()
-  " Make Y yank to end of line.
-  " nnoremap Y :<C-U>YRYankCount 'y$'<CR>
-  " Fix L and H in operator-pending mode, so yH and such works.
-  " omap <expr> L YRMapsExpression("", "$")
-  " omap <expr> H YRMapsExpression("", "^")
-  " Don't clobber the yank register when pasting over text in visual mode.
-  " vnoremap p :<c-u>YRPaste 'p', 'v'<cr>gv:YRYankRange 'v'<cr>
-" endfunction
-
-" imap <silent> <C-k> _
 imap <silent> <D-d> _
 imap <C-l> <space>=><space>
 imap <D-l> <space>=><space>
