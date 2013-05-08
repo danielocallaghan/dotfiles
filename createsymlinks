@@ -7,4 +7,5 @@ ln -s ~/dotfiles/Preferences.sublime-settings ~/.config/sublime-text-2/Packages/
 ln -s ~/dotfiles/sublime_keybindings.json ~/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap
 ln -s ~/dotfiles/Preferences.sublime-settings ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
 ln -s ~/dotfiles/vimrc ~/.vimrc
+ln -s ~/dotfiles/gvimrc ~/.gvimrc
 ln -s ~/dotfiles/vim ~/.vim

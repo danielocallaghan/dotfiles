@@ -17,17 +17,16 @@ Bundle 'skwp/YankRing.vim'
 Bundle 'git-mirror/vim-l9'
 Bundle 'tpope/vim-fugitive'
 Bundle 'kien/ctrlp.vim'
-Bundle 'airblade/vim-rooter'
+" Bundle 'airblade/vim-rooter'
 " Bundle 'Lokaltog/vim-easymotion'
 Bundle 'ervandew/supertab'
 Bundle 'scrooloose/snipmate-snippets'
 Bundle 'scrooloose/nerdtree'
-Bundle 'vim-scripts/greplace.vim'
 Bundle 'tjennings/git-grep-vim'
-Bundle 'mileszs/ack.vim'
+" Bundle 'mileszs/ack.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'rubycomplete.vim'
-Bundle 'altercation/vim-colors-solarized'
+" Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/molokai'
 Bundle 'groenewege/vim-less'
 Bundle 'kchmck/vim-coffee-script'
@@ -136,6 +135,11 @@ map <leader>h              :wincmd h<cr>
 map <leader>j              :wincmd j<cr>
 map <leader>k              :wincmd k<cr>
 map <leader>l              :wincmd l<cr>
+" Move around splits with <c-hjkl>
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
 
 set background=dark
 "colorscheme solarized
@@ -148,10 +152,8 @@ set guifont=Menlo\ Regular:h13 " solarized bg: 002933
 hi normal guibg=#002933
 hi LineNr guifg=#9C9C9C guibg=NONE
 
-" alias yw to yank the entire word 'yank inner word'
-" even if the cursor is halfway inside the word
-nnoremap ,yw yiww
-" ,ow = 'overwrite word', replace a word with what's in the yank buffer
+map <leader>y "*y
+" overwrite word, replace a word with what's in the yank buffer
 nnoremap ,ow "_diwhp
 " ,# Surround a word with #{ruby interpolation}
 map ,# ysiw#
@@ -192,7 +194,8 @@ nnoremap <D-{> f{ci{
 "
 " the first quote will autoclose so you'll get 'foo' and hitting <c-a> will
 " put the cursor right after the quote
-imap <C-a> <esc>wa
+imap <C-a> <esc>la
+imap <D-l> <esc>la
 
 " GitGrep - open up a git grep line, with a quote started for the search
 nnoremap ,gg :GitGrep ""<left>
@@ -202,19 +205,25 @@ vnoremap < <gv
 vnoremap > >gv
 
 " create <%= foo %> erb tags using Ctrl-k in edit mode
-imap <silent> <C-K> <%=   %><Esc>3hi
-
+imap <silent> <C-k> <%=   %><Esc>3hi
+imap <silent> <D-k> <%=   %><Esc>3hi
 " create <%= foo %> erb tags using Ctrl-j in edit mode
-imap <silent> <C-J> <%  %><Esc>2hi
+imap <silent> <C-j> <%  %><Esc>2hi
+imap <silent> <D-j> <%  %><Esc>2hi
 
-noremap <F8> :tabnext<CR>
-noremap <F7> :tabprev!<CR>
-inoremap <F5> :bprev!<CR>
-inoremap <F6> :bnext!<CR>
-inoremap <F7> :tabprev!<CR>
-inoremap <F8> :tabnext!<CR>
+" Tab and window mappings
 nmap <C-Tab> :tabn<CR>
 nmap <C-S-Tab> :tabp<CR>
+map <silent> <D-1> :tabn 1<cr>
+map <silent> <D-2> :tabn 2<cr>
+map <silent> <D-3> :tabn 3<cr>
+map <silent> <D-4> :tabn 4<cr>
+map <silent> <D-5> :tabn 5<cr>
+map <silent> <D-6> :tabn 6<cr>
+map <silent> <D-7> :tabn 7<cr>
+map <silent> <D-8> :tabn 8<cr>
+map <silent> <D-9> :tabn 9<cr>
+
 noremap <C-s> :w<CR>
 vnoremap <C-s> <C-C>:w<CR>
 inoremap <C-s> <C-O>:w<CR>
@@ -244,7 +253,6 @@ map <leader>p pV`]=
 nmap <leader>P PV`]=
 imap <silent> <D-d> _
 imap <C-l> <space>=><space>
-imap <D-l> <space>=><space>
 
 let g:netrw_preview=1 " preview window shown in a vertically split
 let g:netrw_winsize=20
