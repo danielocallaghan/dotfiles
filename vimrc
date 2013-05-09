@@ -106,6 +106,11 @@ if has("statusline") && !&cp
   set statusline+=\ %v[0x%B]    " current column [hex char]
 endif
 
+" remove from ~/.vim/bundle/delimitMate.vim/plugin/delimitMate.vim
+" if !has('gui_running')
+"   imap <silent> <C-[>OC <RIGHT>
+" endif
+
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 nnoremap <C-k> 10k
