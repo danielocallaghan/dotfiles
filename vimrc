@@ -252,6 +252,7 @@ inoremap kj <esc>
 nnoremap <silent> n nzz
 nnoremap <silent> N Nzz
 nnoremap ,gg :GitGrep ""<left>
+nnoremap ,fm /def\s\(self\.\)\?
 
 
 """"""""""""" Plugin Configs """"""""""""""""""""
