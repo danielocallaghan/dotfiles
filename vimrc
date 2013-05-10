@@ -40,7 +40,6 @@ set backspace=indent,eol,start  "Allow backspace in insert mode
 set history=1000                "Store lots of :cmdline history
 set showcmd                     "Show incomplete cmds down the bottom
 set showmode                    "Show current mode down the bottom
-" set gcr=a:blinkon0              "Disable cursor blink
 set guicursor=a:blinkon1000
 set visualbell                  "No sounds
 set autoread                    "Reload files changed outside vim
@@ -144,26 +143,21 @@ nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
 """""""""""" GUI/Look & Feel """""""""""""""
+colorscheme molokai
 set background=dark
-if has('gui_running')
-  colorscheme molokai
-endif
 set guioptions-=m  "menu bar
 set guioptions-=T  "toolbar
 set guifont=Menlo\ Regular:h13 " solarized bg: 002933
 hi normal guibg=#002933
-hi LineNr guifg=#9C9C9C guibg=NONE
-""improve autocomplete menu color
-hi TabLineSel ctermfg=white cterm=bold
+hi LineNr guifg=#9C9C9C guibg=NONE ctermbg=NONE ctermfg=DarkGrey
+hi TabLineSel ctermfg=white cterm=bold " improve autocomplete menu color
 hi TabLine ctermfg=LightGrey ctermbg=NONE gui=NONE guifg=DarkGrey cterm=NONE
-
 
 """""""""""""""""""""""""""""""""""""""""""""
 """""        Misc Editing       """""""""""""
 """""""""""""""""""""""""""""""""""""""""""""
 map <leader>y "*y
-" overwrite word, replace a word with what's in the yank buffer
-nnoremap ,ow "_diwhp
+nnoremap ,ow "_diwhp " overwrite word, replace a word with what's in the yank buffer
 " ,# Surround a word with #{ruby interpolation}
 map ,# ysiw#
 vmap ,# c#{<C-R>"}<ESC>
