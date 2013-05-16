@@ -53,7 +53,6 @@ set incsearch        "Find the next match as we type the search
 set ignorecase
 set smartcase
 nmap <silent> <leader>/ :nohlsearch<CR>
-nmap <CR> :nohlsearch<CR>
 
 set gdefault
 set viminfo='100,f1  "Save up to 100 marks, enable capital marks
@@ -118,7 +117,6 @@ nnoremap <C-j> 10j
 syntax on
 filetype off
 filetype plugin indent on
-" highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
 au BufNewFile,BufRead,BufWrite *.dump set filetype=sql
 au BufNewFile,BufRead,BufWrite Gemfile,Gemfile.lock,config.ru,*.rabl set filetype=ruby
@@ -152,6 +150,10 @@ hi normal guibg=#002933
 hi LineNr guifg=#9C9C9C guibg=NONE ctermbg=NONE ctermfg=DarkGrey
 hi TabLineSel ctermfg=white cterm=bold " improve autocomplete menu color
 hi TabLine ctermfg=LightGrey ctermbg=NONE gui=NONE guifg=DarkGrey cterm=NONE
+hi Search gui=underline cterm=underline guifg=#FFFFFF guibg=#303030
+set cul
+hi CursorLine term=none cterm=none ctermbg=3 gui=none guibg=#053437
+hi CursorLineNR guifg=#9C9C9C
 
 """""""""""""""""""""""""""""""""""""""""""""
 """""        Misc Editing       """""""""""""
@@ -317,4 +319,65 @@ endfunction
 command! OpenChangedFiles :call OpenChangedFiles()
 
 nmap <leader>ocf :OpenChangedFiles<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RUNNING TESTS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+map <leader>t :silent call RunTestFile()<cr>
+map <leader>T :silent call RunNearestTest()<cr>
+map <leader>a :silent call RunTests('')<cr>
+map <leader>c :w\|:silent !script/features<cr>
+map <leader>w :w\|:silent !script/features --profile wip<cr>
+
+function! RunTestFile(...)
+  if a:0
+    let command_suffix = a:1
+  else
+    let command_suffix = ""
+  endif
+
+  " Run the tests for the previously-marked file.
+  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
+  if in_test_file
+    call SetTestFile()
+  elseif !exists("t:grb_test_file")
+    return
+  end
+  call RunTests(t:grb_test_file . command_suffix)
+endfunction
+
+function! RunNearestTest()
+  let spec_line_number = line('.')
+  call RunTestFile(":" . spec_line_number)
+endfunction
+
+function! SetTestFile()
+  " Set the spec file that tests will be run for.
+  let t:grb_test_file=@%
+endfunction
+
+function! RunTests(filename)
+  " Write the file and run tests for the given filename
+  :w
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo
+  :silent !echo;echo;echo;echo;echo;echo;echo;echo
+
+  if match(a:filename, '\.feature$') != -1
+    exec ":!script/features " . a:filename
+  else
+    exec ":!bundle exec spec --color " . a:filename
+    " if filereadable("Gemfile")
+    "   exec ":!bundle exec spec --color " . a:filename
+    " elseif filereadable("Gemfile")
+    "   exec ":!bundle exec rspec --color " . a:filename
+    " elseif filereadable("script/test")
+    "   exec ":!script/test " . a:filename
+    " else
+    "   exec ":!rspec --color " . a:filename
+    " end
+  end
+endfunction
 
