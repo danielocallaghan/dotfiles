@@ -152,7 +152,7 @@ hi TabLineSel ctermfg=white cterm=bold " improve autocomplete menu color
 hi TabLine ctermfg=LightGrey ctermbg=NONE gui=NONE guifg=DarkGrey cterm=NONE
 hi Search gui=underline cterm=underline guifg=#FFFFFF guibg=#303030
 set cul
-hi CursorLine term=none cterm=none ctermbg=3 gui=none guibg=#053437
+hi CursorLine term=none cterm=none ctermbg=none gui=none guibg=#053437
 hi CursorLineNR guifg=#9C9C9C
 
 """""""""""""""""""""""""""""""""""""""""""""
