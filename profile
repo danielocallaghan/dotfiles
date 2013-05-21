@@ -32,11 +32,18 @@ fi
 if [ -f /usr/share/git-core/git-completion.bash ]; then
   . /usr/share/git-core/git-completion.bash
 fi
+
 export CLICOLOR=1
 export TERM=xterm-color
 export LSCOLORS=GxFxCxDxBxegedabagaced
 export VISUAL=vim
 export EDITOR=vim
+
+export RUBY_GC_MALLOC_LIMIT=1000000000
+export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1.25
+export RUBY_HEAP_MIN_SLOTS=800000
+export RUBY_FREE_MIN=600000
+export LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so
 
 # Setting GIT prompt
 c_cyan=`tput setaf 6`

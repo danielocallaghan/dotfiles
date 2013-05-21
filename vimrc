@@ -235,6 +235,7 @@ map <silent> <D-8> :tabn 8<cr>
 map <silent> <D-9> :tabn 9<cr>
 " toggle between most recently opened buffer
 nnoremap <leader><leader> <c-^>
+nnoremap <silent><leader><C-]> <C-w><C-]><C-w>T
 
 noremap <C-s> :w<CR>
 vnoremap <C-s> <C-C>:w<CR>
@@ -268,7 +269,7 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = '0'
 " let g:ctrlp_root_markers = [ '.root', 'Gemfile', 'config.ru', 'Rakefile', '.git/']
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'dir':  '\v[\/]\.(git|hg|svn)|coverage$',
   \ 'file': '\v\.(exe|so|dll|.DS_Store)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
@@ -320,6 +321,14 @@ command! OpenChangedFiles :call OpenChangedFiles()
 
 nmap <leader>ocf :OpenChangedFiles<CR>
 
+function! PromoteToLet()
+  :normal! dd
+  :normal! P
+  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
+  :normal ==
+endfunction
+:command! PromoteToLet :call PromoteToLet()
+:map <leader>p :PromoteToLet<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING TESTS
