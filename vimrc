@@ -159,7 +159,7 @@ hi CursorLineNR guifg=#9C9C9C
 """""        Misc Editing       """""""""""""
 """""""""""""""""""""""""""""""""""""""""""""
 map <leader>y "*y
-nnoremap ,ow "_diwhp " overwrite word, replace a word with what's in the yank buffer
+nnoremap ,ow "_diwhp
 " ,# Surround a word with #{ruby interpolation}
 map ,# ysiw#
 vmap ,# c#{<C-R>"}<ESC>
@@ -333,12 +333,6 @@ endfunction
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING TESTS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>t :silent call RunTestFile()<cr>
-map <leader>T :silent call RunNearestTest()<cr>
-map <leader>a :silent call RunTests('')<cr>
-map <leader>c :w\|:silent !script/features<cr>
-map <leader>w :w\|:silent !script/features --profile wip<cr>
-
 function! RunTestFile(...)
   if a:0
     let command_suffix = a:1
@@ -390,3 +384,37 @@ function! RunTests(filename)
   end
 endfunction
 
+map <leader>t :silent call RunTestFile()<CR>
+map <leader>T :silent call RunNearestTest()<CR>
+map <leader>a :silent call RunTests('')<CR>
+map <leader>c :w\|:silent !script/features<CR>
+map <leader>w :w\|:silent !script/features --profile wip<CR>
+
+function! OpenTestAlternate()
+  let new_file = AlternateForCurrentFile()
+  exec ':tab drop ' . new_file
+endfunction
+
+function! AlternateForCurrentFile()
+  let current_file = expand("%")
+  let new_file = current_file
+  let in_spec = match(current_file, '^spec/') != -1
+  let going_to_spec = !in_spec
+  let in_app = match(current_file, '\<controllers\>') != -1 || match(current_file, '\<models\>') != -1 || match(current_file, '\<views\>') != -1 || match(current_file, '\<helpers\>') != -1
+  if going_to_spec
+    if in_app
+      let new_file = substitute(new_file, '^app/', '', '')
+    end
+    let new_file = substitute(new_file, '\.e\?rb$', '_spec.rb', '')
+    let new_file = 'spec/' . new_file
+  else
+    let new_file = substitute(new_file, '_spec\.rb$', '.rb', '')
+    let new_file = substitute(new_file, '^spec/', '', '')
+    if in_app
+      let new_file = 'app/' . new_file
+    end
+  endif
+  return new_file
+endfunction
+
+nnoremap <leader>R :call OpenTestAlternate()<cr>
