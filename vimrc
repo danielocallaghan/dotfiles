@@ -17,22 +17,20 @@ Bundle 'skwp/YankRing.vim'
 Bundle 'git-mirror/vim-l9'
 Bundle 'tpope/vim-fugitive'
 Bundle 'kien/ctrlp.vim'
-" Bundle 'airblade/vim-rooter'
-" Bundle 'Lokaltog/vim-easymotion'
 Bundle 'ervandew/supertab'
 Bundle 'scrooloose/snipmate-snippets'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tjennings/git-grep-vim'
-" Bundle 'mileszs/ack.vim'
 Bundle 'msanders/snipmate.vim'
 Bundle 'rubycomplete.vim'
-" Bundle 'altercation/vim-colors-solarized'
 Bundle 'vim-scripts/molokai'
 Bundle 'groenewege/vim-less'
 Bundle 'kchmck/vim-coffee-script'
 Bundle 'spf13/vim-colors'
 Bundle 'vim-scripts/bufexplorer.zip'
 Bundle 'delimitMate.vim'
+Bundle 'matchit.zip'
+Bundle 'ecomba/vim-ruby-refactoring'
 
 " == general config ==
 set number
@@ -53,6 +51,9 @@ set incsearch        "Find the next match as we type the search
 set ignorecase
 set smartcase
 nmap <silent> <leader>/ :nohlsearch<CR>
+" Keep search hit centered
+nnoremap <silent> n nzz
+nnoremap <silent> N Nzz
 
 set gdefault
 set viminfo='100,f1  "Save up to 100 marks, enable capital marks
@@ -192,11 +193,6 @@ nnoremap <D-[> f[ci[
 nnoremap <D-]> f]ci]
 nnoremap <D-{> f{ci{
 
-"When typing a string, your quotes auto complete. Move past the quote
-"while still in insert mode
-imap <C-a> <esc>la
-imap <D-l> <esc>la
-
 " Reselect visual block after indent/outdent
 vnoremap < <gv
 vnoremap > >gv
@@ -214,40 +210,47 @@ vmap <D-j> ]egv
 
 " Visually select the text that was last edited/pasted
 nmap gV `[v`]
+
+""""""""""""""" Paste Behaviour Tweaks """"""""""""""""""""
+" Use black hole register ("_) for the deletion so the unnamed register is not changed
+" nnoremap S "_diwP
+" vnoremap S "_d"0P
+" reselect and re-yank any text that is pasted in visual mode
+xnoremap p pgvy
+
 " paste lines from unnamed register and fix indentation
 map <leader>p pV`]=
 nmap <leader>P PV`]=
+
 imap <silent> <D-d> _
-imap <C-l> <space>=><space>
+imap <C-i> <space>=><space>
 
-
-"""""""""""""" Tab/Buffer Navigation """""""""""""""
+"""""""""""""" Tab/Buffer Navigation """"""""""""""""""""""
 nmap <C-Tab> :tabn<CR>
 nmap <C-S-Tab> :tabp<CR>
-map <silent> <D-1> :tabn 1<cr>
-map <silent> <D-2> :tabn 2<cr>
-map <silent> <D-3> :tabn 3<cr>
-map <silent> <D-4> :tabn 4<cr>
-map <silent> <D-5> :tabn 5<cr>
-map <silent> <D-6> :tabn 6<cr>
-map <silent> <D-7> :tabn 7<cr>
-map <silent> <D-8> :tabn 8<cr>
-map <silent> <D-9> :tabn 9<cr>
 " toggle between most recently opened buffer
 nnoremap <leader><leader> <c-^>
 nnoremap <silent><leader><C-]> <C-w><C-]><C-w>T
-
 noremap <C-s> :w<CR>
 vnoremap <C-s> <C-C>:w<CR>
 inoremap <C-s> <C-O>:w<CR>
 cmap w!! w !sudo tee % >/dev/null
+
+"""""""""""""" Moving around within a file """""""""""""""
 " In command-line mode, C-a jumps to beginning (to match C-e)
 cnoremap <C-a> <Home>
+cnoremap <C-l> <right>
+cnoremap <C-h> <left>
+cnoremap <D-l> <right>
+"When typing a string, your quotes auto complete. Move past the quote
+"while still in insert mode
+imap <C-a> <esc>la
+imap <D-l> <right>
+imap <C-h> <left>
+imap <C-l> <right>
+
 inoremap jk <esc>
 inoremap kj <esc>
-" Keep search hit centered
-nnoremap <silent> n nzz
-nnoremap <silent> N Nzz
 nnoremap ,gg :GitGrep ""<left>
 nnoremap ,fm /def\s\(self\.\)\?
 
@@ -258,8 +261,8 @@ let g:netrw_winsize=20
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 let g:NERDTreeWinSize = 30
-map <silent> <leader>ntt :NERDTreeToggle<CR>
-map <silent> <leader>ntf :NERDTree<CR>:wincmd l<cr>p:NERDTreeFind<CR> " Show current file in NERDTree
+map <silent> <leader>ntt :NERDTreeToggle<cr>
+map <silent> <leader>ntf :NERDTree<cr><leader>l<cr>:NERDTreeFind<cr>
 
 let g:ctrlp_map = 'cp'
 map <silent> <leader>cpb :CtrlPBookmarkDir<CR>
@@ -277,17 +280,6 @@ let g:ctrlp_prompt_mappings = {
   \ 'AcceptSelection("e")': [],
   \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
   \ }
-" add mapping
-" <leader>gv app/views
-" <leader>gv app/controllers
-" <leader>gv app/models
-" learn & repeat after substitution
-" more normal mode keys
-"     -> motion commands
-" never repeat yourself
-" add PromoteToLet()
-" add test runner
-
 
 """"""""""""" Functions """""""""""""""""""""""""""
 function! <SID>StripTrailingWhitespaces()
@@ -320,15 +312,6 @@ endfunction
 command! OpenChangedFiles :call OpenChangedFiles()
 
 nmap <leader>ocf :OpenChangedFiles<CR>
-
-function! PromoteToLet()
-  :normal! dd
-  :normal! P
-  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
-  :normal ==
-endfunction
-:command! PromoteToLet :call PromoteToLet()
-:map <leader>p :PromoteToLet<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING TESTS
@@ -416,5 +399,15 @@ function! AlternateForCurrentFile()
   endif
   return new_file
 endfunction
-
 nnoremap <leader>R :call OpenTestAlternate()<cr>
+
+" vim ruby refactoring plugin
+nnoremap <leader>rap  :RAddParameter<cr>
+nnoremap <leader>rcpc :RConvertPostConditional<cr>
+nnoremap <leader>rel  :RExtractLet<cr>
+vnoremap <leader>rec  :RExtractConstant<cr>
+vnoremap <leader>relv :RExtractLocalVariable<cr>
+nnoremap <leader>rit  :RInlineTemp<cr>
+vnoremap <leader>rrlv :RRenameLocalVariable<cr>
+vnoremap <leader>rriv :RRenameInstanceVariable<cr>
+vnoremap <leader>rem  :RExtractMethod<cr>

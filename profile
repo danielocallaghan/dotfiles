@@ -21,6 +21,9 @@ alias ber='bundle exec rake'
 alias bes='bundle exec spec'
 alias bers='bundle exec rspec'
 alias rails='bundle exec rails'
+alias recur='bundle exec rake features:enhanced[cur]'
+alias rpcur='bundle exec rake features:plain[cur]'
+alias rcur='bundle exec rake features[cur]'
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
 [[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion

@@ -1,0 +1,30 @@
+change till:
+ct<char>
+
+find:
+df<char>
+
+change inside:
+ci<char>
+
+delete around paragraph
+dap
+
+move to first non-blank char in next/prev line:
++/-
+
+move a sentence/paragraph forward/back
+( or )
+{ or }
+
+
+add mappings:
+  <leader>gv app/views
+  <leader>gv app/controllers
+  <leader>gv app/models
+  learn & repeat after substitution
+  more normal mode keys
+      -> motion commands
+  never repeat yourself
+  add test runner
+
