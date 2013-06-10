@@ -31,6 +31,7 @@ Bundle 'vim-scripts/bufexplorer.zip'
 Bundle 'delimitMate.vim'
 Bundle 'matchit.zip'
 Bundle 'ecomba/vim-ruby-refactoring'
+Bundle 'briancollins/vim-jst'
 
 " == general config ==
 set number
