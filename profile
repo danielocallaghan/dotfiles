@@ -16,6 +16,7 @@ alias mvim="rvm ruby-1.9.3 do mvim"
 alias gitcycle='git stash && git pull --rebase && git stash pop'
 alias gs='git status .'
 alias gap='git add -p'
+alias gcop='git co -p'
 alias be='bundle exec'
 alias ber='bundle exec rake'
 alias bes='bundle exec spec'
