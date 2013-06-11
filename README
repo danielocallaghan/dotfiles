@@ -1,7 +1,15 @@
-Various vim related configuration files that can be symlinked to the current users profile/home dir
+# Dan's Dotfiles
 
-vim plugins installed as submodules eg:
-git submodule add https://github.com/git-mirror/vim-l9.git vim/bundle/l9
+Various vim/env related configuration files that can be symlinked to the current users profile/home dir by running ./createsymlinks
 
-Consider installing Vundle instead:
-https://github.com/gmarik/vundle
+## Vim Settings
+
+Plugins & extensions managed by Vundle:
+  * https://github.com/gmarik/vundle
+
+Mappings, functions & bindings and general guidance pulled together from various sources such as:
+  * https://github.com/skwp/dotfiles
+  * http://mislav.uniqpath.com/2011/12/vim-revisited/
+  * https://github.com/garybernhardt/dotfiles/blob/master/.vimrc
+  * https://github.com/r00k/dotfiles
+

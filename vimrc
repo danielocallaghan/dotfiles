@@ -52,9 +52,10 @@ set incsearch        "Find the next match as we type the search
 set ignorecase
 set smartcase
 nmap <silent> <leader>/ :nohlsearch<CR>
+nmap <silent> // :nohlsearch<CR>
 " Keep search hit centered
-nnoremap <silent> n nzz
-nnoremap <silent> N Nzz
+" nnoremap <silent> n nzz
+" nnoremap <silent> N Nzz
 
 set gdefault
 set viminfo='100,f1  "Save up to 100 marks, enable capital marks
@@ -67,6 +68,9 @@ set nowb
 set notimeout
 set ttimeout
 set ttimeoutlen=100
+" Get rid of the delay when hitting esc!
+set noesckeys
+
 " ================ Indentation ======================
 set smartindent
 set expandtab
@@ -75,11 +79,14 @@ set pastetoggle=<F2>
 set tabstop=2
 set smarttab
 set shiftwidth=2
+set shiftround " When at 3 spaces and I hit >>, go to 4, not 5.
 set autoindent
 set nowrap       "Don't wrap lines
 set foldmethod=indent   "fold based on indent
 set foldnestmax=3       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
+" Don't add the comment prefix when I hit enter or o/O on a comment line.
+set formatoptions-=or
 
 " ================ Completion =======================
 set wildmode=longest,list
@@ -94,7 +101,7 @@ set wildignore+=*.gem
 set wildignore+=log/**
 set wildignore+=*.png,*.jpg,*.gif
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-set scrolloff=8         "Start scrolling when we're 8 lines away from margins
+set scrolloff=12         "Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
 
@@ -111,11 +118,6 @@ endif
 "   imap <silent> <C-[>OC <RIGHT>
 " endif
 
-nnoremap <C-e> 3<C-e>
-nnoremap <C-y> 3<C-y>
-nnoremap <C-k> 10k
-nnoremap <C-j> 10j
-
 syntax on
 filetype off
 filetype plugin indent on
@@ -131,14 +133,29 @@ autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
 autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
 autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 
+" Disable that goddamn 'Entering Ex mode. Type 'visual' to go to Normal mode.'
+" that I trigger 40x a day.
+map Q <Nop>
+" Disable K looking stuff up
+map K <Nop>
+
+" These are very similar keys. Typing 'a will jump to the line in the current
+" file marked with ma. However, `a will jump to the line and column marked
+" with ma.  It’s more useful in any case I can imagine, but it’s located way
+" off in the corner of the keyboard. The best way to handle this is just to
+" swap them: http://items.sjbach.com/319/configuring-vim-right
+nnoremap ' `
+nnoremap ` '
 
 """"""""""" Move around splits """""""""""""""""
-map <leader>h              :wincmd h<cr>
-map <leader>j              :wincmd j<cr>
-map <leader>k              :wincmd k<cr>
-map <leader>l              :wincmd l<cr>
-nnoremap <c-j> <c-w>j
-nnoremap <c-k> <c-w>k
+map <leader>h :wincmd h<cr>
+map <leader>j :wincmd j<cr>
+map <leader>k :wincmd k<cr>
+map <leader>l :wincmd l<cr>
+" TODO: Below now maps to jump up/down by method/block, need to think of a better
+" binding
+" nnoremap <c-j> <c-w>j
+" nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
@@ -161,6 +178,7 @@ hi CursorLineNR guifg=#9C9C9C
 """""        Misc Editing       """""""""""""
 """""""""""""""""""""""""""""""""""""""""""""
 map <leader>y "*y
+map <leader>Y "*Y
 nnoremap ,ow "_diwhp
 " ,# Surround a word with #{ruby interpolation}
 map ,# ysiw#
@@ -209,6 +227,17 @@ nmap <D-j> ]e
 vmap <D-k> [egv
 vmap <D-j> ]egv
 
+" move up/down quickly by using Cmd-j, Cmd-k
+" which will move us around by functions
+nnoremap <silent> <C-j> }
+nnoremap <silent> <C-k> {
+autocmd FileType ruby map <buffer> <C-j> ]m
+autocmd FileType ruby map <buffer> <C-k> [m
+autocmd FileType rspec map <buffer> <C-j> }
+autocmd FileType rspec map <buffer> <C-k> {
+autocmd FileType javascript map <buffer> <C-k> }
+autocmd FileType javascript map <buffer> <C-j> {
+
 " Visually select the text that was last edited/pasted
 nmap gV `[v`]
 
@@ -224,7 +253,7 @@ map <leader>p pV`]=
 nmap <leader>P PV`]=
 
 imap <silent> <D-d> _
-imap <C-i> <space>=><space>
+imap <C-y> <space>=><space>
 
 """""""""""""" Tab/Buffer Navigation """"""""""""""""""""""
 nmap <C-Tab> :tabn<CR>
@@ -238,17 +267,24 @@ inoremap <C-s> <C-O>:w<CR>
 cmap w!! w !sudo tee % >/dev/null
 
 """""""""""""" Moving around within a file """""""""""""""
-" In command-line mode, C-a jumps to beginning (to match C-e)
+"""""""""""""" Arrow Key Evasion bindings  """"""""""""""""
 cnoremap <C-a> <Home>
-cnoremap <C-l> <right>
+nnoremap <C-e> $
+nnoremap <C-a> ^
+imap <C-a> <C-o>^
+imap <C-e> <C-o>$
+vnoremap <C-e> $
+vnoremap <C-a> ^
+
 cnoremap <C-h> <left>
+cnoremap <C-l> <right>
 cnoremap <D-l> <right>
-"When typing a string, your quotes auto complete. Move past the quote
-"while still in insert mode
-imap <C-a> <esc>la
-imap <D-l> <right>
+
 imap <C-h> <left>
 imap <C-l> <right>
+imap <D-l> <right>
+
+nnoremap <C-y> 3<C-y>
 
 inoremap jk <esc>
 inoremap kj <esc>
@@ -282,7 +318,11 @@ let g:ctrlp_prompt_mappings = {
   \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
   \ }
 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""" Functions """""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+
 function! <SID>StripTrailingWhitespaces()
     " Preparation: save last search, and cursor position.
     let _s=@/
@@ -313,6 +353,22 @@ endfunction
 command! OpenChangedFiles :call OpenChangedFiles()
 
 nmap <leader>ocf :OpenChangedFiles<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MULTIPURPOSE TAB KEY
+" Indent if we're at the beginning of a line. Else, do completion.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TODO: Debug this, not working in all file types
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING TESTS
@@ -404,6 +460,7 @@ nnoremap <leader>R :call OpenTestAlternate()<cr>
 
 " vim ruby refactoring plugin
 nnoremap <leader>rap  :RAddParameter<cr>
+nnoremap <leader>rapnb :RAddParameterNB<cr>
 nnoremap <leader>rcpc :RConvertPostConditional<cr>
 nnoremap <leader>rel  :RExtractLet<cr>
 vnoremap <leader>rec  :RExtractConstant<cr>
@@ -412,3 +469,5 @@ nnoremap <leader>rit  :RInlineTemp<cr>
 vnoremap <leader>rrlv :RRenameLocalVariable<cr>
 vnoremap <leader>rriv :RRenameInstanceVariable<cr>
 vnoremap <leader>rem  :RExtractMethod<cr>
+
+map <Leader>d odebugger<cr>puts 'debugger'<esc>:w<cr>

@@ -13,10 +13,11 @@ dap
 move to first non-blank char in next/prev line:
 +/-
 
-move a sentence/paragraph forward/back
-( or )
-{ or }
+open all folds: zR
+toggle fold: zo
 
+set mark: ma
+goto mark: 'a
 
 add mappings:
   <leader>gv app/views
