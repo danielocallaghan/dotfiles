@@ -1,17 +1,14 @@
-change till:
-ct<char>
+change till: ct<char>
 
-find:
-df<char>
+find: df<char>
 
-change inside:
-ci<char>
+change inside: ci<char>
 
-delete around paragraph
-dap
+delete around paragraph: dap
 
-move to first non-blank char in next/prev line:
-+/-
+delete till end of line: D
+
+move to first non-blank char in next/prev line: +/-
 
 open all folds: zR
 toggle fold: zo
