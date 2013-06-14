@@ -221,6 +221,7 @@ imap <silent> <C-k> <%=   %><Esc>3hi
 imap <silent> <D-k> <%=   %><Esc>3hi
 imap <silent> <C-j> <%  %><Esc>2hi
 imap <silent> <D-j> <%  %><Esc>2hi
+
 " Line Bubbling
 nmap <D-k> [e
 nmap <D-j> ]e
@@ -231,6 +232,8 @@ vmap <D-j> ]egv
 " which will move us around by functions
 nnoremap <silent> <C-j> }
 nnoremap <silent> <C-k> {
+vnoremap <silent> <C-j> }
+vnoremap <silent> <C-k> {
 autocmd FileType ruby map <buffer> <C-j> ]m
 autocmd FileType ruby map <buffer> <C-k> [m
 autocmd FileType rspec map <buffer> <C-j> }
