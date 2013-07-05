@@ -228,18 +228,10 @@ nmap <D-j> ]e
 vmap <D-k> [egv
 vmap <D-j> ]egv
 
-" move up/down quickly by using Cmd-j, Cmd-k
+" move up/down quickly by using C-j, C-k
 " which will move us around by functions
-nnoremap <silent> <C-j> }
-nnoremap <silent> <C-k> {
-vnoremap <silent> <C-j> }
-vnoremap <silent> <C-k> {
-autocmd FileType ruby map <buffer> <C-j> ]m
-autocmd FileType ruby map <buffer> <C-k> [m
-autocmd FileType rspec map <buffer> <C-j> }
-autocmd FileType rspec map <buffer> <C-k> {
-autocmd FileType javascript map <buffer> <C-k> }
-autocmd FileType javascript map <buffer> <C-j> {
+noremap <silent> <C-j> 5j
+noremap <silent> <C-k> 5k
 
 " Visually select the text that was last edited/pasted
 nmap gV `[v`]
