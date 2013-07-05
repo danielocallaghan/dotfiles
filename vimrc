@@ -52,7 +52,6 @@ set incsearch        "Find the next match as we type the search
 set ignorecase
 set smartcase
 nmap <silent> <leader>/ :nohlsearch<CR>
-nmap <silent> // :nohlsearch<CR>
 " Keep search hit centered
 " nnoremap <silent> n nzz
 " nnoremap <silent> N Nzz
