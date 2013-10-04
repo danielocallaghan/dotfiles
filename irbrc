@@ -1,9 +1,6 @@
 require "rubygems"
 require "awesome_print"
-require 'wirble'
 require 'ap'
-Wirble.init
-Wirble.colorize
 
 unless IRB.version.include?('DietRB')
   IRB::Irb.class_eval do
