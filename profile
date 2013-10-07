@@ -4,7 +4,7 @@ if [ -f /etc/bashrc ]; then
 fi
 # Source private vars
 if [ -f ~/.private-env.bash ]; then
-  . ~/.private-env.bash
+  . ~/Dropbox/workrelated/private-env.bash
 fi
 
 # User specific aliases and functions
