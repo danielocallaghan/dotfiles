@@ -24,7 +24,7 @@
 [color "status"]
   added = yellow
   changed = green
-  untracked = cyan  
+  untracked = cyan
 [user]
   name = Daniel O'Callaghan
   email = DOCallaghan@au.westfield.com

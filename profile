@@ -1,20 +1,24 @@
 # Source global definitions
-if [ -f /etc/bashrc ]; then
-  . /etc/bashrc
-fi
+ if [ -f /etc/bashrc ]; then
+   . /etc/bashrc
+ fi
 # Source private vars
 if [ -f ~/.private-env.bash ]; then
   . ~/Dropbox/workrelated/private-env.bash
 fi
 
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
+[[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
+
 # User specific aliases and functions
-export PATH=/usr/local/bin:$PATH
+export PATH=$PATH:/usr/local/bin
 
 alias l='ls -alh'
 alias vim="stty stop '' -ixoff ; rvm ruby-2.0.0 do vim"
 alias gitcycle='git stash && git pull --rebase && git stash pop'
 alias gs='git status .'
 alias gap='git add -p'
+alias git=hub
 alias be='bundle exec'
 alias ber='bundle exec rake'
 alias bes='bundle exec spec'
@@ -23,9 +27,6 @@ alias bes='bundle exec rspec'
 alias bec='bundle exec cucumber'
 alias rails='bundle exec rails'
 alias rcur='bundle exec cucumber --tags @cur'
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
-[[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
 
 # GIT modifications
 if [ -f ~/.git-completion.bash ]; then
@@ -40,6 +41,7 @@ export TERM=xterm-color
 export LSCOLORS=GxFxCxDxBxegedabagaced
 export VISUAL=vim
 export EDITOR=vim
+export GITHUB_HOST=github.dbg.westfield.com
 
 export RUBY_GC_MALLOC_LIMIT=1000000000
 export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1.25
