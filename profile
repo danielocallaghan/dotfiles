@@ -14,7 +14,7 @@ fi
 export PATH=$PATH:/usr/local/bin
 
 alias l='ls -alh'
-alias vim="stty stop '' -ixoff ; rvm ruby-2.0.0 do vim"
+alias vim="stty stop '' -ixoff ; rvm 1.9.3 do vim"
 alias gitcycle='git stash && git pull --rebase && git stash pop'
 alias gs='git status .'
 alias gap='git add -p'
