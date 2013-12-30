@@ -252,6 +252,11 @@ imap <C-y> <space>=><space>
 """""""""""""" Tab/Buffer Navigation """"""""""""""""""""""
 nmap <C-Tab> :tabn<CR>
 nmap <C-S-Tab> :tabp<CR>
+nmap <D-right> :tabn<CR>
+nmap <D-left> :tabp<CR>
+imap <D-right> <esc>:tabn<CR>
+imap <D-left> <esc>:tabp<CR>
+
 " toggle between most recently opened buffer
 nnoremap <leader><leader> <c-^>
 nnoremap <silent><leader><C-]> <C-w><C-]><C-w>T
@@ -472,4 +477,4 @@ vnoremap <leader>rrlv :RRenameLocalVariable<cr>
 vnoremap <leader>rriv :RRenameInstanceVariable<cr>
 vnoremap <leader>rem  :RExtractMethod<cr>
 
-map <Leader>d odebugger<cr>puts 'debugger'<esc>:w<cr>
+map <Leader>d obyebug<cr>puts 'debugger'<esc>:w<cr>
