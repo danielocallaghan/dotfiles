@@ -10,11 +10,18 @@ fi
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
 [[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
 
+if [ -f /usr/local/git/contrib/completion/git-completion.bash ]; then
+  . /usr/local/git/contrib/completion/git-completion.bash
+fi
+
 # User specific aliases and functions
 export PATH=$PATH:/usr/local/bin
 
+stty -ixon
+
 alias l='ls -alh'
 alias vim="stty stop '' -ixoff ; rvm 1.9.3 do vim"
+alias mvim="rvm ruby-1.9.3 do mvim"
 alias gitcycle='git stash && git pull --rebase && git stash pop'
 alias gs='git status .'
 alias gap='git add -p'
@@ -27,14 +34,6 @@ alias bes='bundle exec rspec'
 alias bec='bundle exec cucumber'
 alias rails='bundle exec rails'
 alias rcur='bundle exec cucumber --tags @cur'
-
-# GIT modifications
-if [ -f ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
-fi
-if [ -f /usr/share/git-core/git-completion.bash ]; then
-  . /usr/share/git-core/git-completion.bash
-fi
 
 export CLICOLOR=1
 export TERM=xterm-color
