@@ -3,12 +3,15 @@
    . /etc/bashrc
  fi
 # Source private vars
-if [ -f ~/.private-env.bash ]; then
+if [ -f ~/Dropbox/workrelated/private-env.bash ]; then
   . ~/Dropbox/workrelated/private-env.bash
 fi
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
 [[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  . $(brew --prefix)/etc/bash_completion
+fi
 
 if [ -f /usr/local/git/contrib/completion/git-completion.bash ]; then
   . /usr/local/git/contrib/completion/git-completion.bash
@@ -17,36 +20,42 @@ fi
 # User specific aliases and functions
 export PATH=$PATH:/usr/local/bin
 
-stty -ixon
-
 alias l='ls -alh'
-alias vim="stty stop '' -ixoff ; rvm 1.9.3 do vim"
-alias mvim="rvm ruby-1.9.3 do mvim"
-alias gitcycle='git stash && git pull --rebase && git stash pop'
+alias ..='cd ..'
+alias grep='grep --color=auto'
+alias df='df -H'
+alias du='du -ch'
+# top is atop, just like vi is vim
+alias top='atop'
+
 alias gs='git status .'
 alias gap='git add -p'
 alias git=hub
+
 alias be='bundle exec'
 alias ber='bundle exec rake'
 alias bes='bundle exec spec'
 alias bers='bundle exec rspec'
 alias bes='bundle exec rspec'
 alias bec='bundle exec cucumber'
-alias rails='bundle exec rails'
 alias rcur='bundle exec cucumber --tags @cur'
 
+# GIT modifications
 export CLICOLOR=1
 export TERM=xterm-color
 export LSCOLORS=GxFxCxDxBxegedabagaced
 export VISUAL=vim
 export EDITOR=vim
 export GITHUB_HOST=github.dbg.westfield.com
+export rvmsudo_secure_path=0
 
-export RUBY_GC_MALLOC_LIMIT=1000000000
-export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1.25
-export RUBY_HEAP_MIN_SLOTS=800000
-export RUBY_FREE_MIN=600000
-export LD_PRELOAD=/usr/lib/libtcmalloc_minimal.so
+# improve bash history
+shopt -s histappend
+export PROMPT_COMMAND='history -a; history -n;'$PROMPT_COMMAND
+export HISTFILESIZE=10000000
+export HISTSIZE=10000000
+export HISTCONTROL=ignoredups
+export HISTIGNORE="&:[ ]*:exit"
 
 # Setting GIT prompt
 c_cyan=`tput setaf 6`

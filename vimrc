@@ -21,8 +21,8 @@ Bundle 'ervandew/supertab'
 Bundle 'scrooloose/snipmate-snippets'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tjennings/git-grep-vim'
+Bundle 'mileszs/ack.vim'
 Bundle 'msanders/snipmate.vim'
-Bundle 'rubycomplete.vim'
 Bundle 'vim-scripts/molokai'
 Bundle 'groenewege/vim-less'
 Bundle 'kchmck/vim-coffee-script'
@@ -31,7 +31,9 @@ Bundle 'vim-scripts/bufexplorer.zip'
 Bundle 'delimitMate.vim'
 Bundle 'matchit.zip'
 Bundle 'ecomba/vim-ruby-refactoring'
+Bundle 'ngmy/vim-rubocop'
 Bundle 'briancollins/vim-jst'
+Bundle 'AndrewRadev/splitjoin.vim'
 
 " == general config ==
 set number
@@ -127,10 +129,10 @@ au BufNewFile,BufRead,BufWrite *.yml set filetype=yaml
 au BufNewFile,BufRead,BufWrite *.json set filetype=javascript
 
 "ruby
-autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+" autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
+" autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+" autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+" autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
 
 " Disable that goddamn 'Entering Ex mode. Type 'visual' to go to Normal mode.'
 " that I trigger 40x a day.
@@ -288,7 +290,9 @@ nnoremap <C-y> 3<C-y>
 inoremap jk <esc>
 inoremap kj <esc>
 nnoremap ,gg :GitGrep ""<left>
+nnoremap ,ff :Ack<space>
 nnoremap ,fm /def\s\(self\.\)\?
+nnoremap ,fr :%s///gc<left><left><left><left>
 
 
 """"""""""""" Plugin Configs """"""""""""""""""""
@@ -317,6 +321,8 @@ let g:ctrlp_prompt_mappings = {
   \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
   \ }
 
+
+let g:vimrubocop_config = '~/.rubocop.yml'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""" Functions """""""""""""""""""""""""""
@@ -462,6 +468,35 @@ function! s:ChangeHashSyntax(line1,line2)
     call setpos('.', l:save_cursor)
 endfunction
 command! -range=% ChangeHashSyntax call <SID>ChangeHashSyntax(<line1>,<line2>)
+
+function! DoPrettyXML()
+  " save the filetype so we can restore it later
+  let l:origft = &ft
+  set ft=
+  " delete the xml header if it exists. This will
+  " permit us to surround the document with fake tags
+  " without creating invalid xml.
+  1s/<?xml .*?>//e
+  " insert fake tags around the entire document.
+  " This will permit us to pretty-format excerpts of
+  " XML that may contain multiple top-level elements.
+  0put ='<PrettyXML>'
+  $put ='</PrettyXML>'
+  silent %!xmllint --format -
+  " xmllint will insert an <?xml?> header. it's easy enough to delete
+  " if you don't want it.
+  " delete the fake tags
+  2d
+  $d
+  " restore the 'normal' indentation, which is one extra level
+  " too deep due to the extra tags we wrapped around the document.
+  silent %<
+  " back to home
+  1
+  " restore the filetype
+  exe "set ft=" . l:origft
+endfunction
+command! PrettyXML call DoPrettyXML()
 
 nnoremap <leader>R :call OpenTestAlternate()<cr>
 
