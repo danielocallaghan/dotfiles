@@ -2,10 +2,6 @@ ln -s ~/dotfiles/gitconfig ~/.gitconfig
 ln -s ~/dotfiles/git_template ~/.git_template
 ln -s ~/dotfiles/irbrc ~/.irbrc
 ln -s ~/dotfiles/rdebugrc ~/.rdebugrc
-ln -s ~/dotfiles/sublime_keybindings.json ~/.config/sublime-text-2/Packages/User/Default (Linux).sublime-keymap
-ln -s ~/dotfiles/Preferences.sublime-settings ~/.config/sublime-text-2/Packages/User/Preferences.sublime-settings
-ln -s ~/dotfiles/sublime_keybindings.json ~/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap
-ln -s ~/dotfiles/Preferences.sublime-settings ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings
 ln -s ~/dotfiles/vimrc ~/.vimrc
 ln -s ~/dotfiles/gvimrc ~/.gvimrc
 ln -s ~/dotfiles/vim ~/.vim
@@ -14,7 +10,6 @@ ln -s ~/dotfiles/powconfig ~/.powconfig
 ln -s ~/dotfiles/powrc ~/.powrc
 ln -s ~/dotfiles/rubocop.yml ~/.rubocop.yml
 ln -s ~/dotfiles/psqlrc ~/.psqlrc
-
 
 ln -s ~/Users/daniel/Sites/aaa_client ~/.pow/aaa-client
 ln -s ~/Sites/aaa_console ~/.pow/aaa-console
