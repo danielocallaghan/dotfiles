@@ -12,5 +12,23 @@ ln -s ~/dotfiles/vim ~/.vim
 ln -s ~/dotfiles/powenv ~/.powenv
 ln -s ~/dotfiles/powconfig ~/.powconfig
 ln -s ~/dotfiles/powrc ~/.powrc
+ln -s ~/dotfiles/pow ~/.pow
 ln -s ~/dotfiles/rubocop.yml ~/.rubocop.yml
 ln -s ~/dotfiles/psqlrc ~/.psqlrc
+
+
+ln -s ~/Users/daniel/Sites/aaa_client ~/.pow/aaa-client
+ln -s ~/Sites/aaa_console ~/.pow/aaa-console
+ln -s ~/Sites/aaa_service  ~/.pow/aaa-service
+ln -s ~/Sites/auth0-test ~/.pow/auth0-test
+ln -s ~/Sites/back_office_console  ~/.pow/back-office-console
+ln -s ~/Sites/centre_service ~/.pow/centre-service
+ln -s ~/Sites/concierge_console ~/.pow/concierge-console
+ln -s ~/Sites/customer_console ~/.pow/customer-console
+ln -s ~/Sites/deal_service ~/.pow/deal-service
+ln -s ~/Sites/event_service ~/.pow/event-service
+ln -s ~/Sites/metric_service ~/.pow/metric-service
+ln -s ~/Sites/okta-samples/okta-ruby-sinatra  ~/.pow/okta-ruby-sinatra
+ln -s ~/Sites/product_service ~/.pow/product-service
+ln -s ~/Sites/store_service ~/.pow/store-service
+ln -s ~/Sites/user_service ~/.pow/user-service
