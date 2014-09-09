@@ -1,3 +1,4 @@
+ln -s ~/dotfiles/profile ~/.profile
 ln -s ~/dotfiles/gitconfig ~/.gitconfig
 ln -s ~/dotfiles/git_template ~/.git_template
 ln -s ~/dotfiles/irbrc ~/.irbrc
