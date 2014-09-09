@@ -12,7 +12,6 @@ ln -s ~/dotfiles/vim ~/.vim
 ln -s ~/dotfiles/powenv ~/.powenv
 ln -s ~/dotfiles/powconfig ~/.powconfig
 ln -s ~/dotfiles/powrc ~/.powrc
-ln -s ~/dotfiles/pow ~/.pow
 ln -s ~/dotfiles/rubocop.yml ~/.rubocop.yml
 ln -s ~/dotfiles/psqlrc ~/.psqlrc
 
