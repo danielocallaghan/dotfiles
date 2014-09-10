@@ -1,0 +1,14 @@
+git clone git@github.com:westfield/aaa_console.git
+git clone git@github.com:westfield/aaa_service.git
+git clone git@github.com:westfield/user_service.git
+git clone git@github.com:westfield/access_service.git
+git clone git@github.com:westfield/back_office_console.git
+git clone git@github.com:westfield/centre_service.git
+git clone git@github.com:westfield/concierge_console.git
+git clone git@github.com:westfield/deal_service.git
+git clone git@github.com:westfield/event_service.git
+git clone git@github.com:westfield/product_service.git
+git clone git@github.com:westfield/rubycas-client.git
+git clone git@github.com:westfield/service_api.git
+git clone git@github.com:westfield/store_service.git
+git clone git@github.com:westfield/westfield_uri_helper.git

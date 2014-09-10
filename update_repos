@@ -1,0 +1,1 @@
+for dir in ~/Sites/*; do (cd "$dir" && git pull); done

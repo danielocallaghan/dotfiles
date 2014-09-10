@@ -27,3 +27,5 @@ ln -s ~/Sites/okta-samples/okta-ruby-sinatra  ~/.pow/okta-ruby-sinatra
 ln -s ~/Sites/product_service ~/.pow/product-service
 ln -s ~/Sites/store_service ~/.pow/store-service
 ln -s ~/Sites/user_service ~/.pow/user-service
+
+ln -s ~/dotfiles/update_repos ~/Sites/update_repos
