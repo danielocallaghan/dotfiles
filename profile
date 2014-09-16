@@ -20,17 +20,14 @@ fi
 # User specific aliases and functions
 export PATH=$PATH:/usr/local/bin
 
-alias l='ls -alh'
+alias l='ls -alhg'
 alias ..='cd ..'
 alias grep='grep --color=auto'
 alias df='df -H'
 alias du='du -ch'
-# top is atop, just like vi is vim
-alias top='atop'
 
 alias gs='git status .'
 alias gap='git add -p'
-alias git=hub
 
 alias be='bundle exec'
 alias ber='bundle exec rake'
@@ -51,7 +48,7 @@ export rvmsudo_secure_path=0
 
 # improve bash history
 shopt -s histappend
-export PROMPT_COMMAND='history -a; history -n;'$PROMPT_COMMAND
+export PROMPT_COMMAND='history -w;'$PROMPT_COMMAND
 export HISTFILESIZE=10000000
 export HISTSIZE=10000000
 export HISTCONTROL=ignoredups
@@ -95,3 +92,4 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[0
 
 ### Added by the Heroku Toolbelt
 PATH=$PATH:/usr/pgsql-9.1/bin:$HOME/.rvm/bin # Add RVM to PATH for scripting
+export PATH=/usr/local/bin:$PATH
