@@ -180,7 +180,8 @@ hi normal guibg=#002933
 hi LineNr guifg=#9C9C9C guibg=NONE ctermbg=NONE ctermfg=DarkGrey
 hi TabLineSel ctermfg=white cterm=bold " improve autocomplete menu color
 hi TabLine ctermfg=LightGrey ctermbg=NONE gui=NONE guifg=DarkGrey cterm=NONE
-hi Search gui=underline cterm=underline guifg=#FFFFFF guibg=#303030
+" hi Search gui=underline cterm=underline guifg=#FFFFFF guibg=#303030
+hi Search gui=NONE cterm=NONE guifg=#FFFFFF guibg=#303030
 set cul
 hi CursorLine term=none cterm=none ctermbg=none gui=none guibg=#053437
 hi CursorLineNR guifg=#9C9C9C

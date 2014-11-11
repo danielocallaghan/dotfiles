@@ -29,3 +29,5 @@ ln -s ~/Sites/store_service ~/.pow/store-service
 ln -s ~/Sites/user_service ~/.pow/user-service
 
 ln -s ~/dotfiles/update_repos ~/Sites/update_repos
+ln -s ~/dotfiles/gemrc ~/.gemrc
+
