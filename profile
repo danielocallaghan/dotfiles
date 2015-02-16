@@ -7,7 +7,6 @@ if [ -f ~/Dropbox/workrelated/private-env.bash ]; then
   . ~/Dropbox/workrelated/private-env.bash
 fi
 
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
 [[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
@@ -93,3 +92,4 @@ PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[0
 ### Added by the Heroku Toolbelt
 PATH=$PATH:/usr/pgsql-9.1/bin:$HOME/.rvm/bin # Add RVM to PATH for scripting
 export PATH=/usr/local/bin:$PATH
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
