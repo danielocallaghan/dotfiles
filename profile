@@ -27,6 +27,12 @@ alias du='du -ch'
 
 alias gs='git status .'
 alias gap='git add -p'
+alias gd='git diff'
+alias gds='git diff --staged'
+alias gri2='git stash; git rebase -i HEAD~2; git stash pop'
+alias gpushmefeature='git commit; git push me `current_git_branch`;'
+alias gupfrommaster='br=`current_git_branch`;git stash; git co master; git pull; git co $br; git rebase master; git push -f me $br; git stash pop'
+alias gcommitandopenpr='git commit;git push me $current_git_branch;hub pull-request'
 
 alias be='bundle exec'
 alias ber='bundle exec rake'
@@ -85,6 +91,19 @@ parse_git_branch ()
         return 0
     fi
     echo -e $gitver
+}
+
+current_git_branch ()
+{
+  git rev-parse --abbrev-ref HEAD
+}
+
+run_byebugger ()
+{
+  while :
+  do
+    be byebug -R localhost:12345
+  done
 }
 
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[$(branch_color)\]\n$(parse_git_branch)\[${c_sgr0}\]\$ '
