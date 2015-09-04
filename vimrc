@@ -523,4 +523,5 @@ vnoremap <leader>rrlv :RRenameLocalVariable<cr>
 vnoremap <leader>rriv :RRenameInstanceVariable<cr>
 vnoremap <leader>rem  :RExtractMethod<cr>
 
-map <Leader>d obyebug<cr>puts 'debugger'<esc>:w<cr>
+map <leader>d obinding.pry<esc>:w<cr>
+map <leader>rd oRails.logger.debug("")<left><left>
