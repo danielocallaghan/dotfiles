@@ -24,6 +24,7 @@ alias ..='cd ..'
 alias grep='grep --color=auto'
 alias df='df -H'
 alias du='du -ch'
+alias run_popcorntv='sudo node /Users/daniel/Sites/PopcornTV/atv.js'
 
 alias gs='git status .'
 alias gap='git add -p'
