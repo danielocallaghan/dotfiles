@@ -40,6 +40,7 @@ Bundle 'ecomba/vim-ruby-refactoring'
 Bundle 'ngmy/vim-rubocop'
 Bundle 'briancollins/vim-jst'
 Bundle 'AndrewRadev/splitjoin.vim'
+Plugin 'mattn/emmet-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -227,6 +228,8 @@ nnoremap <D-{> f{ci{
 " Reselect visual block after indent/outdent
 vnoremap < <gv
 vnoremap > >gv
+" Visually select the text that was last edited/pasted
+nmap gV `[v`]
 
 " ERB
 imap <silent> <C-k> <%=   %><Esc>3hi
@@ -245,8 +248,6 @@ vmap <D-j> ]egv
 noremap <silent> <C-j> 5j
 noremap <silent> <C-k> 5k
 
-" Visually select the text that was last edited/pasted
-nmap gV `[v`]
 
 """"""""""""""" Paste Behaviour Tweaks """"""""""""""""""""
 " Use black hole register ("_) for the deletion so the unnamed register is not changed
@@ -525,3 +526,8 @@ vnoremap <leader>rem  :RExtractMethod<cr>
 
 map <leader>d obinding.pry<esc>:w<cr>
 map <leader>rd oRails.logger.debug("")<left><left>
+iabbrev @@ daniel.ocallaghan@gmail.com
+
+let g:user_emmet_leader_key='<D-e>'
+let g:user_emmet_install_global = 0
+autocmd FileType html,css,scss,erb,xml,haml EmmetInstall
