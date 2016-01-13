@@ -12,19 +12,14 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
 
-if [ -f /usr/local/git/contrib/completion/git-completion.bash ]; then
-  . /usr/local/git/contrib/completion/git-completion.bash
-fi
-
 # User specific aliases and functions
 export PATH=$PATH:/usr/local/bin
 
-alias l='ls -alhg'
+alias l='ls -lah'
 alias ..='cd ..'
 alias grep='grep --color=auto'
 alias df='df -H'
 alias du='du -ch'
-alias run_popcorntv='sudo node /Users/daniel/Sites/PopcornTV/atv.js'
 
 alias gs='git status .'
 alias gap='git add -p'
@@ -49,16 +44,7 @@ export TERM=xterm-color
 export LSCOLORS=GxFxCxDxBxegedabagaced
 export VISUAL=vim
 export EDITOR=vim
-export GITHUB_HOST=github.dbg.westfield.com
 export rvmsudo_secure_path=0
-
-# improve bash history
-shopt -s histappend
-export PROMPT_COMMAND='history -w;'$PROMPT_COMMAND
-export HISTFILESIZE=10000000
-export HISTSIZE=10000000
-export HISTCONTROL=ignoredups
-export HISTIGNORE="&:[ ]*:exit"
 
 # Setting GIT prompt
 c_cyan=`tput setaf 6`
@@ -122,3 +108,4 @@ PATH=$PATH:/usr/pgsql-9.1/bin:$HOME/.rvm/bin # Add RVM to PATH for scripting
 export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:/usr/local/sbin
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
+source ~/.git-completion.bash
