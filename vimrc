@@ -40,7 +40,9 @@ Bundle 'ecomba/vim-ruby-refactoring'
 Bundle 'ngmy/vim-rubocop'
 Bundle 'briancollins/vim-jst'
 Bundle 'AndrewRadev/splitjoin.vim'
+Bundle 'scrooloose/syntastic'
 Plugin 'mattn/emmet-vim'
+Plugin 'vim-airline/vim-airline'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -221,9 +223,14 @@ vmap ,{ c{<C-R>"}<ESC>
 
 nnoremap <D-(> f(ci(
 nnoremap <D-)> f)ci)
+" nnoremap ei( f(ci(
+
 nnoremap <D-[> f[ci[
 nnoremap <D-]> f]ci]
+" nnoremap ei[ f[ci[
+
 nnoremap <D-{> f{ci{
+" nnoremap ei{ f{ci{
 
 " Reselect visual block after indent/outdent
 vnoremap < <gv
@@ -274,9 +281,11 @@ imap <D-left> <esc>:tabp<CR>
 " toggle between most recently opened buffer
 nnoremap <leader><leader> <c-^>
 nnoremap <silent><leader><C-]> <C-w><C-]><C-w>T
-noremap <C-s> :w<CR>
-vnoremap <C-s> <C-C>:w<CR>
-inoremap <C-s> <C-O>:w<CR>
+
+" noremap <C-s> :w<CR>
+" vnoremap <C-s> <esc>:w<CR>
+" inoremap <C-s> <esc>:w<CR>
+
 cmap w!! w !sudo tee % >/dev/null
 
 """""""""""""" Moving around within a file """""""""""""""
@@ -387,66 +396,6 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RUNNING TESTS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! RunTestFile(...)
-  if a:0
-    let command_suffix = a:1
-  else
-    let command_suffix = ""
-  endif
-
-  " Run the tests for the previously-marked file.
-  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
-  if in_test_file
-    call SetTestFile()
-  elseif !exists("t:grb_test_file")
-    return
-  end
-  call RunTests(t:grb_test_file . command_suffix)
-endfunction
-
-function! RunNearestTest()
-  let spec_line_number = line('.')
-  call RunTestFile(":" . spec_line_number)
-endfunction
-
-function! SetTestFile()
-  " Set the spec file that tests will be run for.
-  let t:grb_test_file=@%
-endfunction
-
-function! RunTests(filename)
-  " Write the file and run tests for the given filename
-  :w
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo
-
-  if match(a:filename, '\.feature$') != -1
-    exec ":!script/features " . a:filename
-  else
-    exec ":!bundle exec spec --color " . a:filename
-    " if filereadable("Gemfile")
-    "   exec ":!bundle exec spec --color " . a:filename
-    " elseif filereadable("Gemfile")
-    "   exec ":!bundle exec rspec --color " . a:filename
-    " elseif filereadable("script/test")
-    "   exec ":!script/test " . a:filename
-    " else
-    "   exec ":!rspec --color " . a:filename
-    " end
-  end
-endfunction
-
-map <leader>t :silent call RunTestFile()<CR>
-map <leader>T :silent call RunNearestTest()<CR>
-map <leader>a :silent call RunTests('')<CR>
-map <leader>c :w\|:silent !script/features<CR>
-map <leader>w :w\|:silent !script/features --profile wip<CR>
-
 function! OpenTestAlternate()
   let new_file = AlternateForCurrentFile()
   exec ':tab drop ' . new_file
@@ -525,6 +474,7 @@ vnoremap <leader>rriv :RRenameInstanceVariable<cr>
 vnoremap <leader>rem  :RExtractMethod<cr>
 
 map <leader>d obinding.pry<esc>:w<cr>
+map <leader>bb obyebug<esc>:w<cr>
 map <leader>rd oRails.logger.debug("")<left><left>
 iabbrev @@ daniel.ocallaghan@gmail.com
 

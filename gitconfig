@@ -10,6 +10,7 @@
   last = cat-file commit HEAD
   unstage = reset HEAD
 	ctags = !.git/hooks/ctags
+	uncommit = reset
 [color]
   ui = auto
 [color "branch"]

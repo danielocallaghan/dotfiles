@@ -1,12 +1,12 @@
+To select between the single quotes I usually do a vi'
+vib (select inner block)
+Inside a curly braces block you can use viB
+To make the selections 'inclusive' (select also the quotes, parenthesis or braces) you can use a instead of i.
+asdfasdf [asdf] {asdfadsf}
+
 change till: ct<char>
-
 find: df<char>
-
 change inside: ci<char>
-
-delete around paragraph: dap
-
-delete till end of line: D
 
 move to first non-blank char in next/prev line: +/-
 
