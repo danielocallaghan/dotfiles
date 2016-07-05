@@ -21,7 +21,7 @@ alias grep='grep --color=auto'
 alias df='df -H'
 alias du='du -ch'
 
-alias gs='git status -s .'
+alias gs='git status .'
 alias gpr='hub pull-request'
 alias gc='git commit'
 alias gap='git add -p'
