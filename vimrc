@@ -277,6 +277,8 @@ nmap <D-right> :tabn<CR>
 nmap <D-left> :tabp<CR>
 imap <D-right> <esc>:tabn<CR>
 imap <D-left> <esc>:tabp<CR>
+map <F10> :tabmove -1<CR>
+map <F12> :tabmove +1<CR>
 
 " toggle between most recently opened buffer
 nnoremap <leader><leader> <c-^>
