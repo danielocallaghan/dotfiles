@@ -7,7 +7,7 @@ if [ -f ~/Dropbox/workrelated/private-env.bash ]; then
   . ~/Dropbox/workrelated/private-env.bash
 fi
 
-[[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
+# [[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
@@ -39,6 +39,10 @@ alias bers='bundle exec rspec'
 alias bes='bundle exec rspec'
 alias bec='bundle exec cucumber'
 alias rcur='bundle exec cucumber --tags @cur'
+
+alias docker-rm='docker rm $(docker ps -a -q -f status=exited)'
+alias docker-rmi='docker rmi $(docker images -q -f dangling=true)'
+alias docker-rmv='docker volume rm $(docker volume ls -q -f dangling=true)'
 
 alias deployccodev='git push dev && heroku run rake db:migrate --app cco-io-dev && heroku ps:restart --app cco-io-dev'
 alias deployccouat='git push uat && heroku run rake db:migrate --app cco-io-uat && heroku ps:restart --app cco-io-uat'
@@ -140,16 +144,19 @@ function storyNames {
 
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[$(branch_color)\]\n$(parse_git_branch)\[${c_sgr0}\]\n\$ '
 
-export GOPATH=$HOME/Sites/cco
+export GOPATH=$HOME/golang
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
 
 export NVM_DIR="$HOME/.nvm"
 [[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
 ### Added by the Heroku Toolbelt
 PATH=$PATH:/usr/pgsql-9.1/bin:$HOME/.rvm/bin # Add RVM to PATH for scripting
-export PATH=$PATH:/usr/local/opt/go/libexec/bin
-export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:/usr/local/sbin
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
 source ~/.git-completion.bash
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
