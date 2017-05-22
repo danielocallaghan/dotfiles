@@ -11,6 +11,7 @@
   unstage = reset HEAD
 	ctags = !.git/hooks/ctags
 	uncommit = reset
+  freshness = "!f() { git for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(color:cyan)%(refname:short)%(color:reset) | %(committerdate:relative)%(color:reset) | %(subject)' | column -s '|' -t; }; f"
 [color]
   ui = auto
 [color "branch"]

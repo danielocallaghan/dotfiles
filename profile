@@ -7,20 +7,9 @@ if [ -f ~/Dropbox/workrelated/private-env.bash ]; then
   . ~/Dropbox/workrelated/private-env.bash
 fi
 
-# [[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
-
-_apex()  {
-  COMPREPLY=()
-  local cur="${COMP_WORDS[COMP_CWORD]}"
-  local opts="$(apex autocomplete -- ${COMP_WORDS[@]:1})"
-  COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
-  return 0
-}
-
-complete -F _apex apex
 
 # User specific aliases and functions
 export PATH=$PATH:/usr/local/bin
@@ -34,13 +23,16 @@ alias du='du -ch'
 alias gs='git status .'
 alias gpr='hub pull-request'
 alias gc='git commit'
+alias gb='git freshness'
 alias gap='git add -p'
+alias glp='git log -p'
 alias gd='git diff'
 alias gds='git diff --staged'
 alias gri2='git stash; git rebase -i HEAD~2; git stash pop'
 alias gpushmefeature='git commit; git push me `current_git_branch`;'
 alias gupfrommaster='br=`current_git_branch`;git stash; git co master; git pull; git co $br; git rebase master; git push -f me $br;git stash show -p;'
 alias gcommitandopenpr='git commit;git push me $current_git_branch;hub pull-request'
+alias refreshctags='ctags -R --languages=ruby --exclude=.git'
 
 alias be='bundle exec'
 alias ber='bundle exec rake'
@@ -54,9 +46,7 @@ alias docker-rm='docker rm $(docker ps -a -q -f status=exited)'
 alias docker-rmi='docker rmi $(docker images -q -f dangling=true)'
 alias docker-rmv='docker volume rm $(docker volume ls -q -f dangling=true)'
 
-alias deployccodev='git push dev && heroku run rake db:migrate --app cco-io-dev && heroku ps:restart --app cco-io-dev'
-alias deployccouat='git push uat && heroku run rake db:migrate --app cco-io-uat && heroku ps:restart --app cco-io-uat'
-alias deployccoprod='git push prod && heroku run rake db:migrate --app cco-io-prod && heroku ps:restart --app cco-io-prod'
+alias runsystemtest='BROWSER=chrome STACKURL=http://localhost:3001 be rspec'
 
 # GIT modifications
 export CLICOLOR=1
@@ -70,13 +60,13 @@ export rvmsudo_secure_path=0
 shopt -s histappend ## append, no clearouts
 shopt -s histverify ## edit a recalled history line before executing
 shopt -s histreedit ## reedit a history substitution line if it failed
-export HISTFILESIZE=100000000
-export HISTSIZE=100000000
-export HISTCONTROL=ignoredups:erasedups
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000000
 export HISTIGNORE="&:[ ]*:exit"
 ## Save the history after each command finishes
 ### (and keep any existing PROMPT_COMMAND settings)
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
 export PT_TOKEN="241684b37391333e81db2df64265652d"
 
 # Setting GIT prompt
@@ -135,29 +125,15 @@ run_pryremote ()
   done
 }
 
-# usage eg: storyNames 108986798 108977884 108364434
-function storyNames {
-  PROJECT_ID="1340646"
-  declare -a story_ids="$@"
-  for STORY_ID in $story_ids; do
-    story=$(curl -s -X GET -H "X-TrackerToken: $PT_TOKEN" "https://www.pivotaltracker.com/services/v5/projects/$PROJECT_ID/stories/$STORY_ID")
-    IFS=$'\n'
-    declare -a names=($(echo $story | json_pp | awk '/"name"/ { print $0 }'))
-    echo $story | json_pp | awk '/"url"/ { print $0 }' | awk -F"\" : \"" '{ print $2 }' | sed 's/",//'
-    echo $story | json_pp | awk '/"kind"/ { print $0 }' | awk -F"\" : \"" '{ print $2 }' | sed 's/",//'
-      for name in ${names[@]}; do
-        echo $name | awk -F"\" : \"" '{ print $2 }' | sed 's/",//'
-      done
-    echo
-  done
-}
-
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[$(branch_color)\]\n$(parse_git_branch)\[${c_sgr0}\]\n\$ '
 
 export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
+
+export MYSQL_PATH=/usr/local/Cellar/mysql/5.7.15
+export PATH=$PATH:$MYSQL_PATH/bin
 
 export NVM_DIR="$HOME/.nvm"
 [[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh" # This loads nvm

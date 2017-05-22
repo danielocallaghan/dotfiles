@@ -28,21 +28,18 @@ Bundle 'scrooloose/snipmate-snippets'
 Bundle 'scrooloose/nerdtree'
 Bundle 'tjennings/git-grep-vim'
 Bundle 'mileszs/ack.vim'
-Bundle 'msanders/snipmate.vim'
 Bundle 'vim-scripts/molokai'
-Bundle 'groenewege/vim-less'
-Bundle 'kchmck/vim-coffee-script'
 Bundle 'spf13/vim-colors'
 Bundle 'vim-scripts/bufexplorer.zip'
-Bundle 'delimitMate.vim'
 Bundle 'matchit.zip'
-Bundle 'ecomba/vim-ruby-refactoring'
 Bundle 'ngmy/vim-rubocop'
-Bundle 'briancollins/vim-jst'
 Bundle 'AndrewRadev/splitjoin.vim'
 Bundle 'scrooloose/syntastic'
 Plugin 'mattn/emmet-vim'
 Plugin 'vim-airline/vim-airline'
+Plugin 'fatih/vim-go'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
+" Plugin 'SirVer/ultisnips'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -127,11 +124,6 @@ if has("statusline") && !&cp
   set statusline+=\ %v[0x%B]    " current column [hex char]
 endif
 
-" remove from ~/.vim/bundle/delimitMate.vim/plugin/delimitMate.vim
-" if !has('gui_running')
-"   imap <silent> <C-[>OC <RIGHT>
-" endif
-
 syntax on
 filetype off
 filetype plugin indent on
@@ -142,11 +134,6 @@ au BufNewFile,BufRead,BufWrite *.yml set filetype=yaml
 au BufNewFile,BufRead,BufWrite *.json set filetype=javascript
 
 "ruby
-" autocmd FileType ruby,eruby set omnifunc=rubycomplete#Complete
-" autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-" autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-" autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-
 " Disable that goddamn 'Entering Ex mode. Type 'visual' to go to Normal mode.'
 " that I trigger 40x a day.
 map Q <Nop>
@@ -188,6 +175,30 @@ hi Search gui=NONE cterm=NONE guifg=#FFFFFF guibg=#303030
 set cul
 hi CursorLine term=none cterm=none ctermbg=none gui=none guibg=#053437
 hi CursorLineNR guifg=#9C9C9C
+
+" Golang
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+
+au FileType go nmap <Leader>ds <Plug>(go-def-split)
+au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+
+au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>e <Plug>(go-rename)
+
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
 
 """""""""""""""""""""""""""""""""""""""""""""
 """""        Misc Editing       """""""""""""
@@ -238,12 +249,6 @@ vnoremap > >gv
 " Visually select the text that was last edited/pasted
 nmap gV `[v`]
 
-" ERB
-imap <silent> <C-k> <%=   %><Esc>3hi
-imap <silent> <D-k> <%=   %><Esc>3hi
-imap <silent> <C-j> <%  %><Esc>2hi
-imap <silent> <D-j> <%  %><Esc>2hi
-
 " Line Bubbling
 nmap <D-k> [e
 nmap <D-j> ]e
@@ -279,6 +284,8 @@ imap <D-right> <esc>:tabn<CR>
 imap <D-left> <esc>:tabp<CR>
 map <F10> :tabmove -1<CR>
 map <F12> :tabmove +1<CR>
+nmap <leader>tm :tabmove +1<CR>
+nmap <leader>tM :tabmove -1<CR>
 
 " toggle between most recently opened buffer
 nnoremap <leader><leader> <c-^>
@@ -483,3 +490,7 @@ iabbrev @@ daniel.ocallaghan@gmail.com
 let g:user_emmet_leader_key='<D-e>'
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,scss,erb,xml,haml EmmetInstall
+
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+let g:go_list_type = "quickfix"
