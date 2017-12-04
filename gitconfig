@@ -12,6 +12,8 @@
 	ctags = !.git/hooks/ctags
 	uncommit = reset
   freshness = "!f() { git for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(color:cyan)%(refname:short)%(color:reset) | %(committerdate:relative)%(color:reset) | %(subject)' | column -s '|' -t; }; f"
+  fetch = fetch --no-tags
+  pushf = push --force-with-lease
 [color]
   ui = auto
 [color "branch"]
@@ -29,7 +31,7 @@
   untracked = cyan
 [user]
   name = Daniel O'Callaghan
-  email = doc@trineo.com
+  email = daniel.ocallaghan@gmail.com
 [apply]
   whitespace = nowarn
 

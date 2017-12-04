@@ -11,6 +11,14 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
 
+if [ -f ~/Sites/airtasker/deployment-utilities/airtasker.rc ]; then
+  . ~/Sites/airtasker/deployment-utilities/airtasker.rc
+fi
+
+getami() { ~/Airtasker/deployment-utilities/bg_deploy/available.sh $1; }
+deploy() { ~/Airtasker/deployment-utilities/bg_deploy/bg_deploy.sh $1 $2 $3; }
+restartNode() { ~/Airtasker/deployment-utilities/restart_node.sh $1 $2; }
+
 # User specific aliases and functions
 export PATH=$PATH:/usr/local/bin
 
@@ -46,8 +54,6 @@ alias docker-rm='docker rm $(docker ps -a -q -f status=exited)'
 alias docker-rmi='docker rmi $(docker images -q -f dangling=true)'
 alias docker-rmv='docker volume rm $(docker volume ls -q -f dangling=true)'
 
-alias runsystemtest='BROWSER=chrome STACKURL=http://localhost:3001 be rspec'
-
 # GIT modifications
 export CLICOLOR=1
 export TERM=xterm-color
@@ -65,9 +71,9 @@ export HISTSIZE=1000000000
 export HISTIGNORE="&:[ ]*:exit"
 ## Save the history after each command finishes
 ### (and keep any existing PROMPT_COMMAND settings)
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
-
-export PT_TOKEN="241684b37391333e81db2df64265652d"
+# export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+# insert history on the fly but don't reload - maintains independence between tabs
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 # Setting GIT prompt
 c_cyan=`tput setaf 6`
@@ -125,8 +131,26 @@ run_pryremote ()
   done
 }
 
+trigger_throttling() {
+  echo "Sending 100 requests..."
+
+  for i in {1..100}
+  do
+    echo ""
+    curl http://localhost:3000/
+  done
+
+  echo ""
+  echo "All subsequent requests should now be throttled until the next app restart."
+  echo "View this behaviour by sending another request eg:"
+  echo "curl -i http://localhost:3000/"
+  curl -i http://localhost:3000/
+  echo ""
+}
+
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[$(branch_color)\]\n$(parse_git_branch)\[${c_sgr0}\]\n\$ '
 
+export HOMEBREW_GITHUB_API_TOKEN="e47ca9173b119daf5fedaf2909a3be74f0eb2195"
 export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
@@ -139,10 +163,13 @@ export NVM_DIR="$HOME/.nvm"
 [[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
 ### Added by the Heroku Toolbelt
-PATH=$PATH:/usr/pgsql-9.1/bin:$HOME/.rvm/bin # Add RVM to PATH for scripting
+export PATH=$PATH:/usr/pgsql-9.1/bin
 export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:/usr/local/sbin
+
+export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
+
 source ~/.git-completion.bash
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"

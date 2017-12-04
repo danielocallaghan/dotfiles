@@ -322,8 +322,11 @@ inoremap kj <esc>
 nnoremap ,gg :GitGrep ""<left>
 nnoremap ,ff :Ack<space>
 nnoremap ,fm /def\s\(self\.\)\?
-nnoremap ,fr :%s///gc<left><left><left><left>
+nnoremap ,fr :%s///c<left><left><left>
+nnoremap ,chs :%s/:\([^ ]*\)\(\s*\)=>/\1:/c
 
+cnoremap fj %!python -m json.tool
+cnoremap vfj !python -m json.tool
 
 """"""""""""" Plugin Configs """"""""""""""""""""
 let g:netrw_preview=1 " preview window shown in a vertically split
