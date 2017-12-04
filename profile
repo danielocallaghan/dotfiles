@@ -150,7 +150,6 @@ trigger_throttling() {
 
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[$(branch_color)\]\n$(parse_git_branch)\[${c_sgr0}\]\n\$ '
 
-export HOMEBREW_GITHUB_API_TOKEN="e47ca9173b119daf5fedaf2909a3be74f0eb2195"
 export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
