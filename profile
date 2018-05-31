@@ -11,6 +11,11 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
 
+export AIRTASKER_HOMEDIR=$HOME/Sites/airtasker
+export DEPLOYMENT_UTILS_DIR=$AIRTASKER_HOMEDIR/deployment-utilities
+export API_DIR=$AIRTASKER_HOMEDIR/api
+source $DEPLOYMENT_UTILS_DIR/airtasker.rc
+
 if [ -f ~/Sites/airtasker/deployment-utilities/airtasker.rc ]; then
   . ~/Sites/airtasker/deployment-utilities/airtasker.rc
 fi
@@ -41,18 +46,7 @@ alias gpushmefeature='git commit; git push me `current_git_branch`;'
 alias gupfrommaster='br=`current_git_branch`;git stash; git co master; git pull; git co $br; git rebase master; git push -f me $br;git stash show -p;'
 alias gcommitandopenpr='git commit;git push me $current_git_branch;hub pull-request'
 alias refreshctags='ctags -R --languages=ruby --exclude=.git'
-
-alias be='bundle exec'
-alias ber='bundle exec rake'
-alias bes='bundle exec spec'
-alias bers='bundle exec rspec'
-alias bes='bundle exec rspec'
-alias bec='bundle exec cucumber'
-alias rcur='bundle exec cucumber --tags @cur'
-
-alias docker-rm='docker rm $(docker ps -a -q -f status=exited)'
-alias docker-rmi='docker rmi $(docker images -q -f dangling=true)'
-alias docker-rmv='docker volume rm $(docker volume ls -q -f dangling=true)'
+alias stgssh='ssh -o ProxyCommand="ssh staging-bastion nc -w 120 %h %p 2> /dev/null" -l ubuntu -i ~/.ssh/staging/old-airtasker-staging.pem'
 
 # GIT modifications
 export CLICOLOR=1
@@ -114,40 +108,6 @@ current_git_branch ()
   git rev-parse --abbrev-ref HEAD
 }
 
-run_byebugger ()
-{
-  while :
-  do
-    be byebug -R localhost:12345
-  done
-}
-
-run_pryremote ()
-{
-  while :
-  do
-    pry-remote
-    sleep 1
-  done
-}
-
-trigger_throttling() {
-  echo "Sending 100 requests..."
-
-  for i in {1..100}
-  do
-    echo ""
-    curl http://localhost:3000/
-  done
-
-  echo ""
-  echo "All subsequent requests should now be throttled until the next app restart."
-  echo "View this behaviour by sending another request eg:"
-  echo "curl -i http://localhost:3000/"
-  curl -i http://localhost:3000/
-  echo ""
-}
-
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[$(branch_color)\]\n$(parse_git_branch)\[${c_sgr0}\]\n\$ '
 
 export GOPATH=$HOME/golang
@@ -169,6 +129,8 @@ export PATH=$PATH:/usr/local/sbin
 export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
 
-source ~/.git-completion.bash
+source ~/dotfiles/dev-helpers.sh
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+export AIR_HOME=/Users/daniel/Airtasker/web
+source $AIR_HOME/cli.sh
