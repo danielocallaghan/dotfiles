@@ -39,7 +39,8 @@ Plugin 'mattn/emmet-vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'fatih/vim-go'
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
-" Plugin 'SirVer/ultisnips'
+
+set rtp+=/usr/local/opt/fzf
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -132,6 +133,7 @@ au BufNewFile,BufRead,BufWrite *.dump set filetype=sql
 au BufNewFile,BufRead,BufWrite Gemfile,Gemfile.lock,config.ru,*.rabl set filetype=ruby
 au BufNewFile,BufRead,BufWrite *.yml set filetype=yaml
 au BufNewFile,BufRead,BufWrite *.json set filetype=javascript
+au BufNewFile,BufRead,BufWrite *.es6 set filetype=javascript
 
 "ruby
 " Disable that goddamn 'Entering Ex mode. Type 'visual' to go to Normal mode.'
@@ -277,6 +279,7 @@ imap <C-y> <space>=><space>
 
 """""""""""""" Tab/Buffer Navigation """"""""""""""""""""""
 nmap <C-Tab> :tabn<CR>
+nmap <D-d> :tabnew<CR>:FZF<CR>
 nmap <C-S-Tab> :tabp<CR>
 nmap <D-right> :tabn<CR>
 nmap <D-left> :tabp<CR>

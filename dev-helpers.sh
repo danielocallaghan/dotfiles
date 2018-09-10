@@ -47,8 +47,8 @@ trigger_throttling() {
 }
 
 function jcurl() {
-  echo "$@" &> /dev/stdout
-  curl -H 'Content-Type: application/json' -s -i "$@" &> /dev/stdout | pygmentize -l json | less -r
+  # echo "$@" &> /dev/stdout
+  curl -H 'Content-Type: application/json' -s -i "$@" &> /dev/stdout | pygmentize -l json
 }
 export -f jcurl
 

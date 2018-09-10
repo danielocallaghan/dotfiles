@@ -121,6 +121,8 @@ export PATH=$PATH:$MYSQL_PATH/bin
 export NVM_DIR="$HOME/.nvm"
 [[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh" # This loads nvm
 
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 ### Added by the Heroku Toolbelt
 export PATH=$PATH:/usr/pgsql-9.1/bin
 export PATH=$PATH:/usr/local/bin
