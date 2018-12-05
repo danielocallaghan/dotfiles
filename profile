@@ -10,11 +10,18 @@ fi
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
+if [ -f $(brew --prefix)/etc/bash_completion.d/git-completion.bash ]; then
+  . $(brew --prefix)/etc/bash_completion.d/git-completion.bash
+fi
 
 export AIRTASKER_HOMEDIR=$HOME/Sites/airtasker
 export DEPLOYMENT_UTILS_DIR=$AIRTASKER_HOMEDIR/deployment-utilities
 export API_DIR=$AIRTASKER_HOMEDIR/api
 source $DEPLOYMENT_UTILS_DIR/airtasker.rc
+# Disable S3 lookup for maintenance mode in Airtasker Web
+export DISABLE_MAINTENANCE_MODE_CHECKS=true
+# Disable S3 lookup for heavy tasks in Airtasker Web
+export DISABLE_HEAVY_TASKS_CHECKS=true
 
 if [ -f ~/Sites/airtasker/deployment-utilities/airtasker.rc ]; then
   . ~/Sites/airtasker/deployment-utilities/airtasker.rc
@@ -135,4 +142,3 @@ source ~/dotfiles/dev-helpers.sh
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 export AIR_HOME=/Users/daniel/Airtasker/web
-source $AIR_HOME/cli.sh
