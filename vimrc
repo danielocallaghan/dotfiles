@@ -1,50 +1,48 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-cucumber'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-ragtag'
+Plug 'skwp/YankRing.vim'
+Plug 'git-mirror/vim-l9'
+Plug 'tpope/vim-fugitive'
+Plug 'kien/ctrlp.vim'
+Plug 'ervandew/supertab'
+Plug 'scrooloose/snipmate-snippets'
+Plug 'scrooloose/nerdtree'
+Plug 'tjennings/git-grep-vim'
+Plug 'mileszs/ack.vim'
+Plug 'vim-scripts/molokai'
+Plug 'spf13/vim-colors'
+Plug 'vim-scripts/bufexplorer.zip'
+Plug 'ngmy/vim-rubocop'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'scrooloose/syntastic'
+Plug 'mattn/emmet-vim'
+Plug 'vim-airline/vim-airline'
+Plug 'fatih/vim-go'
+Plug 'nsf/gocode', {'rtp': 'vim/'}
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-cucumber'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-unimpaired'
-Bundle 'tpope/vim-abolish'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-ragtag'
-Bundle 'skwp/YankRing.vim'
-Bundle 'git-mirror/vim-l9'
-Bundle 'tpope/vim-fugitive'
-Bundle 'kien/ctrlp.vim'
-Bundle 'ervandew/supertab'
-Bundle 'scrooloose/snipmate-snippets'
-Bundle 'scrooloose/nerdtree'
-Bundle 'tjennings/git-grep-vim'
-Bundle 'mileszs/ack.vim'
-Bundle 'vim-scripts/molokai'
-Bundle 'spf13/vim-colors'
-Bundle 'vim-scripts/bufexplorer.zip'
-Bundle 'matchit.zip'
-Bundle 'ngmy/vim-rubocop'
-Bundle 'AndrewRadev/splitjoin.vim'
-Bundle 'scrooloose/syntastic'
-Plugin 'mattn/emmet-vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'fatih/vim-go'
-Plugin 'nsf/gocode', {'rtp': 'vim/'}
+" Initialize plugin system
+call plug#end()
 
-set rtp+=/usr/local/opt/fzf
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
+" set rtp+=/usr/local/opt/fzf
 
 " == general config ==
 set number
@@ -262,7 +260,6 @@ vmap <D-j> ]egv
 noremap <silent> <C-j> 5j
 noremap <silent> <C-k> 5k
 
-
 """"""""""""""" Paste Behaviour Tweaks """"""""""""""""""""
 " Use black hole register ("_) for the deletion so the unnamed register is not changed
 " nnoremap S "_diwP
@@ -323,7 +320,7 @@ nnoremap <C-y> 3<C-y>
 inoremap jk <esc>
 inoremap kj <esc>
 nnoremap ,gg :GitGrep ""<left>
-nnoremap ,ff :Ack<space>
+nnoremap ,ff :FZF<CR>
 nnoremap ,fm /def\s\(self\.\)\?
 nnoremap ,fr :%s///c<left><left><left>
 nnoremap ,chs :%s/:\([^ ]*\)\(\s*\)=>/\1:/c
@@ -360,9 +357,7 @@ let g:ctrlp_prompt_mappings = {
 
 let g:vimrubocop_config = '~/.rubocop.yml'
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""" Functions """""""""""""""""""""""""""
-"""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! <SID>StripTrailingWhitespaces()
     " Preparation: save last search, and cursor position.
