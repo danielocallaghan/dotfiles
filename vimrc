@@ -7,7 +7,6 @@ filetype off                  " required
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-rails'
-Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
@@ -27,6 +26,7 @@ Plug 'mileszs/ack.vim'
 Plug 'vim-scripts/molokai'
 Plug 'spf13/vim-colors'
 Plug 'vim-scripts/bufexplorer.zip'
+Plug 'adelarsq/vim-matchit'
 Plug 'ngmy/vim-rubocop'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'scrooloose/syntastic'

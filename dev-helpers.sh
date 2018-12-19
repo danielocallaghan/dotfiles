@@ -7,6 +7,8 @@ alias srspec='spring rspec'
 alias srs='spring rspec'
 alias srails='spring rails'
 alias srake='spring rake'
+alias dea='docker exec -it airtasker_app_1'
+alias dep='docker exec -it airtasker_postgres_1'
 
 alias docker-rm='docker rm $(docker ps -a -q -f status=exited)'
 alias docker-rmi='docker rmi $(docker images -q -f dangling=true)'
