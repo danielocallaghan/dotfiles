@@ -9,7 +9,7 @@
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   last = cat-file commit HEAD
   unstage = reset HEAD
-	ctags = !.git/hooks/ctags
+  ctags = !.git/hooks/ctags
 	uncommit = reset
   freshness = "!f() { git for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(color:cyan)%(refname:short)%(color:reset) | %(committerdate:relative)%(color:reset) | %(subject)' | column -s '|' -t; }; f"
   fetch = fetch --no-tags

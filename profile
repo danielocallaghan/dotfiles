@@ -18,14 +18,7 @@ export AIRTASKER_HOMEDIR=$HOME/Sites/airtasker
 export DEPLOYMENT_UTILS_DIR=$AIRTASKER_HOMEDIR/deployment-utilities
 export API_DIR=$AIRTASKER_HOMEDIR/api
 source $DEPLOYMENT_UTILS_DIR/airtasker.rc
-# Disable S3 lookup for maintenance mode in Airtasker Web
-export DISABLE_MAINTENANCE_MODE_CHECKS=true
-# Disable S3 lookup for heavy tasks in Airtasker Web
-export DISABLE_HEAVY_TASKS_CHECKS=true
-
-if [ -f ~/Sites/airtasker/deployment-utilities/airtasker.rc ]; then
-  . ~/Sites/airtasker/deployment-utilities/airtasker.rc
-fi
+source $DEPLOYMENT_UTILS_DIR/kubernetes.rc
 
 getami() { ~/Airtasker/deployment-utilities/bg_deploy/available.sh $1; }
 deploy() { ~/Airtasker/deployment-utilities/bg_deploy/bg_deploy.sh $1 $2 $3; }
@@ -48,6 +41,7 @@ alias gap='git add -p'
 alias glp='git log -p'
 alias gd='git diff'
 alias gds='git diff --staged'
+alias gbD='git branch -D'
 alias gri2='git stash; git rebase -i HEAD~2; git stash pop'
 alias gpushmefeature='git commit; git push me `current_git_branch`;'
 alias gupfrommaster='br=`current_git_branch`;git stash; git co master; git pull; git co $br; git rebase master; git push -f me $br;git stash show -p;'
@@ -142,3 +136,12 @@ source ~/dotfiles/dev-helpers.sh
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 export AIR_HOME=/Users/daniel/Airtasker/web
+# Airtasker web environment variables
+export REGION=1036
+export TARGET=dev
+export HOTRELOADING=true
+
+# Disable maintenance mode and heavy tasks.
+# These are not required in development mode, disabling them will speed up the build process
+export DISABLE_MAINTENANCE_MODE_CHECKS=true
+export DISABLE_HEAVY_TASKS_CHECKS=true

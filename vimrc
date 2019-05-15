@@ -36,6 +36,11 @@ Plug 'fatih/vim-go'
 Plug 'nsf/gocode', {'rtp': 'vim/'}
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/limelight.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'elixir-editors/vim-elixir'
+Plug 'mhinz/vim-mix-format'
+Plug 'udalov/kotlin-vim'
 
 " Initialize plugin system
 call plug#end()
@@ -114,6 +119,8 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 set scrolloff=12         "Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
+
+set tags=tags;
 
 if has("statusline") && !&cp
   set laststatus=2              " always show the status bar
@@ -199,6 +206,8 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
+
+let g:mix_format_on_save = 1
 
 """""""""""""""""""""""""""""""""""""""""""""
 """""        Misc Editing       """""""""""""

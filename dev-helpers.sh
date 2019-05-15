@@ -14,6 +14,10 @@ alias docker-rm='docker rm $(docker ps -a -q -f status=exited)'
 alias docker-rmi='docker rmi $(docker images -q -f dangling=true)'
 alias docker-rmv='docker volume rm $(docker volume ls -q -f dangling=true)'
 
+alias devapimore='git --no-pager log --pretty=oneline `curl -s https://api.dev.airtasker.com/gitref` | head -n 200 | less'
+alias stgapimore='git --no-pager log --pretty=oneline `curl -s https://api.stage.airtasker.com/gitref` | head -n 200 | less'
+alias prodapimore='git --no-pager log --pretty=oneline `curl -s https://api.airtasker.com/gitref` | head -n 200 | less'
+
 run_byebugger ()
 {
   while :
@@ -68,3 +72,16 @@ browse_index() {
 }
 export -f browse_index
 
+run_ci_stage_automation() {
+  curl -X POST \
+    'https://circleci.com/api/v1.1/project/github/airtasker/web/tree/master?circle-token=8362a6c7b0a6eb8826ded4dec02f317f02efe55e' \
+      -H 'cache-control: no-cache' \
+      -H 'content-type: application/json' \
+      -d '{
+          "build_parameters": {
+            "CIRCLE_JOB": "run-regression-staging-au"
+          }
+        }
+      '
+}
+export -f run_ci_stage_automation
