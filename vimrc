@@ -13,7 +13,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-ragtag'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'skwp/YankRing.vim'
 Plug 'git-mirror/vim-l9'
 Plug 'tpope/vim-fugitive'
@@ -129,6 +129,8 @@ if has("statusline") && !&cp
   set statusline+=\ %l/%L[%p%%] " current line/total lines
   set statusline+=\ %v[0x%B]    " current column [hex char]
 endif
+
+set statusline+=%{gutentags#statusline()}
 
 syntax on
 filetype off

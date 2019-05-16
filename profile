@@ -42,10 +42,13 @@ alias glp='git log -p'
 alias gd='git diff'
 alias gds='git diff --staged'
 alias gbD='git branch -D'
+alias gp="git push"
+alias ggpull='git pull origin `current_git_branch`'
+alias gpo='git push origin `current_git_branch`'
 alias gri2='git stash; git rebase -i HEAD~2; git stash pop'
 alias gpushmefeature='git commit; git push me `current_git_branch`;'
 alias gupfrommaster='br=`current_git_branch`;git stash; git co master; git pull; git co $br; git rebase master; git push -f me $br;git stash show -p;'
-alias gcommitandopenpr='git commit;git push me $current_git_branch;hub pull-request'
+
 alias refreshctags='ctags -R --languages=ruby --exclude=.git'
 alias stgssh='ssh -o ProxyCommand="ssh staging-bastion nc -w 120 %h %p 2> /dev/null" -l ubuntu -i ~/.ssh/staging/old-airtasker-staging.pem'
 
@@ -110,6 +113,15 @@ current_git_branch ()
 }
 
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[$(branch_color)\]\n$(parse_git_branch)\[${c_sgr0}\]\n\$ '
+
+# Elixir
+export ERL_AFLAGS="-kernel shell_history enabled"
+alias mec="mix ecto.create"
+alias mem="mix ecto.migrate"
+alias mps="mix phx.server"
+alias iexmps="iex -S mix phx.server"
+alias iexs="iex -S mix"
+alias mpr="mix phx.routes"
 
 export GOPATH=$HOME/golang
 export GOROOT=/usr/local/opt/go/libexec
