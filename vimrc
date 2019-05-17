@@ -13,6 +13,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
+Plug 'ecomba/vim-ruby-refactoring' " https://github.com/ecomba/vim-ruby-refactoring
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'skwp/YankRing.vim'
 Plug 'git-mirror/vim-l9'
@@ -479,6 +480,26 @@ function! DoPrettyXML()
   exe "set ft=" . l:origft
 endfunction
 command! PrettyXML call DoPrettyXML()
+
+function! Smart_TabComplete()
+  let line = getline('.')                         " curline
+  let substr = strpart(line, -1, col('.'))        " from start to cursor
+  let substr = matchstr(substr, "[^ \t.]*$")       " word till cursor
+  if (strlen(substr)==0)                          " nothing to match on empty string
+    return "\<tab>"
+  endif
+  let has_period = match(substr, '\.') != -1      " position of period, if any
+  let has_slash = match(substr, '\/') != -1       " position of slash, if any
+  if (!has_period && !has_slash)
+    return "\<C-X>\<C-P>"                         " existing text matching
+  elseif ( has_slash )
+    return "\<C-X>\<C-F>"                         " file matching
+  else
+    return "\<C-X>\<C-O>"                         " plugin matching
+  endif
+endfunction
+
+inoremap <tab> <c-r>=Smart_TabComplete()<CR>
 
 nnoremap <leader>R :call OpenTestAlternate()<cr>
 

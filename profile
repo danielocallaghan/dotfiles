@@ -56,8 +56,8 @@ alias stgssh='ssh -o ProxyCommand="ssh staging-bastion nc -w 120 %h %p 2> /dev/n
 export CLICOLOR=1
 export TERM=xterm-color
 export LSCOLORS=GxFxCxDxBxegedabagaced
-export VISUAL=vim
 export EDITOR=vim
+export VISUAL=vim
 export rvmsudo_secure_path=0
 
 # improve bash history

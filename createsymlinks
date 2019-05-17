@@ -15,4 +15,4 @@ ln -s ~/dotfiles/psqlrc ~/.psqlrc
 
 ln -s ~/dotfiles/update_repos ~/Sites/update_repos
 ln -s ~/dotfiles/gemrc ~/.gemrc
-
+ln -s ~/dotfiles/iex.exs ~/.iex.exs
