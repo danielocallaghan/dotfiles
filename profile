@@ -34,7 +34,6 @@ alias df='df -H'
 alias du='du -ch'
 
 alias gs='git status .'
-alias gpr='hub pull-request'
 alias gc='git commit'
 alias gb='git freshness'
 alias gap='git add -p'
@@ -45,6 +44,8 @@ alias gbD='git branch -D'
 alias gp="git push"
 alias ggpull='git pull origin `current_git_branch`'
 alias gpo='git push origin `current_git_branch`'
+alias gpfo='git push origin `current_git_branch`'
+alias hpr='hub pull-request'
 alias gri2='git stash; git rebase -i HEAD~2; git stash pop'
 alias gpushmefeature='git commit; git push me `current_git_branch`;'
 alias gupfrommaster='br=`current_git_branch`;git stash; git co master; git pull; git co $br; git rebase master; git push -f me $br;git stash show -p;'
@@ -123,10 +124,10 @@ alias iexmps="iex -S mix phx.server"
 alias iexs="iex -S mix"
 alias mpr="mix phx.routes"
 
-export GOPATH=$HOME/golang
-export GOROOT=/usr/local/opt/go/libexec
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
+export GOPATH="${HOME}/.go"
+export GOBIN="${GOPATH}/bin"
+export GOROOT="$(brew --prefix golang)/libexec"
+export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
 export MYSQL_PATH=/usr/local/Cellar/mysql/5.7.15
 export PATH=$PATH:$MYSQL_PATH/bin

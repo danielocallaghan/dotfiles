@@ -209,6 +209,8 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
 
 let g:mix_format_on_save = 1
 
@@ -365,7 +367,12 @@ let g:ctrlp_prompt_mappings = {
   \ 'AcceptSelection("e")': [],
   \ 'AcceptSelection("t")': ['<cr>', '<c-m>'],
   \ }
-
+let g:ctrlp_user_command = {
+  \ 'types': {
+  \ 1: ['.git', 'cd %s && git ls-files --cached --exclude-standard --others']
+  \ },
+  \ 'fallback': 'find %s -type f'
+  \ }
 
 let g:vimrubocop_config = '~/.rubocop.yml'
 
@@ -519,6 +526,9 @@ map <leader>d obinding.pry<esc>:w<cr>
 map <leader>bb obyebug<esc>:w<cr>
 map <leader>rd oRails.logger.debug("")<left><left>
 iabbrev @@ daniel.ocallaghan@gmail.com
+
+
+map <leader>mf :MixFormat<cr>
 
 let g:user_emmet_leader_key='<D-e>'
 let g:user_emmet_install_global = 0
