@@ -132,6 +132,9 @@ export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 export MYSQL_PATH=/usr/local/Cellar/mysql/5.7.15
 export PATH=$PATH:$MYSQL_PATH/bin
 
+export ESCRIPTS_PATH=/Users/daniel/.mix/escripts
+export PATH=$PATH:$ESCRIPTS_PATH
+
 export NVM_DIR="$HOME/.nvm"
 [[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh" # This loads nvm
 

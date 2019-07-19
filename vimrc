@@ -522,6 +522,7 @@ vnoremap <leader>rrlv :RRenameLocalVariable<cr>
 vnoremap <leader>rriv :RRenameInstanceVariable<cr>
 vnoremap <leader>rem  :RExtractMethod<cr>
 
+map <leader>ed orequire IEx;<cr>IEx.pry()<esc>:w<cr>
 map <leader>d obinding.pry<esc>:w<cr>
 map <leader>bb obyebug<esc>:w<cr>
 map <leader>rd oRails.logger.debug("")<left><left>
