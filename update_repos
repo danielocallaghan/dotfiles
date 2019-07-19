@@ -1,5 +1,0 @@
-for dir in ~/Sites/*/; do
-  cd "$dir";
-  echo "updating: $dir";
-  git pull;
-done

@@ -1,5 +1,0 @@
-export POW_TIMEOUT=300
-export POW_WORKERS=3
-export POW_DOMAINS=dev,test,development.dbg.westfield.com,test.dbg.westfield.com
-export RUBY_DEBUG_PORT=3923
-export AAA_RUBY_DEBUG_PORT=3924
