@@ -14,15 +14,15 @@ if [ -f $(brew --prefix)/etc/bash_completion.d/git-completion.bash ]; then
   . $(brew --prefix)/etc/bash_completion.d/git-completion.bash
 fi
 
-export AIRTASKER_HOMEDIR=$HOME/Sites/airtasker
+export AIRTASKER_HOMEDIR=$HOME/code
 export DEPLOYMENT_UTILS_DIR=$AIRTASKER_HOMEDIR/deployment-utilities
 export API_DIR=$AIRTASKER_HOMEDIR/api
 source $DEPLOYMENT_UTILS_DIR/airtasker.rc
 source $DEPLOYMENT_UTILS_DIR/kubernetes.rc
 
-getami() { ~/Airtasker/deployment-utilities/bg_deploy/available.sh $1; }
-deploy() { ~/Airtasker/deployment-utilities/bg_deploy/bg_deploy.sh $1 $2 $3; }
-restartNode() { ~/Airtasker/deployment-utilities/restart_node.sh $1 $2; }
+getami() { ~/code/deployment-utilities/bg_deploy/available.sh $1; }
+deploy() { ~/code/deployment-utilities/bg_deploy/bg_deploy.sh $1 $2 $3; }
+restartNode() { ~/code/deployment-utilities/restart_node.sh $1 $2; }
 
 # User specific aliases and functions
 export PATH=$PATH:/usr/local/bin
@@ -161,3 +161,4 @@ export HOTRELOADING=true
 # These are not required in development mode, disabling them will speed up the build process
 export DISABLE_MAINTENANCE_MODE_CHECKS=true
 export DISABLE_HEAVY_TASKS_CHECKS=true
+export PATH="/usr/local/opt/libpq/bin:$PATH"
