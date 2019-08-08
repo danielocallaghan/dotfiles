@@ -48,8 +48,6 @@ call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" set rtp+=/usr/local/opt/fzf
-
 " == general config ==
 set number
 set backspace=indent,eol,start  "Allow backspace in insert mode
@@ -351,13 +349,39 @@ let g:NERDTreeWinSize = 30
 map <silent> <leader>ntt :NERDTreeToggle<cr>
 map <silent> <leader>ntf :NERDTree<cr><leader>l<cr>:NERDTreeFind<cr>
 
-let g:ctrlp_map = 'cp'
+" [Buffers] Jump to the existing window if possible
+let g:fzf_buffers_jump = 1
+
+function! s:fzf_statusline()
+  " Override statusline as you like
+  highlight fzf1 ctermfg=161 ctermbg=251
+  highlight fzf2 ctermfg=23 ctermbg=251
+  highlight fzf3 ctermfg=237 ctermbg=251
+  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+endfunction
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
+
+command! FZFOpen call fzf#run({'source': 'git ls-files', 'sink': 'tab drop', 'down': '40%'})
+nmap <leader>ff :FZFOpen<CR>
+nmap cp :FZFOpen<CR>
+
+function! OpenChangedFiles()
+  only " Close all windows, unless they're modified
+  let status = system('git status -s | grep "^ \?\(M\|A\|UU\)" | sed "s/^.\{3\}//"')
+  let filenames = split(status, "\n")
+  exec "edit " . filenames[0]
+  for filename in filenames[1:]
+    exec "tabnew " . filename
+  endfor
+endfunction
+command! OpenChangedFiles :call OpenChangedFiles()
+nmap <leader>ocf :OpenChangedFiles<CR>
+
 map <silent> <leader>cpb :CtrlPBookmarkDir<CR>
 map <leader>F :CtrlP %%<CR>
 nmap <leader>b :CtrlPBuffer<CR>
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = '0'
-" let g:ctrlp_root_markers = [ '.root', 'Gemfile', 'config.ru', 'Rakefile', '.git/']
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)|coverage$',
   \ 'file': '\v\.(exe|so|dll|.DS_Store)$',
@@ -526,8 +550,6 @@ map <leader>ed orequire IEx;<cr>IEx.pry()<esc>:w<cr>
 map <leader>d obinding.pry<esc>:w<cr>
 map <leader>bb obyebug<esc>:w<cr>
 map <leader>rd oRails.logger.debug("")<left><left>
-iabbrev @@ daniel.ocallaghan@gmail.com
-
 
 map <leader>mf :MixFormat<cr>
 

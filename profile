@@ -136,7 +136,8 @@ export ESCRIPTS_PATH=/Users/daniel/.mix/escripts
 export PATH=$PATH:$ESCRIPTS_PATH
 
 export NVM_DIR="$HOME/.nvm"
-[[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
@@ -145,6 +146,7 @@ export PATH=$PATH:/usr/pgsql-9.1/bin
 export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:/usr/local/sbin
 
+export PATH=$PATH:/usr/local/opt/libpq/bin
 export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
 
@@ -161,4 +163,3 @@ export HOTRELOADING=true
 # These are not required in development mode, disabling them will speed up the build process
 export DISABLE_MAINTENANCE_MODE_CHECKS=true
 export DISABLE_HEAVY_TASKS_CHECKS=true
-export PATH="/usr/local/opt/libpq/bin:$PATH"
