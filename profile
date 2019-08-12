@@ -35,6 +35,7 @@ alias du='du -ch'
 
 alias gs='git status .'
 alias gc='git commit'
+alias gcm='git co master'
 alias gb='git freshness'
 alias gap='git add -p'
 alias glp='git log -p'

@@ -11,3 +11,4 @@ ln -s ~/dotfiles/rubocop.yml ~/.rubocop.yml
 ln -s ~/dotfiles/psqlrc ~/.psqlrc
 ln -s ~/dotfiles/gemrc ~/.gemrc
 ln -s ~/dotfiles/iex.exs ~/.iex.exs
+ln -s ~/dotfiles/ctags ~/.ctags
