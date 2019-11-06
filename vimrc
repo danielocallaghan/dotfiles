@@ -212,6 +212,8 @@ let g:go_info_mode='gopls'
 
 let g:mix_format_on_save = 1
 
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
 """""""""""""""""""""""""""""""""""""""""""""
 """""        Misc Editing       """""""""""""
 """""""""""""""""""""""""""""""""""""""""""""
@@ -331,6 +333,7 @@ nnoremap <C-y> 3<C-y>
 
 inoremap jk <esc>
 inoremap kj <esc>
+nnoremap ,ag :Ack ""<left>
 nnoremap ,gg :GitGrep ""<left>
 nnoremap ,ff :FZF<CR>
 nnoremap ,fm /def\s\(self\.\)\?
@@ -364,18 +367,6 @@ autocmd! User FzfStatusLine call <SID>fzf_statusline()
 command! FZFOpen call fzf#run({'source': 'git ls-files', 'sink': 'tab drop', 'down': '40%'})
 nmap <leader>ff :FZFOpen<CR>
 nmap cp :FZFOpen<CR>
-
-function! OpenChangedFiles()
-  only " Close all windows, unless they're modified
-  let status = system('git status -s | grep "^ \?\(M\|A\|UU\)" | sed "s/^.\{3\}//"')
-  let filenames = split(status, "\n")
-  exec "edit " . filenames[0]
-  for filename in filenames[1:]
-    exec "tabnew " . filename
-  endfor
-endfunction
-command! OpenChangedFiles :call OpenChangedFiles()
-nmap <leader>ocf :OpenChangedFiles<CR>
 
 map <silent> <leader>cpb :CtrlPBookmarkDir<CR>
 map <leader>F :CtrlP %%<CR>
@@ -533,6 +524,10 @@ endfunction
 inoremap <tab> <c-r>=Smart_TabComplete()<CR>
 
 nnoremap <leader>R :call OpenTestAlternate()<cr>
+
+" copy current file name (relative/absolute) to system clipboard
+" relative path  (src/foo.txt)
+nnoremap <leader>cf :let @*=expand("%")<CR>
 
 " vim ruby refactoring plugin
 nnoremap <leader>rap  :RAddParameter<cr>
