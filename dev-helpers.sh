@@ -72,16 +72,14 @@ browse_index() {
 }
 export -f browse_index
 
-run_ci_stage_automation() {
+run_stage_e2e() {
   curl -X POST \
-    'https://circleci.com/api/v1.1/project/github/airtasker/web/tree/master?circle-token=8362a6c7b0a6eb8826ded4dec02f317f02efe55e' \
-      -H 'cache-control: no-cache' \
-      -H 'content-type: application/json' \
-      -d '{
+    "https://circleci.com/api/v1.1/project/github/airtasker/web/tree/master?circle-token=$CIRCLECI_TOKEN" \
+    -H 'Content-Type: application/json' \
+    -d '{
           "build_parameters": {
-            "CIRCLE_JOB": "run-regression-staging-au"
+            "CIRCLE_JOB": "cypress-test-passthrough-stage-electron"
           }
-        }
-      '
+        }'
 }
-export -f run_ci_stage_automation
+export -f run_stage_e2e

@@ -14,7 +14,6 @@ Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-commentary'
 Plug 'ecomba/vim-ruby-refactoring' " https://github.com/ecomba/vim-ruby-refactoring
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'skwp/YankRing.vim'
 Plug 'git-mirror/vim-l9'
 Plug 'tpope/vim-fugitive'
@@ -35,6 +34,10 @@ Plug 'mattn/emmet-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'fatih/vim-go'
 Plug 'nsf/gocode', {'rtp': 'vim/'}
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/limelight.vim'
@@ -42,6 +45,8 @@ Plug 'leafgarland/typescript-vim'
 Plug 'elixir-editors/vim-elixir'
 Plug 'mhinz/vim-mix-format'
 Plug 'udalov/kotlin-vim'
+Plug 'keith/swift.vim'
+Plug 'dense-analysis/ale'
 
 " Initialize plugin system
 call plug#end()
@@ -89,7 +94,7 @@ set noesckeys
 set smartindent
 set expandtab
 set softtabstop=2
-set pastetoggle=<F2>
+" set pastetoggle=<F2>
 set tabstop=2
 set smarttab
 set shiftwidth=2
@@ -119,7 +124,6 @@ set scrolloff=12         "Start scrolling when we're 8 lines away from margins
 set sidescrolloff=15
 set sidescroll=1
 
-set tags=tags;
 
 if has("statusline") && !&cp
   set laststatus=2              " always show the status bar
@@ -128,8 +132,6 @@ if has("statusline") && !&cp
   set statusline+=\ %l/%L[%p%%] " current line/total lines
   set statusline+=\ %v[0x%B]    " current column [hex char]
 endif
-
-set statusline+=%{gutentags#statusline()}
 
 syntax on
 filetype off
@@ -194,7 +196,6 @@ au FileType go nmap <Leader>ds <Plug>(go-def-split)
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
 
-au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 
 au FileType go nmap <Leader>i <Plug>(go-info)
@@ -370,7 +371,7 @@ nmap cp :FZFOpen<CR>
 
 map <silent> <leader>cpb :CtrlPBookmarkDir<CR>
 map <leader>F :CtrlP %%<CR>
-nmap <leader>b :CtrlPBuffer<CR>
+nmap <leader>B :CtrlPBuffer<CR>
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = '0'
 let g:ctrlp_custom_ignore = {
@@ -555,3 +556,24 @@ autocmd FileType html,css,scss,erb,xml,haml EmmetInstall
 let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
 let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 let g:go_list_type = "quickfix"
+
+" Set this. Airline will handle the rest.
+let g:airline#extensions#ale#enabled = 1
+
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
+    \ 'javascript': ['/Users/daniel/.nvm/versions/node/v10.16.0/bin/typescript-language-server'],
+    \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
+    \ 'python': ['/usr/local/bin/pyls'],
+    \ 'ruby': ['solargraph', 'stdio'],
+    \ }
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" Or map each action separately
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition({ 'gotoCmd': 'tab drop' })<CR>
+nnoremap <c-r>] :call LanguageClient#textDocument_definition({ 'gotoCmd': 'tab drop' })<CR>
+nnoremap <silent> <leader>rn :call LanguageClient#textDocument_rename()<CR>
