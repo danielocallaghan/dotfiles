@@ -18,24 +18,7 @@ alias devapimore='git --no-pager log --pretty=oneline `curl -s https://api.dev.a
 alias stgapimore='git --no-pager log --pretty=oneline `curl -s https://api.stage.airtasker.com/gitref` | head -n 200 | less'
 alias prodapimore='git --no-pager log --pretty=oneline `curl -s https://api.airtasker.com/gitref` | head -n 200 | less'
 
-run_byebugger ()
-{
-  while :
-  do
-    be byebug -R localhost:12345
-  done
-}
-
-run_pryremote ()
-{
-  while :
-  do
-    pry-remote
-    sleep 1
-  done
-}
-
-trigger_throttling() {
+function trigger_throttling() {
   echo "Sending 100 requests..."
 
   for i in {1..100}
@@ -56,23 +39,20 @@ function jcurl() {
   # echo "$@" &> /dev/stdout
   curl -H 'Content-Type: application/json' -s -i "$@" &> /dev/stdout | pygmentize -l json
 }
-export -f jcurl
 
-local_indexes() {
+function local_indexes() {
   curl -s 'localhost:9200/_cat/indices?v' | grep 'index'
 }
-export -f local_indexes
 
-browse_index() {
+function browse_index() {
   jcurl -XPOST "localhost:9200/$1/_search?pretty"  -d '
     {
       "query": { "match_all": {} },
       "size": 3
     }'
 }
-export -f browse_index
 
-run_stage_e2e() {
+function run_stage_e2e() {
   curl -X POST \
     "https://circleci.com/api/v1.1/project/github/airtasker/web/tree/master?circle-token=$CIRCLECI_TOKEN" \
     -H 'Content-Type: application/json' \
@@ -82,4 +62,3 @@ run_stage_e2e() {
           }
         }'
 }
-export -f run_stage_e2e
