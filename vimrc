@@ -1,5 +1,4 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+set nocompatible              " be iMproved, required filetype off                  " required
 
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
@@ -32,8 +31,7 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'scrooloose/syntastic'
 Plug 'mattn/emmet-vim'
 Plug 'vim-airline/vim-airline'
-Plug 'fatih/vim-go'
-Plug 'nsf/gocode', {'rtp': 'vim/'}
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
@@ -47,6 +45,8 @@ Plug 'mhinz/vim-mix-format'
 Plug 'udalov/kotlin-vim'
 Plug 'keith/swift.vim'
 Plug 'dense-analysis/ale'
+Plug 'bufbuild/vim-buf'
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Initialize plugin system
 call plug#end()
@@ -106,6 +106,7 @@ set foldnestmax=3       "deepest fold is 3 levels
 set nofoldenable        "dont fold by default
 " Don't add the comment prefix when I hit enter or o/O on a comment line.
 set formatoptions-=or
+set maxmempattern=3000
 
 " ================ Completion =======================
 set wildmode=longest,list
@@ -179,7 +180,7 @@ set guifont=Menlo\ Regular:h13 " solarized bg: 002933
 hi normal guibg=#002933
 hi LineNr guifg=#9C9C9C guibg=NONE ctermbg=NONE ctermfg=DarkGrey
 hi TabLineSel ctermfg=white cterm=bold " improve autocomplete menu color
-hi TabLine ctermfg=LightGrey ctermbg=NONE gui=NONE guifg=DarkGrey cterm=NONE
+hi Tabline ctermfg=LightGrey ctermbg=NONE gui=NONE guifg=DarkGrey cterm=NONE
 " hi Search gui=underline cterm=underline guifg=#FFFFFF guibg=#303030
 hi Search gui=NONE cterm=NONE guifg=#FFFFFF guibg=#303030
 set cul
@@ -187,19 +188,19 @@ hi CursorLine term=none cterm=none ctermbg=none gui=none guibg=#053437
 hi CursorLineNR guifg=#9C9C9C
 
 " Golang
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>c <Plug>(go-coverage)
+" au FileType go nmap <leader>r <Plug>(go-run)
+" au FIleType go nmap <leader>b <Plug>(go-build)
+" au FileType go nmap <leader>t <Plug>(go-test)
+" au FileType go nmap <leader>c <Plug>(go-coverage)
 
-au FileType go nmap <Leader>ds <Plug>(go-def-split)
-au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
-au FileType go nmap <Leader>dt <Plug>(go-def-tab)
+" au FileType go nmap <Leader>ds <Plug>(go-def-split)
+" au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
+" au FiLeType go nmap <Leader>dt <Plug>(go-def-tab)
 
-au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+" au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 
-au FileType go nmap <Leader>i <Plug>(go-info)
-au FileType go nmap <Leader>e <Plug>(go-rename)
+" au FileType go nmap <Leader>i <Plug>(go-info)
+" au FileType go nmap <Leader>e <Plug>(go-rename)
 
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -210,6 +211,9 @@ let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
+
+" Run gofmt and goimports on save
+" autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
 
 let g:mix_format_on_save = 1
 
@@ -285,6 +289,9 @@ xnoremap p pgvy
 " paste lines from unnamed register and fix indentation
 map <leader>p pV`]=
 nmap <leader>P PV`]=
+ " yg_ -> yank til last char in the current line.
+nmap $ g_
+
 
 imap <silent> <D-d> _
 imap <C-y> <space>=><space>
@@ -305,10 +312,6 @@ nmap <leader>tM :tabmove -1<CR>
 " toggle between most recently opened buffer
 nnoremap <leader><leader> <c-^>
 nnoremap <silent><leader><C-]> <C-w><C-]><C-w>T
-
-" noremap <C-s> :w<CR>
-" vnoremap <C-s> <esc>:w<CR>
-" inoremap <C-s> <esc>:w<CR>
 
 cmap w!! w !sudo tee % >/dev/null
 
@@ -373,6 +376,7 @@ map <silent> <leader>cpb :CtrlPBookmarkDir<CR>
 map <leader>F :CtrlP %%<CR>
 nmap <leader>B :CtrlPBuffer<CR>
 let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_map = '<c-op>'
 let g:ctrlp_working_path_mode = '0'
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)|coverage$',
@@ -441,33 +445,6 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
-function! OpenTestAlternate()
-  let new_file = AlternateForCurrentFile()
-  exec ':tab drop ' . new_file
-endfunction
-
-function! AlternateForCurrentFile()
-  let current_file = expand("%")
-  let new_file = current_file
-  let in_spec = match(current_file, '^spec/') != -1
-  let going_to_spec = !in_spec
-  let in_app = match(current_file, '\<controllers\>') != -1 || match(current_file, '\<models\>') != -1 || match(current_file, '\<views\>') != -1 || match(current_file, '\<helpers\>') != -1
-  if going_to_spec
-    if in_app
-      let new_file = substitute(new_file, '^app/', '', '')
-    end
-    let new_file = substitute(new_file, '\.e\?rb$', '_spec.rb', '')
-    let new_file = 'spec/' . new_file
-  else
-    let new_file = substitute(new_file, '_spec\.rb$', '.rb', '')
-    let new_file = substitute(new_file, '^spec/', '', '')
-    if in_app
-      let new_file = 'app/' . new_file
-    end
-  endif
-  return new_file
-endfunction
-
 function! s:ChangeHashSyntax(line1,line2)
     let l:save_cursor = getpos(".")
     silent! execute ':' . a:line1 . ',' . a:line2 . 's/:\([a-z0-9_]\+\)\s\+=>/\1:/g'
@@ -524,8 +501,6 @@ endfunction
 
 inoremap <tab> <c-r>=Smart_TabComplete()<CR>
 
-nnoremap <leader>R :call OpenTestAlternate()<cr>
-
 " copy current file name (relative/absolute) to system clipboard
 " relative path  (src/foo.txt)
 nnoremap <leader>cf :let @*=expand("%")<CR>
@@ -553,27 +528,44 @@ let g:user_emmet_leader_key='<D-e>'
 let g:user_emmet_install_global = 0
 autocmd FileType html,css,scss,erb,xml,haml EmmetInstall
 
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-let g:go_list_type = "quickfix"
+" let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+" let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+" let g:go_list_type = "quickfix"
 
 " Set this. Airline will handle the rest.
 let g:airline#extensions#ale#enabled = 1
 
+" let g:ale_linters = {
+"   \ 'go': ['gopls'],
+"   \ 'proto': ['buf-check-lint']
+"   \ }
+
+let g:ale_go_langserver_executable = 'gopls'
+" let g:ale_lint_on_text_changed = 'never'
+" let g:ale_linters_explicit = 1
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '.'
+nmap <silent> <C-l> <Plug>(ale_next_wrap)
+
 " Required for operations modifying multiple buffers like rename.
 set hidden
 
+    " \ 'javascript': ['/Users/daniel/.nvm/versions/node/v10.16.0/bin/typescript-language-server', '--stdio'],
+    " \ 'go': ['gopls']
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls'],
-    \ 'javascript': ['/Users/daniel/.nvm/versions/node/v10.16.0/bin/typescript-language-server'],
     \ 'javascript.jsx': ['tcp://127.0.0.1:2089'],
     \ 'python': ['/usr/local/bin/pyls'],
-    \ 'ruby': ['solargraph', 'stdio'],
+    \ 'ruby': ['solargraph', 'stdio']
     \ }
+
+let g:LanguageClient_loggingLevel = 'DEBUG'
 
 nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 " Or map each action separately
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+" clash with vim-go version
+nnoremap <silent> <leader>gd :call LanguageClient#textDocument_definition({ 'gotoCmd': 'tab drop' })<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition({ 'gotoCmd': 'tab drop' })<CR>
 nnoremap <c-r>] :call LanguageClient#textDocument_definition({ 'gotoCmd': 'tab drop' })<CR>
 nnoremap <silent> <leader>rn :call LanguageClient#textDocument_rename()<CR>

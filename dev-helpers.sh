@@ -7,8 +7,6 @@ alias srspec='spring rspec'
 alias srs='spring rspec'
 alias srails='spring rails'
 alias srake='spring rake'
-alias dea='docker exec -it airtasker_app_1'
-alias dep='docker exec -it airtasker_postgres_1'
 
 alias docker-rm='docker rm $(docker ps -a -q -f status=exited)'
 alias docker-rmi='docker rmi $(docker images -q -f dangling=true)'
@@ -19,12 +17,12 @@ alias stgapimore='git --no-pager log --pretty=oneline `curl -s https://api.stage
 alias prodapimore='git --no-pager log --pretty=oneline `curl -s https://api.airtasker.com/gitref` | head -n 200 | less'
 
 function trigger_throttling() {
-  echo "Sending 100 requests..."
+  echo "Sending 600 requests..."
 
-  for i in {1..100}
+  for i in {1..600}
   do
     echo ""
-    curl http://localhost:3000/$1
+    curl http://localhost:3001/$1
   done
 
   echo ""

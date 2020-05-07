@@ -14,3 +14,5 @@ ln -s ~/dotfiles/psqlrc ~/.psqlrc
 ln -s ~/dotfiles/gemrc ~/.gemrc
 ln -s ~/dotfiles/iex.exs ~/.iex.exs
 ln -s ~/dotfiles/ctags ~/.ctags
+mkdir -p ~/.config/nvim
+ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim/init.vim

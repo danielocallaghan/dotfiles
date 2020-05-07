@@ -75,7 +75,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(gitfast ruby brew)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -127,6 +127,11 @@ source $DEPLOYMENT_UTILS_DIR/kubernetes.rc
 export PATH=$PATH:/usr/local/bin
 
 alias l='ls -lah'
+alias la="exa -abghl --git --color=automatic"
+alias lat="exa -abgh --git --color=automatic --tree --level=2"
+# `cat` with beautiful colors. requires: pip install -U Pygments
+alias c='pygmentize'
+alias search='ag'
 alias ..='cd ..'
 alias grep='grep --color=auto'
 alias df='df -H'
@@ -151,7 +156,6 @@ alias gpushmefeature='git commit; git push me `current_git_branch`;'
 alias gupfrommaster='br=`current_git_branch`;git stash; git co master; git pull; git co $br; git rebase master; git push -f me $br;git stash show -p;'
 
 alias refreshctags='ctags -R --languages=ruby --exclude=.git'
-alias stgssh='ssh -o ProxyCommand="ssh staging-bastion nc -w 120 %h %p 2> /dev/null" -l ubuntu -i ~/.ssh/staging/old-airtasker-staging.pem'
 
 # GIT modifications
 export CLICOLOR=1
@@ -165,6 +169,11 @@ export rvmsudo_secure_path=0
 HISTSIZE=200000
 SAVEHIST=100000
 
+function current_git_branch()
+{
+  git rev-parse --abbrev-ref HEAD
+}
+
 # Elixir
 export ERL_AFLAGS="-kernel shell_history enabled"
 alias mec="mix ecto.create"
@@ -174,10 +183,12 @@ alias iexmps="iex -S mix phx.server"
 alias iexs="iex -S mix"
 alias mpr="mix phx.routes"
 
-export GOPATH="${HOME}/.go"
-export GOBIN="${GOPATH}/bin"
-export GOROOT="$(brew --prefix golang)/libexec"
-export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+export GOENV_ROOT="$HOME/.goenv"
+export PATH="$GOENV_ROOT/bin:$PATH"
+eval "$(goenv init -)"
+export GOPATH=$(go env GOPATH)
+export PATH="$GOROOT/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin"
 
 export MYSQL_PATH=/usr/local/Cellar/mysql/5.7.15
 export PATH=$PATH:$MYSQL_PATH/bin
@@ -212,5 +223,11 @@ export HOTRELOADING=true
 export DISABLE_MAINTENANCE_MODE_CHECKS=true
 export DISABLE_HEAVY_TASKS_CHECKS=true
 
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="/Users/daniel/.sdkman"
+[[ -s "/Users/daniel/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/daniel/.sdkman/bin/sdkman-init.sh"
