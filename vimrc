@@ -222,6 +222,8 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 """""""""""""""""""""""""""""""""""""""""""""
 """""        Misc Editing       """""""""""""
 """""""""""""""""""""""""""""""""""""""""""""
+" break undo operations into smaller chunks (per line)
+inoremap <CR> <C-G>u<CR>
 map <leader>y "*y
 map <leader>Y "*Y
 nnoremap ,ow "_diwhp

@@ -1,7 +1,6 @@
 ln -s ~/dotfiles/profile ~/.profile
 ln -s ~/dotfiles/zshrc ~/.zshrc
 ln -s ~/dotfiles/gitconfig ~/.gitconfig
-ln -s ~/dotfiles/git_template ~/.git_template
 ln -s ~/dotfiles/irbrc ~/.irbrc
 ln -s ~/dotfiles/rdebugrc ~/.rdebugrc
 ln -s ~/dotfiles/pryrc ~/.pryrc
@@ -13,6 +12,5 @@ ln -s ~/dotfiles/rubocop.yml ~/.rubocop.yml
 ln -s ~/dotfiles/psqlrc ~/.psqlrc
 ln -s ~/dotfiles/gemrc ~/.gemrc
 ln -s ~/dotfiles/iex.exs ~/.iex.exs
-ln -s ~/dotfiles/ctags ~/.ctags
 mkdir -p ~/.config/nvim
 ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim/init.vim

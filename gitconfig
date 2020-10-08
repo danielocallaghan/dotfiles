@@ -9,8 +9,7 @@
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   last = cat-file commit HEAD
   unstage = reset HEAD
-  ctags = !.git/hooks/ctags
-	uncommit = reset
+  uncommit = reset
   freshness = "!f() { git for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(color:cyan)%(refname:short)%(color:reset) | %(committerdate:relative)%(color:reset) | %(subject)' | column -s '|' -t; }; f"
   fetch = fetch --no-tags
   pushf = push --force-with-lease
@@ -33,11 +32,10 @@
   changed = green
   untracked = cyan
 [user]
-	name = Daniel O'Callaghan
+	name = "Daniel O'Callaghan"
 	email = daniel.ocallaghan@gmail.com
 [apply]
   whitespace = nowarn
-
 [push]
 	default = simple
 [rebase]
@@ -49,8 +47,6 @@
 [core]
 	editor = vim
 	pager = diff-so-fancy | less --tabs=4 -RFX
-[init]
-	templatedir = ~/.git_template
 [filter "media"]
 	clean = git-media-clean %f
 	smudge = git-media-smudge %f

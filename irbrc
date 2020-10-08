@@ -1,11 +1,9 @@
 require "rubygems"
-require "awesome_print"
-require 'ap'
 
 unless IRB.version.include?('DietRB')
   IRB::Irb.class_eval do
     def output_value
-      ap @context.last_value
+      pp @context.last_value
     end
   end
 else # MacRuby
