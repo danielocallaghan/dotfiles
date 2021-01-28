@@ -1,0 +1,15 @@
+
+set surround
+set commentary
+
+"Start scrolling when we're 8 lines away from margins
+set scrolloff=12
+set sidescrolloff=15
+set sidescroll=1
+
+
+" move up/down quickly by using C-j, C-k
+" which will move us around by functions
+noremap <silent> <C-j> 5j
+noremap <silent> <C-k> 5k
+

@@ -117,12 +117,6 @@ if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
 
-export AIRTASKER_HOMEDIR=$HOME/code
-export DEPLOYMENT_UTILS_DIR=$AIRTASKER_HOMEDIR/deployment-utilities
-export API_DIR=$AIRTASKER_HOMEDIR/api
-source $DEPLOYMENT_UTILS_DIR/airtasker.rc
-source $DEPLOYMENT_UTILS_DIR/kubernetes.rc
-
 # User specific aliases and functions
 export PATH=$PATH:/usr/local/bin
 
@@ -211,17 +205,6 @@ export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
 
 source ~/dotfiles/dev-helpers.sh
-
-export AIR_HOME=/Users/daniel/Airtasker/web
-# Airtasker web environment variables
-export REGION=1036
-export TARGET=dev
-export HOTRELOADING=true
-
-# Disable maintenance mode and heavy tasks.
-# These are not required in development mode, disabling them will speed up the build process
-export DISABLE_MAINTENANCE_MODE_CHECKS=true
-export DISABLE_HEAVY_TASKS_CHECKS=true
 
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 

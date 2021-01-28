@@ -16,3 +16,6 @@ mkdir -p ~/.config/nvim
 ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim/init.vim
 
 ln -s ~/Library/Application\ Support/Code/User/settings.json ~/dotfiles/vscode_settings.json
+
+mkdir -p ~/.config/karabiner
+cp -R karabiner ~/.config/karabiner
