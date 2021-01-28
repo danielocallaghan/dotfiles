@@ -14,3 +14,5 @@ ln -s ~/dotfiles/gemrc ~/.gemrc
 ln -s ~/dotfiles/iex.exs ~/.iex.exs
 mkdir -p ~/.config/nvim
 ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim/init.vim
+
+ln -s ~/Library/Application\ Support/Code/User/settings.json ~/dotfiles/vscode_settings.json
