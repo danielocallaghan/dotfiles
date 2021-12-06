@@ -79,3 +79,22 @@ function run_stage_e2e() {
           }
         }'
 }
+
+aws-console ()
+{
+    profile=$1
+    login_uri=$(aws-vault login ${profile} -s)
+    osascript \
+      -e 'tell application "Google Chrome"' \
+      -e 'activate' \
+      -e 'open location "https://signin.aws.amazon.com/oauth?Action=logout&redirect_uri=aws.amazon.com"' \
+      -e 'delay 1' \
+      -e 'close active tab of window 1' \
+      -e "open location \"${login_uri}\"" \
+      -e 'end tell'
+}
+
+for profile in master dev stage prod e2etest office gitlab bi tools tools-dev backup backup-dev office-it; do
+  alias aws-console-${profile}="aws-console personio-${profile}"
+  alias aws-login-${profile}="AWS_PROFILE=personio-${profile} aws sso login"
+done

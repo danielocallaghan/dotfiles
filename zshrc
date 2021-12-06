@@ -9,7 +9,7 @@ fi
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/daniel/.oh-my-zsh"
+export ZSH="/Users/patrick.ocallaghan/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -148,8 +148,8 @@ alias hpr='hub pull-request'
 alias gri2='git stash; git rebase -i HEAD~2; git stash pop'
 alias gpushmefeature='git commit; git push me `current_git_branch`;'
 alias gupfrommaster='br=`current_git_branch`;git stash; git co master; git pull; git co $br; git rebase master; git push -f me $br;git stash show -p;'
-
 alias refreshctags='ctags -R --languages=ruby --exclude=.git'
+alias pc=~/dev/personio/perctl
 
 # GIT modifications
 export CLICOLOR=1
@@ -195,11 +195,6 @@ export NVM_DIR="$HOME/.nvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-### Added by the Heroku Toolbelt
-export PATH=$PATH:/usr/pgsql-9.1/bin
-export PATH=$PATH:/usr/local/bin
-export PATH=$PATH:/usr/local/sbin
-
 export PATH=$PATH:/usr/local/opt/libpq/bin
 export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
@@ -214,3 +209,9 @@ export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/daniel/.sdkman"
 [[ -s "/Users/daniel/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/daniel/.sdkman/bin/sdkman-init.sh"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform
+
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+export GPG_TTY=`tty`

@@ -7,9 +7,23 @@ set scrolloff=12
 set sidescrolloff=15
 set sidescroll=1
 
-
 " move up/down quickly by using C-j, C-k
 " which will move us around by functions
 noremap <silent> <C-j> 5j
 noremap <silent> <C-k> 5k
+
+nnoremap <CMD-Left> :tabprevious<CR>
+nnoremap <C-Right> :tabnext<CR>
+
+" Go to tab by number
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
 

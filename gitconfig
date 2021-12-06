@@ -33,7 +33,8 @@
   untracked = cyan
 [user]
 	name = "Daniel O'Callaghan"
-	email = daniel.ocallaghan@gmail.com
+	email = patrick.ocallaghan@personio.de
+	signingkey = F8C8AA42
 [apply]
   whitespace = nowarn
 [push]
@@ -60,3 +61,11 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[gpg]
+	program = /usr/local/bin/gpg
+[commit]
+	gpgsign = true
+[pull]
+	rebase = false
+[url "git@gitlab.personio-internal.de:"]
+	insteadOf = https://gitlab.personio-internal.de/

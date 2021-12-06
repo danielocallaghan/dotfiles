@@ -14,12 +14,6 @@ if [ -f $(brew --prefix)/etc/bash_completion.d/git-completion.bash ]; then
   . $(brew --prefix)/etc/bash_completion.d/git-completion.bash
 fi
 
-export AIRTASKER_HOMEDIR=$HOME/code
-export DEPLOYMENT_UTILS_DIR=$AIRTASKER_HOMEDIR/deployment-utilities
-export API_DIR=$AIRTASKER_HOMEDIR/api
-source $DEPLOYMENT_UTILS_DIR/airtasker.rc
-source $DEPLOYMENT_UTILS_DIR/kubernetes.rc
-
 getami() { ~/code/deployment-utilities/bg_deploy/available.sh $1; }
 deploy() { ~/code/deployment-utilities/bg_deploy/bg_deploy.sh $1 $2 $3; }
 restartNode() { ~/code/deployment-utilities/restart_node.sh $1 $2; }
@@ -52,7 +46,6 @@ alias gpushmefeature='git commit; git push me `current_git_branch`;'
 alias gupfrommaster='br=`current_git_branch`;git stash; git co master; git pull; git co $br; git rebase master; git push -f me $br;git stash show -p;'
 
 alias refreshctags='ctags -R --languages=ruby --exclude=.git'
-alias stgssh='ssh -o ProxyCommand="ssh staging-bastion nc -w 120 %h %p 2> /dev/null" -l ubuntu -i ~/.ssh/staging/old-airtasker-staging.pem'
 
 # GIT modifications
 export CLICOLOR=1
@@ -130,37 +123,12 @@ export GOBIN="${GOPATH}/bin"
 export GOROOT="$(brew --prefix golang)/libexec"
 export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
 
-export MYSQL_PATH=/usr/local/Cellar/mysql/5.7.15
-export PATH=$PATH:$MYSQL_PATH/bin
-
-export ESCRIPTS_PATH=/Users/daniel/.mix/escripts
-export PATH=$PATH:$ESCRIPTS_PATH
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion" ] && . "/usr/local/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-### Added by the Heroku Toolbelt
-export PATH=$PATH:/usr/pgsql-9.1/bin
-export PATH=$PATH:/usr/local/bin
-export PATH=$PATH:/usr/local/sbin
-
-export PATH=$PATH:/usr/local/opt/libpq/bin
-export PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM
 
 source ~/dotfiles/dev-helpers.sh
 
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-export AIR_HOME=/Users/daniel/Airtasker/web
-# Airtasker web environment variables
-export REGION=1036
-export TARGET=dev
-export HOTRELOADING=true
 
-# Disable maintenance mode and heavy tasks.
-# These are not required in development mode, disabling them will speed up the build process
-export DISABLE_MAINTENANCE_MODE_CHECKS=true
-export DISABLE_HEAVY_TASKS_CHECKS=true
+complete -C /usr/local/bin/terraform terraform
