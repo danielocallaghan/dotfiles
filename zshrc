@@ -187,9 +187,6 @@ export PATH="$PATH:$GOPATH/bin"
 export MYSQL_PATH=/usr/local/Cellar/mysql/5.7.15
 export PATH=$PATH:$MYSQL_PATH/bin
 
-export ESCRIPTS_PATH=/Users/daniel/.mix/escripts
-export PATH=$PATH:$ESCRIPTS_PATH
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 
@@ -205,10 +202,6 @@ export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/daniel/.sdkman"
-[[ -s "/Users/daniel/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/daniel/.sdkman/bin/sdkman-init.sh"
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
