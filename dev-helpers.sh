@@ -95,6 +95,6 @@ aws-console ()
 }
 
 for profile in master dev stage prod e2etest office gitlab bi tools tools-dev backup backup-dev office-it; do
-  alias aws-console-${profile}="aws-console personio-${profile}"
-  alias aws-login-${profile}="AWS_PROFILE=personio-${profile} aws sso login"
+  alias aws-console-${profile}="aws-console ${profile}"
+  alias aws-login-${profile}="AWS_PROFILE=${profile} aws sso login"
 done
