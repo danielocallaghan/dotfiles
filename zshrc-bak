@@ -132,7 +132,6 @@ alias df='df -H'
 alias du='du -ch'
 
 alias gs='git status .'
-alias gpl='git pull'
 alias gc='git commit'
 alias gcm='git co master'
 alias gb='git freshness'
@@ -150,20 +149,7 @@ alias gri2='git stash; git rebase -i HEAD~2; git stash pop'
 alias gpushmefeature='git commit; git push me `current_git_branch`;'
 alias gupfrommaster='br=`current_git_branch`;git stash; git co master; git pull; git co $br; git rebase master; git push -f me $br;git stash show -p;'
 alias refreshctags='ctags -R --languages=ruby --exclude=.git'
-alias perctl=~/dev/personio/perctl
-alias pc='perctl'
-alias kc='kubectl'
-alias per="cd ~/dev/personio"
-alias pcreload="pc refresh && pc artisan personio:i18n-json && per && rm -rf node_modules && yarn install --pure-lockfile && yarn run start"
-alias pcreload-mysql="pc build dev && pc recreate mysql && pc recreate web"
-alias pclaravel-log="tail -f ~/dev/personio/app/storage-local/logs/laravel.log"
-alias pcstorage-777="sudo chmod -R 777 app/storage-local/ && sudo chmod -R 777 app/storage"
-
-export AWS_VAULT_FILE_PASSPHRASE="6EX2eDoPY@i6QKAVa" # Avoid entering a passphrase when using aws-vault
-export AWS_VAULT_BACKEND="file" # Use the file backend of aws-vault
-export AWS_SESSION_TTL="12h" # Set the session ttl to 12 hours to avoid reentering MFA multiple times a day
-export AWS_ASSUME_ROLE_TTL="15m"
-
+alias pc=~/dev/personio/perctl
 
 # GIT modifications
 export CLICOLOR=1
@@ -201,9 +187,6 @@ export PATH="$PATH:$GOPATH/bin"
 export MYSQL_PATH=/usr/local/Cellar/mysql/5.7.15
 export PATH=$PATH:$MYSQL_PATH/bin
 
-export ESCRIPTS_PATH=~/.mix/escripts
-export PATH=$PATH:$ESCRIPTS_PATH
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 
@@ -224,10 +207,4 @@ autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
 
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
-export PATH="$(brew --prefix php@7.3)/bin:$PATH"
-
 export GPG_TTY=`tty`
-[[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
-export PATH="/usr/local/opt/mysql-client/bin:$PATH"
-
-export GRADLE_USER_HOME="$HOME/.gradle"
