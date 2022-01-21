@@ -70,3 +70,5 @@
 	rebase = false
 [url "git@gitlab.personio-internal.de:"]
 	insteadOf = https://gitlab.personio-internal.de/
+[init]
+	defaultBranch = master

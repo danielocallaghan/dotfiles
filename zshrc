@@ -226,8 +226,13 @@ complete -o nospace -C /usr/local/bin/terraform terraform
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="$(brew --prefix php@7.3)/bin:$PATH"
 
-export GPG_TTY=`tty`
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 
 export GRADLE_USER_HOME="$HOME/.gradle"
+export JAVA_HOME="$HOME/.sdkman/candidates/java/current"
+export GPG_TTY=`tty`
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
