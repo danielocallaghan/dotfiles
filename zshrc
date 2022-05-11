@@ -150,7 +150,6 @@ alias gri2='git stash; git rebase -i HEAD~2; git stash pop'
 alias gpushmefeature='git commit; git push me `current_git_branch`;'
 alias gupfrommaster='br=`current_git_branch`;git stash; git co master; git pull; git co $br; git rebase master; git push -f me $br;git stash show -p;'
 alias refreshctags='ctags -R --languages=ruby --exclude=.git'
-alias perctl=~/dev/personio/perctl
 alias pc='perctl'
 alias kc='kubectl'
 alias per="cd ~/dev/personio"
@@ -158,6 +157,7 @@ alias pcreload="pc refresh && pc artisan personio:i18n-json && per && rm -rf nod
 alias pcreload-mysql="pc build dev && pc recreate mysql && pc recreate web"
 alias pclaravel-log="tail -f ~/dev/personio/app/storage-local/logs/laravel.log"
 alias pcstorage-777="sudo chmod -R 777 app/storage-local/ && sudo chmod -R 777 app/storage"
+alias gr="./gradlew"
 
 export AWS_VAULT_FILE_PASSPHRASE="6EX2eDoPY@i6QKAVa" # Avoid entering a passphrase when using aws-vault
 export AWS_VAULT_BACKEND="file" # Use the file backend of aws-vault
@@ -203,9 +203,8 @@ export PATH=$PATH:$MYSQL_PATH/bin
 
 export ESCRIPTS_PATH=~/.mix/escripts
 export PATH=$PATH:$ESCRIPTS_PATH
-
 export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -236,3 +235,4 @@ export GPG_TTY=`tty`
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

@@ -12,29 +12,6 @@ alias docker-rm='docker rm $(docker ps -a -q -f status=exited)'
 alias docker-rmi='docker rmi $(docker images -q -f dangling=true)'
 alias docker-rmv='docker volume rm $(docker volume ls -q -f dangling=true)'
 
-alias devapimore='git --no-pager log --pretty=oneline `curl -s https://api.dev.airtasker.com/gitref` | head -n 200 | less'
-alias stgapimore='git --no-pager log --pretty=oneline `curl -s https://api.stage.airtasker.com/gitref` | head -n 200 | less'
-alias prodapimore='git --no-pager log --pretty=oneline `curl -s https://api.airtasker.com/gitref` | head -n 200 | less'
-
-# <region><environment>logs <namespace> <include_regex> <any_stern_inputs>
-# Show me the bff-client pods logs in the api namespace.
-# audevlogs api bff-client
-# Show me the recommender logs in the data namespace but exclude healthchecks
-# ukprodlogs data recommender -e healthcheck
-export audevkc=/Users/$(whoami)/.kube/k8s.dev.airtasker.com-config
-export austagekc=/Users/$(whoami)/.kube/k8s.stage.airtasker.com-config
-export auprodkc=/Users/$(whoami)/.kube/k8s.airtasker.com-config
-export ukdevkc=/Users/$(whoami)/.kube/k8s.dev.airtasker.co.uk-config
-export ukstagekc=/Users/$(whoami)/.kube/k8s.stage.airtasker.co.uk-config
-export ukprodkc=/Users/$(whoami)/.kube/k8s.airtasker.co.uk-config
-alias audevlogs="stern --kubeconfig=$audevkc -n $*"
-alias austagelogs="stern --kubeconfig=$austagekc -n $*"
-alias auprodlogs="stern --kubeconfig=$auprodkc -n $*"
-alias ukdevlogs="stern --kubeconfig=$ukdevkc -n $*"
-alias ukstagelogs="stern --kubeconfig=$ukstagekc -n $*"
-alias ukprodlogs="stern --kubeconfig=$ukprodkc -n $*"
-
-
 function trigger_throttling() {
   echo "Sending 600 requests..."
 
@@ -98,3 +75,8 @@ for profile in master dev stage prod e2etest office gitlab bi tools tools-dev ba
   alias aws-console-${profile}="aws-console ${profile}"
   alias aws-login-${profile}="AWS_PROFILE=${profile} aws sso login"
 done
+
+testresult () {
+  command find $1 -name "index.html" -exec open {} \;
+}
+

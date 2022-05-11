@@ -3,9 +3,11 @@ set surround
 set commentary
 
 "Start scrolling when we're 8 lines away from margins
-set scrolloff=12
+set scrolloff=10
 set sidescrolloff=15
 set sidescroll=1
+
+let mapleader=','
 
 " move up/down quickly by using C-j, C-k
 " which will move us around by functions
@@ -14,6 +16,12 @@ noremap <silent> <C-k> 5k
 
 nnoremap <CMD-Left> :tabprevious<CR>
 nnoremap <C-Right> :tabnext<CR>
+map <F10> :tabmove -1<CR>
+map <F12> :tabmove +1<CR>
+
+" nmap <leader>t :tabmove +1<CR>
+nmap <leader>tm :tabmove +1<CR>
+nmap <leader>tM :tabmove -1<CR>
 
 " Go to tab by number
 noremap <leader>1 1gt
@@ -26,4 +34,9 @@ noremap <leader>7 7gt
 noremap <leader>8 8gt
 noremap <leader>9 9gt
 noremap <leader>0 :tablast<cr>
+
+nmap <D-k> [e
+nmap <D-j> ]e
+vmap <D-k> [egv
+vmap <D-j> ]egv
 

@@ -1,8 +1,8 @@
 To select between the single quotes I usually do a vi'
-vib (select inner block)
 Inside a curly braces block you can use viB
+vib (select inner block)
 To make the selections 'inclusive' (select also the quotes, parenthesis or braces) you can use a instead of i.
-asdfasdf [asdf] {asdfadsf}
+asdfasdf [asdf] {asdfabdsf}
 
 change till: ct<char>
 find: df<char>
@@ -16,13 +16,18 @@ toggle fold: zo
 set mark: ma
 goto mark: 'a
 
-add mappings:
-  <leader>gv app/views
-  <leader>gv app/controllers
-  <leader>gv app/models
-  learn & repeat after substitution
-  more normal mode keys
-      -> motion commands
-  never repeat yourself
-  add test runner
+find and replace:
+  :s/foo/bar/gc
 
+intelliJ stuff
+
+  * CMD + J to trigger autocomplete templates.
+  * CNTRL + space to trigger intelliSense.
+  * CNTRL + T - trigger list of available refactorings.
+  * ⌘C to copy the whole line at the caret to the clipboard (when nothing selected).
+
+* IntelliJ Tweaks:
+  * next/previous problem key/shortcut: cmd + alt + down
+  * vim config for 'S' to put curser on the correct column/indented.
+  * view warnings/errors on current line, force window to appear.
+  * get focus back to code shortcut
