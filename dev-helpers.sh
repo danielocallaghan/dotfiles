@@ -1,33 +1,12 @@
 alias be='bundle exec'
-alias ber='bundle exec rake'
 alias bes='bundle exec rspec'
-alias bec='bundle exec cucumber'
-alias rcur='bundle exec cucumber --tags @cur'
-alias srspec='spring rspec'
-alias srs='spring rspec'
-alias srails='spring rails'
-alias srake='spring rake'
 
+alias k=kubectl
 alias docker-rm='docker rm $(docker ps -a -q -f status=exited)'
 alias docker-rmi='docker rmi $(docker images -q -f dangling=true)'
 alias docker-rmv='docker volume rm $(docker volume ls -q -f dangling=true)'
 
-function trigger_throttling() {
-  echo "Sending 600 requests..."
-
-  for i in {1..600}
-  do
-    echo ""
-    curl http://localhost:3001/$1
-  done
-
-  echo ""
-  echo "All subsequent requests should now be throttled until the next app restart."
-  echo "View this behaviour by sending another request eg:"
-  echo "curl -i http://localhost:3000/$1"
-  curl -i http://localhost:3000/$1
-  echo ""
-}
+alias gr-debug="./gradlew --no-daemon --no-build-cache -Dorg.gradle.jvmargs='-Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=5005,suspend=y'"
 
 function jcurl() {
   # echo "$@" &> /dev/stdout
@@ -44,17 +23,6 @@ function browse_index() {
       "query": { "match_all": {} },
       "size": 3
     }'
-}
-
-function run_stage_e2e() {
-  curl -X POST \
-    "https://circleci.com/api/v1.1/project/github/airtasker/web/tree/master?circle-token=$CIRCLECI_TOKEN" \
-    -H 'Content-Type: application/json' \
-    -d '{
-          "build_parameters": {
-            "CIRCLE_JOB": "cypress-test-passthrough-stage-electron"
-          }
-        }'
 }
 
 aws-console ()
@@ -76,7 +44,14 @@ for profile in master dev stage prod e2etest office gitlab bi tools tools-dev ba
   alias aws-login-${profile}="AWS_PROFILE=${profile} aws sso login"
 done
 
-testresult () {
+test-result() {
   command find $1 -name "index.html" -exec open {} \;
+}
+
+ktlint-result() {
+  command cat "build/reports/ktlint/ktlintMainSourceSetFormat/ktlintMainSourceSetFormat.txt"
+  command cat "build/reports/ktlint/ktlintTestSourceSetFormat/ktlintTestSourceSetFormat.txt"
+  command cat "build/reports/ktlint/ktlintMainSourceSetCheck/ktlintMainSourceSetCheck.txt"
+  command cat "build/reports/ktlint/ktlintKotlinScriptCheck/ktlintKotlinScriptCheck.txt"
 }
 

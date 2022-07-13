@@ -1,9 +1,9 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -15,7 +15,8 @@ export ZSH="/Users/patrick.ocallaghan/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME=powerlevel10k/powerlevel10k
+# ZSH_THEME=powerlevel10k/powerlevel10k
+# source /usr/local/opt/powerlevel10k/powerlevel10k.zsh-theme
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -75,7 +76,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(gitfast ruby brew)
+plugins=(gitfast zsh-autosuggestions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -120,9 +121,8 @@ fi
 # User specific aliases and functions
 export PATH=$PATH:/usr/local/bin
 
+alias oldbrew=/usr/local/bin/brew
 alias l='ls -lah'
-alias la="exa -abghl --git --color=automatic"
-alias lat="exa -abgh --git --color=automatic --tree --level=2"
 # `cat` with beautiful colors. requires: pip install -U Pygments
 alias c='pygmentize'
 alias search='ag'
@@ -145,14 +145,10 @@ alias gp="git push"
 alias ggpull='git pull origin `current_git_branch`'
 alias gpo='git push origin `current_git_branch`'
 alias gpfo='git push origin `current_git_branch`'
-alias hpr='hub pull-request'
 alias gri2='git stash; git rebase -i HEAD~2; git stash pop'
-alias gpushmefeature='git commit; git push me `current_git_branch`;'
 alias gupfrommaster='br=`current_git_branch`;git stash; git co master; git pull; git co $br; git rebase master; git push -f me $br;git stash show -p;'
-alias refreshctags='ctags -R --languages=ruby --exclude=.git'
 alias pc='perctl'
 alias kc='kubectl'
-alias per="cd ~/dev/personio"
 alias pcreload="pc refresh && pc artisan personio:i18n-json && per && rm -rf node_modules && yarn install --pure-lockfile && yarn run start"
 alias pcreload-mysql="pc build dev && pc recreate mysql && pc recreate web"
 alias pclaravel-log="tail -f ~/dev/personio/app/storage-local/logs/laravel.log"
@@ -173,6 +169,8 @@ export EDITOR=vim
 export VISUAL=vim
 export rvmsudo_secure_path=0
 
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#bababa"
+
 # improve history
 HISTSIZE=200000
 SAVEHIST=100000
@@ -191,16 +189,19 @@ alias iexmps="iex -S mix phx.server"
 alias iexs="iex -S mix"
 alias mpr="mix phx.routes"
 
+# Golang
 export GOENV_ROOT="$HOME/.goenv"
 export PATH="$GOENV_ROOT/bin:$PATH"
 eval "$(goenv init -)"
 export GOPATH=$(go env GOPATH)
 export PATH="$GOROOT/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin"
+export GOPRIVATE=gitlab.personio-internal.de
 
 export MYSQL_PATH=/usr/local/Cellar/mysql/5.7.15
 export PATH=$PATH:$MYSQL_PATH/bin
 
+# Node
 export ESCRIPTS_PATH=~/.mix/escripts
 export PATH=$PATH:$ESCRIPTS_PATH
 export NVM_DIR="$HOME/.nvm"
@@ -217,12 +218,12 @@ source ~/dotfiles/dev-helpers.sh
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/terraform terraform
+# complete -o nospace -C /usr/local/bin/terraform terraform
 
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+# export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH="$(brew --prefix php@7.3)/bin:$PATH"
 
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
@@ -230,9 +231,11 @@ export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 
 export GRADLE_USER_HOME="$HOME/.gradle"
 export JAVA_HOME="$HOME/.sdkman/candidates/java/current"
-export GPG_TTY=`tty`
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$(starship init zsh)"
+export GPG_TTY=`tty`

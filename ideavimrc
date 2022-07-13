@@ -1,13 +1,27 @@
 
 set surround
 set commentary
+set sneak
+
+let mapleader=','
+
+set hlsearch         "Hilight searches by default
+set incsearch        "Find the next match as we type the search
+set ignorecase
+set smartcase
+nmap <silent> <leader>/ :nohlsearch<CR>
 
 "Start scrolling when we're 8 lines away from margins
 set scrolloff=10
 set sidescrolloff=15
 set sidescroll=1
 
-let mapleader=','
+set smartindent
+set autoindent
+set smarttab
+set expandtab
+set shiftround " When at 3 spaces and I hit >>, go to 4, not 5.
+
 
 " move up/down quickly by using C-j, C-k
 " which will move us around by functions

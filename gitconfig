@@ -34,7 +34,7 @@
 [user]
 	name = "Daniel O'Callaghan"
 	email = patrick.ocallaghan@personio.de
-	signingkey = F8C8AA42
+	signingkey = D6984FF2
 [apply]
   whitespace = nowarn
 [push]
@@ -63,7 +63,7 @@
 	process = git-lfs filter-process
 	required = true
 [gpg]
-	program = /usr/local/bin/gpg
+	program = /opt/homebrew/bin/gpg
 [commit]
 	gpgsign = true
 [pull]
