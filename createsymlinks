@@ -19,3 +19,5 @@ ln -s ~/Library/Application\ Support/Code/User/settings.json ~/dotfiles/vscode_s
 
 mkdir -p ~/.config/karabiner
 cp -R karabiner ~/.config/karabiner
+
+ln -s ~/dotfiles/starship.toml ~/.config/starship.toml

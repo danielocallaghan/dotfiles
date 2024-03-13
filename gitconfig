@@ -41,8 +41,8 @@
 	default = simple
 [rebase]
   stat = true
-[hub]
-	host = github.com
+# [hub]
+# 	host = github.com
 [mergetool]
 	keepBackup = false
 [core]

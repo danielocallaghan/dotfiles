@@ -1,3 +1,5 @@
+# CodeWhisperer pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.pre.zsh"
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
@@ -35,10 +37,10 @@ export ZSH="/Users/patrick.ocallaghan/.oh-my-zsh"
 # DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
+DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS=true
@@ -131,30 +133,6 @@ alias grep='grep --color=auto'
 alias df='df -H'
 alias du='du -ch'
 
-alias gs='git status .'
-alias gpl='git pull'
-alias gc='git commit'
-alias gcm='git co master'
-alias gb='git freshness'
-alias gap='git add -p'
-alias glp='git log -p'
-alias gd='git diff'
-alias gds='git diff --staged'
-alias gbD='git branch -D'
-alias gp="git push"
-alias ggpull='git pull origin `current_git_branch`'
-alias gpo='git push origin `current_git_branch`'
-alias gpfo='git push origin `current_git_branch`'
-alias gri2='git stash; git rebase -i HEAD~2; git stash pop'
-alias gupfrommaster='br=`current_git_branch`;git stash; git co master; git pull; git co $br; git rebase master; git push -f me $br;git stash show -p;'
-alias pc='perctl'
-alias kc='kubectl'
-alias pcreload="pc refresh && pc artisan personio:i18n-json && per && rm -rf node_modules && yarn install --pure-lockfile && yarn run start"
-alias pcreload-mysql="pc build dev && pc recreate mysql && pc recreate web"
-alias pclaravel-log="tail -f ~/dev/personio/app/storage-local/logs/laravel.log"
-alias pcstorage-777="sudo chmod -R 777 app/storage-local/ && sudo chmod -R 777 app/storage"
-alias gr="./gradlew"
-
 export AWS_VAULT_FILE_PASSPHRASE="6EX2eDoPY@i6QKAVa" # Avoid entering a passphrase when using aws-vault
 export AWS_VAULT_BACKEND="file" # Use the file backend of aws-vault
 export AWS_SESSION_TTL="12h" # Set the session ttl to 12 hours to avoid reentering MFA multiple times a day
@@ -170,6 +148,8 @@ export VISUAL=vim
 export rvmsudo_secure_path=0
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#bababa"
+
+export BAT_THEME="Dracula"
 
 # improve history
 HISTSIZE=200000
@@ -188,13 +168,13 @@ alias mps="mix phx.server"
 alias iexmps="iex -S mix phx.server"
 alias iexs="iex -S mix"
 alias mpr="mix phx.routes"
+alias pipeline="pushd .pipeline && npx projen && popd"
 
 # Golang
-export GOENV_ROOT="$HOME/.goenv"
-export PATH="$GOENV_ROOT/bin:$PATH"
-eval "$(goenv init -)"
-export GOPATH=$(go env GOPATH)
-export PATH="$GOROOT/bin:$PATH"
+# export GOENV_ROOT="$HOME/.goenv"
+# export PATH="$GOENV_ROOT/bin:$PATH"
+# export PATH="$GOROOT/bin:$PATH"
+export GOPATH="$HOME/go"
 export PATH="$PATH:$GOPATH/bin"
 export GOPRIVATE=gitlab.personio-internal.de
 
@@ -224,13 +204,16 @@ autoload -U +X bashcompinit && bashcompinit
 # complete -o nospace -C /usr/local/bin/terraform terraform
 
 # export PATH="/usr/local/opt/python/libexec/bin:$PATH"
-export PATH="$(brew --prefix php@7.3)/bin:$PATH"
+export PATH="$(brew --prefix php@7.4)/bin:$PATH"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 [[ /usr/local/bin/kubectl ]] && source <(kubectl completion zsh)
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 
 export GRADLE_USER_HOME="$HOME/.gradle"
 export JAVA_HOME="$HOME/.sdkman/candidates/java/current"
+export DOCKER_COMPOSE=1
+
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
@@ -239,3 +222,11 @@ export SDKMAN_DIR="$HOME/.sdkman"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(starship init zsh)"
 export GPG_TTY=`tty`
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+export PATH="/opt/homebrew/opt/php@8.1/bin:$PATH"
+export PATH="/opt/homebrew/opt/php@8.1/sbin:$PATH"
+
+# CodeWhisperer post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/codewhisperer/shell/zshrc.post.zsh"
