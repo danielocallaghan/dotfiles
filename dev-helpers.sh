@@ -86,3 +86,8 @@ ktlint-result() {
   command cat "build/reports/ktlint/ktlintMainSourceSetCheck/ktlintMainSourceSetCheck.txt"
   command cat "build/reports/ktlint/ktlintKotlinScriptCheck/ktlintKotlinScriptCheck.txt"
 }
+
+function gvers() {
+  ./gradlew dependencies | grep $1 | grep "[0-9]" | sed "s/[^0-9]*\([0-9]\{1,\}\.[0-9]\{1,\}\.*[0-9]*\).*/\1/" | sort | uniq
+}
+

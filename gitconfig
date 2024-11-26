@@ -1,11 +1,12 @@
 [alias]
+  mr = push -u origin HEAD -o merge_request.create -o merge_request.draft # "git mr"  will automatically push to origin with the same remote branch name and create a MR
   st = status
   ci = commit
   co = checkout
-  lc = log ORIG_HEAD.. --stat --no-merges
   undo=reset --hard
   changes=diff --name-status -r
   diffstat=diff --stat -r
+  lc = log ORIG_HEAD.. --stat --no-merges
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
   last = cat-file commit HEAD
   unstage = reset HEAD

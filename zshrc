@@ -133,7 +133,6 @@ alias grep='grep --color=auto'
 alias df='df -H'
 alias du='du -ch'
 
-export AWS_VAULT_FILE_PASSPHRASE="6EX2eDoPY@i6QKAVa" # Avoid entering a passphrase when using aws-vault
 export AWS_VAULT_BACKEND="file" # Use the file backend of aws-vault
 export AWS_SESSION_TTL="12h" # Set the session ttl to 12 hours to avoid reentering MFA multiple times a day
 export AWS_ASSUME_ROLE_TTL="15m"

@@ -1,7 +1,6 @@
 
 set surround
 set commentary
-set sneak
 
 let mapleader=','
 
