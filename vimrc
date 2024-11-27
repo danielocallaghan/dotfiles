@@ -29,21 +29,14 @@ Plug 'scrooloose/syntastic'
 Plug 'mattn/emmet-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'leafgarland/typescript-vim'
-Plug 'elixir-editors/vim-elixir'
 Plug 'mhinz/vim-mix-format'
 Plug 'udalov/kotlin-vim'
-Plug 'keith/swift.vim'
 Plug 'dense-analysis/ale'
 Plug 'bufbuild/vim-buf'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Initialize plugin system
 call plug#end()
@@ -356,20 +349,20 @@ map <silent> <leader>ntt :NERDTreeToggle<cr>
 map <silent> <leader>ntf :NERDTree<cr><leader>l<cr>:NERDTreeFind<cr>
 
 " [Buffers] Jump to the existing window if possible
-let g:fzf_buffers_jump = 1
+" let g:fzf_buffers_jump = 1
 
-function! s:fzf_statusline()
+" function! s:fzf_statusline()
   " Override statusline as you like
-  highlight fzf1 ctermfg=161 ctermbg=251
-  highlight fzf2 ctermfg=23 ctermbg=251
-  highlight fzf3 ctermfg=237 ctermbg=251
-  setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
-endfunction
-autocmd! User FzfStatusLine call <SID>fzf_statusline()
+  " highlight fzf1 ctermfg=161 ctermbg=251
+  " highlight fzf2 ctermfg=23 ctermbg=251
+  " highlight fzf3 ctermfg=237 ctermbg=251
+  " setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+" endfunction
+" autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
-command! FZFOpen call fzf#run({'source': 'git ls-files', 'sink': 'tab drop', 'down': '40%'})
-nmap <leader>ff :FZFOpen<CR>
-nmap cp :FZFOpen<CR>
+" command! FZFOpen call fzf#run({'source': 'git ls-files', 'sink': 'tab drop', 'down': '40%'})
+" nmap <leader>ff :FZFOpen<CR>
+" nmap cp :FZFOpen<CR>
 
 map <silent> <leader>cpb :CtrlPBookmarkDir<CR>
 map <leader>F :CtrlP %%<CR>
