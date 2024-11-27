@@ -1,0 +1,7 @@
+
+
+* install brew leaves:
+  xargs brew install < my_brew.txt
+  or brew install $(cat my_brews.txt)
+  https://apple.stackexchange.com/questions/279077/how-can-i-install-all-brew-packages-listed-in-a-text-file
+*
